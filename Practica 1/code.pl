@@ -43,7 +43,7 @@ my_list([+]).
 my_list([0]).
 my_list([]).
 
-my_list([H|T]) :- my_list(T), charge(H).
+my_list([H|T]) :- charge(H), my_list(T).
 
 
 basic_surface([[H|T]]) :-  charge(H), my_list(T).
