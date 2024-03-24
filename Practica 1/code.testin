@@ -1,0 +1,1 @@
+test_attributes_db('code#44#48',code,basic_surface,1,['X'=A],[],::(basic_surface(A),=>([]:[A=[[0],[0],[0]]],[not_fails(A)]+[]#[])),loc('/home/lumbalu/PROLOG/repo/PROLOG/Practica 1/code.pl',44,48)).
