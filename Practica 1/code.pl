@@ -31,4 +31,4 @@ basic_surface([[H|T]|T2]) :- charge(H),my_list(T),basic_surface(T2).
 
 :- test basic_surface(X)
    : (X = [[0],[0],[0]])
-   => not_fails
+   => not_fails.
