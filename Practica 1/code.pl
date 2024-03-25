@@ -45,11 +45,21 @@ my_list([]).
 
 my_list([H|T]) :- charge(H), my_list(T).
 
+:- doc(basic_surface/1,"Defines a surface of charged cells and it´s represented by a list of lists. It is defined as: @includedef{basic_surface/1}\n
+@begin{alert}
+@bf{Note:} @tt{basic_surface/1} must have at least one sublist with a charged cell.
+@end{alert}").
+:- prop basic_surface(CellList) 
+#"@var{CellList} is a list with charged cells.".
+
+
+:- test prop basic_surface(X)   
+   : (X = [[]])  
+   => fails
+   # "Cannot be a list with a empty sublist".
+
 
 basic_surface([[H|T]]) :-  charge(H), my_list(T).
 basic_surface([[H|T]|T2]) :- charge(H), my_list(T), basic_surface(T2).
 
 
-:- test basic_surface(X)   
-   : (X = [[0],[0],[0]])  
-   => not_fails.
