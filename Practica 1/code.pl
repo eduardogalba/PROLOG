@@ -53,10 +53,6 @@ get([Elem|_], s(0), Elem).
 get([_|Rest], s(Index), Elem) :-
    get(Rest, Index, Elem).
 
-myappend([],L,L) :- 
-   list(L).
-myappend([X|Xs],Ys,[X|Zs]) :- 
-   myappend(Xs,Ys,Zs).
 
 %------------------------------------------------------------------------------------------------------------------------%
 
@@ -174,25 +170,16 @@ surface_acc([[H|T]|T2], Acc) :-
 % OPERACIONES CON SUPERFICIES
 
 h_line([L], s(0), L).
-h_line(S, N, C) :-
-   get(S, N, C),
-   basic_surface(S).
    
 h_line(S, N, C) :-
    get(S, N, C),
    surface(S).
 
-v_line([L|L2], N, C) :-
-   surface([L|L2]),
-   v_line_aux([L|L2], N, C).
-   
 
-
-v_line_aux([L|L2], N, [E|T]) :-
-   get(L, N, E),
-   v_line_aux(L2, N, T).
-
-
+v_line([], _, []).
+v_line([Fila|Filas], Indice, [Elemento|Columna]) :-
+   get(Fila, Indice, Elemento),
+   v_line(Filas, Indice, Columna).
 
 
 
