@@ -47,18 +47,18 @@ my_list([H|T]) :-
 @end{verbatim}
 ").
 
-my_list([+++++++]).
-my_list([++++++]).
-my_list([+++++]).
-my_list([++++]).
-my_list([+++]).
-my_list([++]).
-my_list([+]).
-my_list([0]).
-my_list([]).
+%my_list([+++++++]).
+%my_list([++++++]).
+%my_list([+++++]).
+%my_list([++++]).
+%my_list([+++]).
+%my_list([++]).
+%my_list([+]).
+%my_list([0]).
+
+my_list([H]) :- charge(H).
 
 my_list([H|T]) :- 
-   charge(H), 
    my_list(T).
 
 %------------------------------------------------------------------------------------------------------------------------%
@@ -98,10 +98,10 @@ f(++, s(s(0))).
 f(+, s(0)).
 f(0, 0).
 
-:- doc(plus/3,"Define la operación @tt{+} entre dos números naturales descritos en notación de Peano. En el caso base, la 
-suma de cualquier número con 0, es el mismo número. La llamada recursiva decrementa el valor del primer operando hasta ser
-0, el caso base, que asigna el segundo operando al resultado y al regresar, incrementa el resultado tantas veces como llamadas
-recursivas se hayan realizado. @includedef{plus/3}\n ").
+:- doc(plus/3,"Define la operación @tt{+} entre dos números naturales descritos en notación de Peano. @includedef{plus/3}\n
+   En el caso base, la suma de cualquier número con 0, es el mismo número. La llamada recursiva decrementa el valor del primer 
+   operando hasta ser 0, el caso base, que asigna el segundo operando al resultado y al regresar, incrementa el resultado tantas
+   veces como llamadas recursivas se hayan realizado.  ").
 
 plus(0,Y,Y).
 plus(s(X),Y,s(Z)) :- plus(X,Y,Z).
@@ -116,8 +116,8 @@ minus(A, B, C) :- plus(C, B, A).
 less(0,s(_X)).
 less(s(X),s(Y)) :- less(X,Y).
 
-:- doc(div/3,"Define la operación @tt{/} entre dos números naturales descritos en notación de Peano. Vista la división
-como sucesivas restas al dividiendo hasta ser 0 o el resto. @includedef{div/3}\n ").
+:- doc(div/3,"Define la operación @tt{/} entre dos números naturales descritos en notación de Peano.  @includedef{div/3}\n 
+ Vista la división como sucesivas restas al dividiendo hasta ser 0 o el resto. ").
 
 div(X, Y, s(0)) :- minus(X, Y, Z), less(Z, Y). 
 div(X, Y, s(Q)) :- minus(X, Y, Z), div(Z, Y, Q).
@@ -142,10 +142,8 @@ basic_surface([[H|T]]) :-
    charge(H), 
    my_list(T).
 
-basic_surface([[H|T]|T2]) :- 
-   charge(H), 
-   my_list(T), 
-   basic_surface(T2).
+basic_surface([_L|S2]) :-  
+   basic_surface(S2).
 
 
 
@@ -155,27 +153,28 @@ basic_surface([[H|T]|T2]) :-
 It is defined as: @includedef{surface/1}\n").
 :- prop surface(CellList) 
 #"@var{CellList} is a list with charged cells.".
-surface([]).
+
 surface([L|L2]) :- 
    basic_surface([L|L2]), 
    mylength(L, Tam), 
    surface_acc([L|L2], Tam).
 
-surface_acc([_],_).
+surface_acc([L],Tam) :- mylength(L, Tam).
 surface_acc([[H|T]|T2], Acc) :- 
-   charge(H), my_list(T), 
    mylength([H|T],NewAcc), 
    igual(Acc,NewAcc), 
    surface_acc(T2,NewAcc).
 
 
 
-h_line([L], s(0), L) :- basic_surface([L]).
+h_line([L], s(0), L).
 h_line(S, N, C) :-
    get(S, N, C),
    basic_surface(S).
    
-
+h_line(S, N, C) :-
+   get(S, N, C),
+   surface(S).
 
 v_line([L|L2], N, C) :-
    surface([L|L2]),
@@ -209,8 +208,6 @@ total_cells([L|S2], Total) :-
    total_cells(S2, TotalResto),
    mylength(L, Esta),
    plus(Esta, TotalResto, Total).
-
-
 
 
 average(S, A) :-
