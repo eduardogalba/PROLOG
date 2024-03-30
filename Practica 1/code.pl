@@ -99,24 +99,34 @@ plus(s(X),Y,s(Z)) :- plus(X,Y,Z).
 
 :- doc(minus/3,"Defines subtraction operator @op{-} between two natural numbers in Peano notation, using @pred{plus/3}. @includedef{minus/3}\n ").
 
-minus(X, Y, Z) :- plus(Z, Y, X).
-
-:- prop minus (Op2, Op1, Res)
+:- prop minus(Op2, Op1, Res)
 #"@var{Op2} is a natural number. \n
 @var{Op1} is a natural number. \n
-@var{Res} is the result."
+@var{Res} is the result.".
+
+minus(X, Y, Z) :- plus(Z, Y, X).
 
 
-:- doc(less/2,"Define la operación @op{>} entre dos números naturales descritos en notación de Peano. @includedef{less/2}\n ").
+:- doc(less/2,"Defines less than @op{>} operator between two natural numbers in Peano notation. @includedef{less/2}\n ").
+
+:- prop less(N, M)
+#"@var{N} is a natural number \n
+@var{M} is a natural number \n
+@pred{less/2} will be true wheter @var{N} less than @var{M}".
 
 less(0,s(_X)).
 less(s(X),s(Y)) :- less(X,Y).
 
-:- doc(div/3,"Define la operación @op{/} entre dos números naturales descritos en notación de Peano.  @includedef{div/3}\n 
+:- doc(div/3,"Defines division @op{/} between two natural numbers in Peano notation.  @includedef{div/3}\n 
  Division is viewed as successive subtractions from the dividend until it becomes 0 or the remainder. ").
 
 div(X, Y, s(0)) :- minus(X, Y, Z), less(Z, Y). 
 div(X, Y, s(Q)) :- minus(X, Y, Z), div(Z, Y, Q).
+
+:- prop div(Dividend, Divisor, Quotient)
+#"@var{Dividend} is a natural number. \n
+@var{Divisor} is a natural number. \n
+@var{Quotient} is a natural number.".
 
 %------------------------------------------------------------------------------------------------------------------------%
 
