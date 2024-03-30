@@ -88,10 +88,10 @@ equal(s(N), s(N)) :-
    operand to 0, reaching case base, which assigns the second operand to the result and, when returning, increments the 
    result as many times as recursive calls have been made.  ").
 
-:- prop plus(Op1, Op2, Resultado)
+:- prop plus(Op1, Op2, Res)
 #"@var{Op1} is a natural number.\n
 @var{Op2} is a natural number.\n 
-@var{Resultado} is the result.".
+@var{Res} is the result.".
 
 plus(0,Y,Y).
 plus(s(X),Y,s(Z)) :- plus(X,Y,Z).
@@ -100,6 +100,11 @@ plus(s(X),Y,s(Z)) :- plus(X,Y,Z).
 :- doc(minus/3,"Defines subtraction operator @op{-} between two natural numbers in Peano notation, using @pred{plus/3}. @includedef{minus/3}\n ").
 
 minus(X, Y, Z) :- plus(Z, Y, X).
+
+:- prop minus (Op2, Op1, Res)
+#"@var{Op2} is a natural number. \n
+@var{Op1} is a natural number. \n
+@var{Res} is the result."
 
 
 :- doc(less/2,"Define la operación @op{>} entre dos números naturales descritos en notación de Peano. @includedef{less/2}\n ").
