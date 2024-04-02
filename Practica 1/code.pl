@@ -27,14 +27,15 @@ charge( 0 ).
 cell charges values. @includedef{my_list/1}\n
 The predicate @pred{list/1} is called recursively, checking that all elements are charges and that it is a list structure. ").
 
-%my_list([+++++++]).
-%my_list([++++++]).
-%my_list([+++++]).
-%my_list([++++]).
-%my_list([+++]).
-%my_list([++]).
-%my_list([+]).
-%my_list([0]).
+my_list([+++++++]).
+my_list([++++++]).
+my_list([+++++]).
+my_list([++++]).
+my_list([+++]).
+my_list([++]).
+my_list([+]).
+my_list([0]).
+%my_list([]).
 
 my_list([H]) :- charge(H).
 
@@ -117,6 +118,9 @@ minus(X, Y, Z) :- plus(Z, Y, X).
 less(0,s(_X)).
 less(s(X),s(Y)) :- less(X,Y).
 
+less_or_equal(0,_).
+less_or_equal(s(X),s(Y)) :- less_or_equal(X,Y).
+
 :- doc(div/3,"Defines division @op{/} between two natural numbers in Peano notation.  @includedef{div/3}\n 
  Division is viewed as successive subtractions from the dividend until it becomes 0 or the remainder. ").
 
@@ -147,18 +151,35 @@ representation will be @tt{[List | [Lists]]}. @p
 :- prop basic_surface(CellMatrix) 
 #"@var{CellMatrix} is a matrix with charged cells.".
 
+:- test basic_surface (X)
+   : (X = [[0,++], [], [+,+++]])
+   => fails
+   # "Cannot have blank lines.".
+
+:- test basic_surface (X)
+   : (X = [[0,1], [+++,+], [+,++]])
+   => fails
+   # "Line contents must have cell charge values.".
 
 :- test basic_surface(X)   
    : (X = [[]])  
    => fails
    # "Cannot be a list with a empty sublist".
 
+:- test basic_surface (X)
+   : (X = [[_]])
+   => not_fails
+   # "Line must contain at least one cell.".
+
+basic_surface([L]) :-
+   my_list(L).
 
 basic_surface([[H|T]]) :-  
    charge(H), 
    my_list(T).
 
-basic_surface([_L|S2]) :-  
+basic_surface([L|S2]) :- 
+   my_list(L), 
    basic_surface(S2).
 
 
@@ -166,6 +187,33 @@ basic_surface([_L|S2]) :-
 It is defined as: @includedef{surface/1}\n").
 :- prop surface(CellList) 
 #"@var{CellList} is a list with charged cells.".
+
+:- test surface (X)
+   : (X = [[0,++], [], [+,+++]])
+   => fails
+   # "Cannot have blank lines.".
+
+:- test surface (X)
+   : (X = [[0,1], [+++,+], [+,++]])
+   => fails
+   # "Line contents must have cell charge values.".
+
+:- test surface (X)
+   : (X = [[]])
+   => fails
+   # "Cannot be a list with empty sublist.".
+
+:- test surface (X)
+   : (X = [[_]])
+   => not_fails
+   # "Line must contain at least one cell.".
+
+:- test surface (X)
+   : ([[_,_,_], [_,_], [_,_,_]])
+   => fails
+   # "Lines must have same length.".
+
+
 
 surface([L|L2]) :- 
    basic_surface([L|L2]), 
@@ -196,6 +244,14 @@ v_line([Fila|Filas], Indice, [Elemento|Columna]) :-
    get(Fila, Indice, Elemento),
    v_line(Filas, Indice, Columna).
 
+v_lines([L|_S2], C) :-
+   surface([L|_S2]), 
+   v_lines_aux([L|_S2], s(0), C).
+
+
+v_lines_aux(S, Index, [C|Resto]) :-
+   v_line(S, Index, C),
+   v_lines_aux(S, s(Index), Resto).
 
 
 
@@ -218,7 +274,7 @@ total_cells([L|S2], Total) :-
    plus(Esta, TotalResto, Total).
 
 
-average(S, A) :-
+average_charge(S, A) :-
    total_charge(S, M),
    total_cells(S, T), 
    div(M, T, A).
