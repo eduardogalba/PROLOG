@@ -1,4 +1,4 @@
-:- module(_,_,[assertions,regtypes]).
+:- module(_,_,[pure,assertions,regtypes]).
 % :- module(_,_,[]).           % For pure LP, depth-first search rule
 %:- module(_,_,['sr/bfall']).   % For pure LP, breadth-first search rule, all predicates
 
@@ -54,6 +54,15 @@ get([Elem|_], s(0), Elem).
 get([_|Rest], s(Index), Elem) :-
    get(Rest, Index, Elem).
 
+myappend([],L,L).
+myappend([X|Xs],Ys,[X|Zs]) :- 
+    myappend(Xs,Ys,Zs).
+
+reverse([],[]).
+reverse([X|Xs],Ys) :- 
+    reverse(Xs,Zs),
+    myappend(Zs,[X],Ys).
+
 
 %------------------------------------------------------------------------------------------------------------------------%
 
@@ -65,12 +74,20 @@ arithmetic operations. @includedef{f/2}\n ").
 
 f(+++++++, s(s(s(s(s(s(s(0)))))))).
 f(++++++, s(s(s(s(s(s(0))))))).
-f(+++++, s(s(s(s(s(0)))))).
+f(+++++, s(s(s(s(s(s(s(0)))))))).
 f(++++, s(s(s(s(0))))).
 f(+++, s(s(s(0)))).
 f(++, s(s(0))).
 f(+, s(0)).
 f(0, 0).
+
+f(s(s(s(s(s(s(s(0))))))), s(s(s(s(s(s(s(0)))))))).
+f(s(s(s(s(s(s(0)))))), s(s(s(s(s(s(0))))))).
+f(s(s(s(s(s(0))))), s(s(s(s(s(0)))))).
+f(s(s(s(s(0)))), s(s(s(s(0))))).
+f(s(s(s(0))), s(s(s(0)))).
+f(s(s(0)), s(s(0))).
+f(s(0), s(0)).
 
 :- doc(equal/2,"Defines equality operator @op{==} between two natural numbers in Peano notation. @includedef{equal/2}\n").
 
@@ -151,12 +168,12 @@ representation will be @tt{[List | [Lists]]}. @p
 :- prop basic_surface(CellMatrix) 
 #"@var{CellMatrix} is a matrix with charged cells.".
 
-:- test basic_surface (X)
+:- test basic_surface(X)
    : (X = [[0,++], [], [+,+++]])
    => fails
    # "Cannot have blank lines.".
 
-:- test basic_surface (X)
+:- test basic_surface(X)
    : (X = [[0,1], [+++,+], [+,++]])
    => fails
    # "Line contents must have cell charge values.".
@@ -166,7 +183,7 @@ representation will be @tt{[List | [Lists]]}. @p
    => fails
    # "Cannot be a list with a empty sublist".
 
-:- test basic_surface (X)
+:- test basic_surface(X)
    : (X = [[_]])
    => not_fails
    # "Line must contain at least one cell.".
@@ -188,27 +205,27 @@ It is defined as: @includedef{surface/1}\n").
 :- prop surface(CellList) 
 #"@var{CellList} is a list with charged cells.".
 
-:- test surface (X)
+:- test surface(X)
    : (X = [[0,++], [], [+,+++]])
    => fails
    # "Cannot have blank lines.".
 
-:- test surface (X)
+:- test surface(X)
    : (X = [[0,1], [+++,+], [+,++]])
    => fails
    # "Line contents must have cell charge values.".
 
-:- test surface (X)
+:- test surface(X)
    : (X = [[]])
    => fails
    # "Cannot be a list with empty sublist.".
 
-:- test surface (X)
+:- test surface(X)
    : (X = [[_]])
    => not_fails
    # "Line must contain at least one cell.".
 
-:- test surface (X)
+:- test surface(X)
    : ([[_,_,_], [_,_], [_,_,_]])
    => fails
    # "Lines must have same length.".
@@ -239,22 +256,40 @@ h_line(S, N, C) :-
    surface(S).
 
 
-v_line([], _, []).
+v_line([Fila], Indice, [Elemento]) :- get(Fila, Indice, Elemento).
 v_line([Fila|Filas], Indice, [Elemento|Columna]) :-
    get(Fila, Indice, Elemento),
    v_line(Filas, Indice, Columna).
 
-v_lines([L|_S2], C) :-
-   surface([L|_S2]), 
-   v_lines_aux([L|_S2], s(0), C).
+v_lines([L], L).
+v_lines([L|S2], C) :-
+   mylength(L, Tam),
+   v_lines_aux([L|S2], Tam, C). 
 
 
-v_lines_aux(S, Index, [C|Resto]) :-
-   v_line(S, Index, C),
-   v_lines_aux(S, s(Index), Resto).
+v_lines_aux(S, s(0), [C]) :- v_line(S, s(0), C).
+v_lines_aux(S, s(Index), Resto) :-
+   v_lines_aux(S, Index, NewResto),
+   v_line(S, s(Index), Coln), 
+   myappend(NewResto, [Coln], Resto).
+   
+ /*  [[a,b,c][a,b,c][a,b,c]]
 
+   [[a,a,a]]  N = 1
+   [[a,a,a]] ++ [b,b,b] = [[a,a,a][b,b,b]] N > 1
+   [[a,a,a][b,b,b]] ++ [c,c,c] = [[a,a,a][b,b,b][c,c,c]]
 
+   Index = s(0) NewResto = [[a,a,a]]
+   Coln = [b,b,b]
+   [[a,a,a]] ++ [b,b,b] = [[a,a,a][b,b,b]]
 
+   Index = s(s(0)) Resto = [[a,a,a][b,b,b]]
+   Coln = [c,c,c]
+   [[a,a,a][b,b,b]] ++ [c,c,c] = [[a,a,a][b,b,b][c,c,c]]
+
+   Index = s(s(s(0))) Resto = [[a,a,a][b,b,b][c,c,c]]
+
+*/
 h_sum([], 0).
 h_sum([H|T], Suma) :-
    h_sum(T, SumaResto),
@@ -273,7 +308,7 @@ total_cells([L|S2], Total) :-
    mylength(L, Esta),
    plus(Esta, TotalResto, Total).
 
-
+average_charge([[]], _).
 average_charge(S, A) :-
    total_charge(S, M),
    total_cells(S, T), 
