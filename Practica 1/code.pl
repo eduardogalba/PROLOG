@@ -27,15 +27,17 @@ charge( 0 ).
 cell charges values. @includedef{my_list/1}\n
 The predicate @pred{list/1} is called recursively, checking that all elements are charges and that it is a list structure. ").
 
-my_list([+++++++]).
-my_list([++++++]).
-my_list([+++++]).
-my_list([++++]).
-my_list([+++]).
-my_list([++]).
-my_list([+]).
-my_list([0]).
+%my_list([+++++++]).
+%my_list([++++++]).
+%my_list([+++++]).
+%my_list([++++]).
+%my_list([+++]).
+%my_list([++]).
+%my_list([+]).
+%my_list([0]).
 %my_list([]).
+% OJO: SI descomentas esta parte, creas mas casos y posible bucle infinito con la misma solucion
+
 
 my_list([H]) :- charge(H).
 
@@ -193,8 +195,9 @@ representation will be @tt{[List | [Lists]]}. @p
    => not_fails
    # "Line must contain at least one cell.".
 
-basic_surface([L]) :-
-   my_list(L).
+%basic_surface([L]) :-
+%   my_list(L).
+% OJO: SI descomentas esta parte, creas mas casos y posible bucle infinito con la misma solucion
 
 basic_surface([[H|T]]) :-  
    charge(H), 
