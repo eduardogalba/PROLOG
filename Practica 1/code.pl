@@ -1,4 +1,4 @@
-:- module(_,_,[pure,assertions,regtypes]).
+:- module(_,_,[assertions,regtypes]).
 % :- module(_,_,[]).           % For pure LP, depth-first search rule
 %:- module(_,_,['sr/bfall']).   % For pure LP, breadth-first search rule, all predicates
 
@@ -141,6 +141,7 @@ less_or_equal(s(X),s(Y)) :- less_or_equal(X,Y).
 :- doc(div/3,"Defines division @op{/} between two natural numbers in Peano notation.  @includedef{div/3}\n 
  Division is viewed as successive subtractions from the dividend until it becomes 0 or the remainder. ").
 
+div(0,_,0).
 div(X, Y, s(0)) :- minus(X, Y, Z), less(Z, Y). 
 div(X, Y, s(Q)) :- minus(X, Y, Z), div(Z, Y, Q).
 
@@ -178,6 +179,10 @@ representation will be @tt{[List | [Lists]]}. @p
    => fails
    # "Line contents must have cell charge values.".
 
+:- test basic_surface(X)
+   : (X = [])
+   => fails.
+
 :- test basic_surface(X)   
    : (X = [[]])  
    => fails
@@ -211,9 +216,13 @@ It is defined as: @includedef{surface/1}\n").
    # "Cannot have blank lines.".
 
 :- test surface(X)
-   : (X = [[0,1], [+++,+], [+,++]])
+   : (X = [[+++,1], [+++,+], [+,++]])
    => fails
    # "Line contents must have cell charge values.".
+
+:- test surface(X)
+   : X = ([])
+   => fails.
 
 :- test surface(X)
    : (X = [[]])
@@ -226,7 +235,7 @@ It is defined as: @includedef{surface/1}\n").
    # "Line must contain at least one cell.".
 
 :- test surface(X)
-   : ([[_,_,_], [_,_], [_,_,_]])
+   : (X = [[_,_,_], [_,_], [_,_,_]])
    => fails
    # "Lines must have same length.".
 
@@ -249,12 +258,52 @@ surface_acc([[H|T]|T2], Acc) :-
 
 % OPERACIONES CON SUPERFICIES
 
-h_line([L], s(0), L).
-   
+:- doc(h_line/3,"Extracts from surface a specific horizontal line @includedef{h_line/3}\n").
+
+:- test h_line([[0,+,++], [+++,++++,+++++]], X, [+++,++++,+++++])
+   : (X = s(s(0)))
+   => not_fails.
+
+:- test h_line([[0,+,++], [+++,++++,+++++]], s(s(s(0))), _)
+   => fails.
+
+:- test h_line([[0,+,++], [+++,++++,+++++]],0, _)
+   => fails.
+
+:- test h_line([[0,+,++], [+++,++++,+++++]], s(s(0)), X)
+   : (X = [+++,++++,+++++])
+   => not_fails.
+
+:- test h_line([], _, _)
+   => fails.
+
+:- test h_line([[]],_,_)
+   => fails.
+
+h_line([L], s(0), L).   
 h_line(S, N, C) :-
    get(S, N, C),
    surface(S).
 
+:- test v_line([[0,+,++], [0,+,++]], X, [+,+])
+   : (X = s(s(0)))
+   => not_fails.
+
+:- test v_line([[0,+,++], [0,+,++]], s(s(s(s(0)))), _)
+   => fails.
+
+:- test v_line([[0,+,++], [0,+,++]], 0, _)
+   => fails.
+
+:- test v_line([[0,+,++], [0,+,++]], s(s(0)), X)
+   : (X = [+,+])
+   => not_fails.
+
+:- test v_line([], _, _)
+   => fails.
+
+:- test v_line([[]],_,_)
+   => fails.
 
 v_line([Fila], Indice, [Elemento]) :- get(Fila, Indice, Elemento).
 v_line([Fila|Filas], Indice, [Elemento|Columna]) :-
@@ -290,17 +339,42 @@ v_lines_aux(S, s(Index), Resto) :-
    Index = s(s(s(0))) Resto = [[a,a,a][b,b,b][c,c,c]]
 
 */
-h_sum([], 0).
+h_sum([C], N) :- f(C, N).
 h_sum([H|T], Suma) :-
    h_sum(T, SumaResto),
    f(H, N),
    plus(N, SumaResto, Suma).
 
-total_charge([],0).
-total_charge([L|S2], T) :-
-   total_charge(S2, SumaResto),
+:- test total_charge([[0,+],[++,+++],[++++,+++++]], X)
+   : X = s(s(s(s(s(s(s(s(s(s(s(s(s(s(0))))))))))))))
+   => not_fails.
+
+:- test total_charge([[0,+],[++,3],[++++,+++++]], _)
+   => fails.
+
+:- test total_charge(_, X)
+   : X = 15
+   => fails.
+
+:- test total_charge([[_,_],[_,_,_],[_,_]], _)
+   => fails.
+
+:- test total_charge([[]], _)
+   => fails.
+
+:-test total_charge([],_)
+   => fails.
+
+total_charge(S, T) :-
+   total_charge_aux(S,T), 
+   surface(S).
+
+total_charge_aux([],0).
+total_charge_aux([L|S2], T) :-
+   total_charge_aux(S2, SumaResto),
    h_sum(L, SumaFila),
    plus(SumaFila, SumaResto, T).
+
 
 total_cells([L], N) :- mylength(L,N).
 total_cells([L|S2], Total) :-
