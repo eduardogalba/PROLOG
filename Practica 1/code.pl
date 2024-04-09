@@ -1,5 +1,5 @@
-%:- module(_,_,[pure,assertions,regtypes]).
-:- module(_,_,[assertions,regtypes]).
+:- module(_,_,[pure,assertions,regtypes]).
+%:- module(_,_,[assertions,regtypes]).
 % :- module(_,_,[]).           % For pure LP, depth-first search rule
 %:- module(_,_,['sr/bfall']).   % For pure LP, breadth-first search rule, all predicates
 
@@ -48,7 +48,8 @@ The predicate @pred{list/1} is called recursively, checking that all elements ar
 
 my_list([H]) :- charge(H).
 
-my_list([_H|T]) :- 
+my_list([H|T]) :- 
+   charge(H),
    my_list(T).
 
 %------------------------------------------------------------------------------------------------------------------------%
