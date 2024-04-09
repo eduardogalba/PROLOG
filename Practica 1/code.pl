@@ -1,5 +1,5 @@
-:- module(_,_,[pure,assertions,regtypes]).
-%:- module(_,_,[assertions,regtypes]).
+%:- module(_,_,[pure,assertions,regtypes]).
+:- module(_,_,[assertions,regtypes]).
 % :- module(_,_,[]).           % For pure LP, depth-first search rule
 %:- module(_,_,['sr/bfall']).   % For pure LP, breadth-first search rule, all predicates
 
@@ -67,7 +67,7 @@ mylength([_|T],s(N)) :-
 
 :- pred get(L, I, E) :: (my_list(L), nat_num(I), charge(E)).
 
-get([Elem|_], s(0), Elem) :- charge(Elem).
+get([Elem|_], s(0), Elem).
 get([_|Rest], s(Index), Elem) :-
    get(Rest, Index, Elem).
 
@@ -133,8 +133,8 @@ equal(s(N), s(N)) :-
 :- pred plus(Op1, Op2, Res) :: (nat_num(Op2), nat_num(Op1), nat_num(Res)) 
    #"@var{Res} is the sum of @var{Op1} and @var{Op2}".
 
-plus(0,Y,Y).
-plus(s(X),Y,s(Z)) :- nat_num(X), nat_num(Y), plus(X,Y,Z).
+plus(0,Y,Y) :- nat_num(Y).
+plus(s(X),Y,s(Z)) :- plus(X,Y,Z).
 
 
 :- doc(minus/3,"Defines subtraction operator @op{-} between two natural numbers in Peano notation, using @pred{plus/3}. @includedef{minus/3}\n ").
@@ -150,7 +150,7 @@ minus(X, Y, Z) :- plus(Z, Y, X).
 :- pred less(N, M) :: (nat_num(N), nat_num(M))
 #"@pred{less/2} will be true if @var{N} less than @var{M}".
 
-less(0,s(_X)).
+less(0,s(X)) :- nat_num(X).
 less(s(X),s(Y)) :- less(X,Y).
 
 
