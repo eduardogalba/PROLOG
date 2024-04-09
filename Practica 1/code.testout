@@ -1,2 +1,0 @@
-test_output_db('code#44#48',st(result_id(1,1,1),[rtcheck(comp,$:('code_wrp_auto:.'([0],[[0],[0]])),[],not_fails,[exception(error(existence_error(procedure,'code_wrp_auto:.'/2),'code_wrp_auto:.'/2))],[])],[],rtcheck_error)).
-test_output_error_db('code#44#48',[],[87,65,82,78,73,78,71,58,32,80,114,101,100,105,99,97,116,101,32,46,47,50,32,117,110,100,101,102,105,110,101,100,32,105,110,32,109,111,100,117,108,101,32,99,111,100,101,95,119,114,112,95,97,117,116,111,10]).
