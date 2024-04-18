@@ -3,7 +3,78 @@
 % :- module(_,_,[]).           % For pure LP, depth-first search rule
 %:- module(_,_,['sr/bfall']).   % For pure LP, breadth-first search rule, all predicates
 
-:- doc(author_data/4,"Defines authors in Deliverit system. It is defined as: @includedef{author_data/4}").
+
+:- doc(title, "Pure Logic Programming: Practise 1").
+:- doc(author, "Eduardo Gil Alba, z170238").
+
+:- doc(module, "
+@section{Introduction}
+The task at hand involves validating representations of statically loaded surfaces with variable load values assigned to 
+discrete points. To facilitate analysis, we adopt several simplifications. Firstly, we constrain charges to predefined values 
+according to the following predicate: @includedef{charge/1} Here, each charge is denoted by the number of '+' symbols, e.g., 
+'++++' signifies a charge of four units. @p
+Furthermore, we discretize the two-dimensional surface, conceptualizing it as a grid of cells where each cell can hold one of 
+the predefined charge values. An illustrative example of such a surface is:
+@begin{verbatim}
+   +++    +++++++    0      +    ++++    0
+ +++++++    +++      0      +    ++++    0
+   +++       0    +++++++   +     0     ++++
+   +++    +++++++    0    ++++    +      0
++++++++      0      +++     +    ++++    0
+   +++    +++++++   +++     +     0      +
+ +++++++    +++      0      +    ++++    0
+@end{verbatim}
+For representation purposes, we employ a list of lists. The inner lists delineate cells horizontally, while the outer list 
+groups cells by rows, with each element representing a load value. Thus, the above surface is structured as follows:
+@begin{verbatim}
+[ [ +++ , +++++++ , 0 , + , ++++ , 0 ],
+[ +++++++ , +++ , 0 , + , ++++ , 0 ],
+[ +++ , 0 , +++++++ , + , 0 , ++++ ],
+[ +++ , +++++++ , 0 , ++++ , + , 0 ],
+[ +++++++ , 0 , +++ , + , ++++ , 0 ],
+[ +++ , +++++++ , +++ , + , 0 , + ],
+[ +++++++ , +++ , 0 , + , ++++ , 0 ] ]
+@end{verbatim}
+Surfaces can have an arbitrary number of cells in both dimensions. @p
+In order to accomplish this, we define two types of surfaces, both containing load values. We establish @prop{basic_surface/1}
+which must consist of at least one line, with each line containing at least one cell. It is defined by:
+@includedef{basic_surface/1} 
+Additionally, we define @prop{surface/1} as above but in addition must ensure that all lines possess the same number of cells. It is defined by:
+@includedef{surface/1}
+@includedef{surface_acc/2}
+
+
+@subsection{Some examples of use:}
+@begin{enumerate}
+@item Check if a @prop{basic_surface/1} is correct:
+@begin{verbatim}
+  ?- basic_surface([[+++,+++++++,0,+], 
+              [+++++++,+++,0,+,++++], 
+              [+++,0], 
+              [+++,+++++++,0], 
+              [+++++++,0,+++,+,++++], 
+              [+++], 
+              [+++++++,+++,0]]).
+
+  yes
+  ?- 
+@end{verbatim}
+@item Check if a @prop{surface/1} is correct:
+@begin{verbatim}
+  ?- surface([[+++,+++++++,0,+,++++,0], 
+              [+++++++,+++,0,+,++++,0], 
+              [+++,0,+++++++,+,0,++++], 
+              [+++,+++++++,0,++++,+,0], 
+              [+++++++,0,+++,+,++++,0], 
+              [+++,+++++++,+++,+,0,+], 
+              [+++++++,+++,0,+,++++,0]]).
+
+  yes
+  ?- 
+@end{verbatim}
+@end{enumerate}").
+
+:- doc(author_data/4,"Defines authors in Deliverit system.").
 :- prop author_data(Surname1, Surname2, Name, ID) 
 #"@var{Surname1} is your first surname.\n
 @var{Surname2} is your second surname.\n
@@ -11,13 +82,10 @@
 @var{ID} is university identifier.".
 author_data('Gil', 'Alba', 'Eduardo', 'Z170238').
 
-:- doc(title, "PROLOG: Practica 1").
-:- doc(author, "Eduardo Gil Alba, z170238").
-
-:- doc(charge/1,"Defines possible cell charge values. @includedef{charge/1}\n").
+:- doc(charge/1,"Defines possible load values. @includedef{charge/1}\n").
 
 :- prop charge(C)
-   #"@var{C} is cell charge value".
+   #"@var{C} is a load value".
 
 charge( +++++++ ).
 charge( ++++++ ).
@@ -56,13 +124,13 @@ my_list([H|T]) :-
 
 % OPERACIONES DE LISTA
 
-:- doc(mylength/2, "Calculates the size of a list. @includedef{mylength/2}\n").
+:- doc(my_length/2, "Calculates the size of a list. @includedef{my_length/2}\n").
 
-:- pred mylength(L, N) :: (my_list(L), nat_num(N)).
+:- pred my_length(L, N) :: (my_list(L), nat_num(N)).
 
-mylength([],0).
-mylength([_|T],s(N)) :-
-   mylength(T,N).
+my_length([],0).
+my_length([_|T],s(N)) :-
+   my_length(T,N).
 
 :- doc(get/2, "Extracts a specific element from a list. @includedef{get/2}\n").
 
@@ -72,13 +140,13 @@ get([Elem|_], s(0), Elem).
 get([_|Rest], s(Index), Elem) :-
    get(Rest, Index, Elem).
 
-:- doc(myappend/3, "").
+:- doc(my_append/3, "").
 
-:- pred myappend(L1, L2, R) :: (my_list(L1), my_list(L2), my_list(R)).
+:- pred my_append(L1, L2, R) :: (my_list(L1), my_list(L2), my_list(R)).
 
-myappend([],L,L).
-myappend([X|Xs],Ys,[X|Zs]) :- 
-    myappend(Xs,Ys,Zs).
+my_append([],L,L).
+my_append([X|Xs],Ys,[X|Zs]) :- 
+    my_append(Xs,Ys,Zs).
 
 %------------------------------------------------------------------------------------------------------------------------%
 
@@ -190,7 +258,8 @@ representation will be @tt{[List | [Lists]]}. @p
    # "Line contents must have cell charge values.".
 
 :- test basic_surface(S)
-   : (S = []) + fails.
+   : (S = []) + fails
+   #"Cannot be an empty list.".
 
 :- test basic_surface(S)   
    : (S = [[]]) + fails
@@ -199,6 +268,10 @@ representation will be @tt{[List | [Lists]]}. @p
 :- test basic_surface(S)
    : (S = [[_]]) + not_fails
    # "Line must contain at least one cell.".
+
+:- test basic_surface(S)
+   : (S = [[_,_,_],[_,_],[_]]) + not_fails
+   #"Lines could have different sizes.".
 
 basic_surface([L]) :-
    my_list(L).
@@ -213,7 +286,7 @@ basic_surface([L|S2]) :-
    basic_surface(S2).
 
 
-:- doc(surface/1,"Defines a surface of charged cells, represented by a cell charge matrix. 
+:- doc(surface/1,"Defines a surface of charged cells, represented by a cell charge matrix. @p
    @begin{note}
    @bf{Note:} @pred{surface/1} must contains at least one non-empty horizontal line.
    @end{note}
@@ -223,15 +296,16 @@ basic_surface([L|S2]) :-
    #"@var{CellMatrix} is a matrix with charged cells.".
 
 :- test surface(S)
+   : (S = [[++,+++], [0,+], [+,++]]) + not_fails
+   #"Call surface correctly.".
+
+:- test surface(S)
    : (S = [[0,++], [], [+,+++]]) + fails
    # "Cannot have blank lines.".
 
 :- test surface(S)
    : (S = [[+++,1], [+++,+], [+,++]]) + fails
    # "Line contents must have cell charge values.".
-
-:- test surface(S)
-   : (S = [[++,+++], [0,+], [+,++]]) + not_fails.
 
 :- test surface(S)
    : (S = [[]]) + fails
@@ -249,16 +323,16 @@ basic_surface([L|S2]) :-
 
 surface([L|L2]) :- 
    basic_surface([L|L2]), 
-   mylength(L, Tam), 
+   my_length(L, Tam), 
    surface_acc([L|L2], Tam).
 
 :- doc(surface_acc/2, "").
 
 :- pred surface_acc(S, N) :: (surface(S), nat_num(N)).
 
-surface_acc([L],Tam) :- mylength(L, Tam).
+surface_acc([L],Tam) :- my_length(L, Tam).
 surface_acc([[H|T]|T2], Acc) :- 
-   mylength([H|T],NewAcc), 
+   my_length([H|T],NewAcc), 
    equal(Acc,NewAcc), 
    surface_acc(T2,NewAcc).
 
@@ -272,23 +346,33 @@ surface_acc([[H|T]|T2], Acc) :-
 
 :- pred h_line(S, I, R) :: (surface(S), nat_num(I), my_list(R)).
 
-:- test h_line([[0,+,++], [+++,++++,+++++]], X, [+++,++++,+++++])
-   : (X = s(s(0))) + not_fails.
+:- test h_line(S, I, R)
+   : (S = [[0,+,++], [+++,++++,+++++]], I  = s(0))
+   => (R = [0,+,++]) + not_fails
+   #"Get horizontal line correctly(1).".
 
-:- test h_line([[0,+,++], [+++,++++,+++++]], X, _)
-   : (X = s(s(s(0)))) + fails.
+:- test h_line(S, I, R)
+   : (S = [[0,+,++], [+++,++++,+++++]], I  = s(s(0)))
+   => (R = [+++,++++,+++++]) + not_fails
+   #"Get horizontal line correctly(2).".
 
-:- test h_line([[0,+,++], [+++,++++,+++++]],X, _)
-   : (X = 0) + fails.
+:- test h_line(S, I, R)
+   : (S = [[0,+,++], [+++,++++,+++++]], R = [+++,++++,+++++])
+   => (I = s(s(0))) + not_fails
+   #"Get horizontal line index correctly.".
 
-:- test h_line([[0,+,++], [+++,++++,+++++]], s(s(0)), X)
-   : (X = [+++,++++,+++++]) + not_fails.
+:- test h_line(_,I, _)
+   : (I = 0) + fails
+   #"Get non-existing horizontal line(1)".
 
-:- test h_line(X,I,C)
-   : (X = []) + fails.
+:- test h_line(S, I, _)
+   : (S = [[0,+,++], [+++,++++,+++++]], I = s(s(s(0)))) + fails
+   #"Get non-existing horizontal line(2).".
 
-:- test h_line(X,I,C)
-   : (X = [[]]) + fails.
+:- test h_line(S,_,_)
+   : (S = []) + fails
+   #"Cannot be an empty surface.".
+
 
 h_line([L], s(0), L).   
 h_line(S, N, C) :-
@@ -299,23 +383,31 @@ h_line(S, N, C) :-
 
 :- pred v_line(S, I, C) :: (surface(S), nat_num(I), my_list(C)).
 
-:- test v_line([[0,+,++], [0,+,++]], X, [+,+])
-   : (X = s(s(0))) + not_fails.
+:- test v_line(S, I, C)
+   : (S = [[0,+,++], [0,+,++]], I = s(s(0)))
+   => (C = [+,+])
+   #"Get column correctly".
 
-:- test v_line([[0,+,++], [0,+,++]], X, _)
-   : (X = s(s(s(s(0))))) + fails.
+:- test v_line(S, I, C)
+   : (S = [[0,+,++], [0,+,++]], C = [+,+])
+   => (I = s(s(0)))
+   #"Get index from column correctly".
 
-:- test v_line([[0,+,++], [0,+,++]], X, _)
-   : (X = 0) + fails.
+:- test v_line(S, I, _)
+   : (S = [[0,+,++], [0,+,++]], I = 0) + fails
+   #"Get non-existing vertical line(1)".
 
-:- test v_line([[0,+,++], [0,+,++]], s(s(0)), X)
-   : (X = [+,+]) + not_fails.
+:- test v_line(S, I, _)
+   : (S = [[0,+,++], [0,+,++]], I = s(s(s(s(0))))) + fails
+   #"Get non-existing vertical line(2)".
 
-:- test v_line(X,I,C)
-   : (X = []) + fails.
+:- test v_line(S,_,_)
+   : (S = []) + fails
+   #"Cannot be an empty surface.".
 
-:- test v_line(X,I,C)
-   : (X = [[]]) + fails.
+:- test v_line(S,_,_)
+   : (S = [[]]) + fails
+   #"Surface must have at least one cell".
 
 v_line([Fila], Indice, [Elemento]) :- get(Fila, Indice, Elemento).
 v_line([Fila|Filas], Indice, [Elemento|Columna]) :-
@@ -327,9 +419,19 @@ v_line([Fila|Filas], Indice, [Elemento|Columna]) :-
 :- pred v_lines(S, C) : (surface(S)) => (surface(C)).
    
 
+:- test v_lines(S, C)
+   : (S = [[0,+,++],[0,+,++],[0,+,++]])
+   => (C = [[0,0,0],[+,+,+],[++,++,++]])
+   #"Test with square matrix".
+
+:- test v_lines(S, C)
+   : (S = [[0,+,++],[0,+,++]])
+   => (C = [[0,0],[+,+],[++,++]])
+   #"Test with rectangular matrix".
+
 v_lines([L], L).
 v_lines([L|S2], C) :-
-   mylength(L, Tam),
+   my_length(L, Tam),
    v_lines_aux([L|S2], Tam, C). 
 
 
@@ -339,7 +441,7 @@ v_lines_aux(S, s(0), [C]) :- v_line(S, s(0), C).
 v_lines_aux(S, s(Index), Resto) :-
    v_lines_aux(S, Index, NewResto),
    v_line(S, s(Index), Coln), 
-   myappend(NewResto, [Coln], Resto).
+   my_append(NewResto, [Coln], Resto).
    
  /*  [[a,b,c][a,b,c][a,b,c]]
 
@@ -371,23 +473,18 @@ h_sum([H|T], Suma) :-
 :- pred total_charge(S, T) :: (surface(S), nat_num(T))
    #"@var{T} is the sum of all elements in a surface.".
 
-:- test total_charge([[0,+],[++,+++],[++++,+++++]], X)
-   => X = s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(0))))))))))))))).
+:- test total_charge([[0,+],[++,+++],[++++,+++++]], T)
+   => T = s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(0))))))))))))))).
 
-:- test total_charge(X, _)
-   : (X = [[0,+],[++,3],[++++,+++++]]) + fails.
+:- test total_charge(S, _)
+   : (S = [[0,+],[++,3],[++++,+++++]]) + fails.
 
-:- test total_charge([[0,+],[++,+++],[++++,+++++]], X)
-   : (X = 15) + fails.
+:- test total_charge(S, _)
+   : (S = [[]]) + fails.
 
-:- test total_charge(X, _)
-   : (X = [[_,_],[_,_,_],[_,_]]) + fails.
+:- test total_charge(S, _)
+   : (S = [[_,_,_],[_,_],[_]]) + fails.
 
-:- test total_charge(X, _)
-   : (X = [[]]) + fails.
-
-:-test total_charge(X,_)
-   : (X = []) + fails.
 
 total_charge(S, T) :-
    total_charge_aux(S,T), 
@@ -405,15 +502,33 @@ total_charge_aux([L|S2], T) :-
 
 :- pred total_cells(S, N) :: (surface(S), nat_num(N)).
 
-total_cells([L], N) :- mylength(L,N).
+total_cells([L], N) :- my_length(L,N).
 total_cells([L|S2], Total) :-
    total_cells(S2, TotalResto),
-   mylength(L, Esta),
+   my_length(L, Esta),
    plus(Esta, TotalResto, Total).
 
 :- doc(average_charge/2, "Calculates average cell charge value from surface. @includedef{average_charge/2}\n").
 
 :- pred average_charge(S, A) :: (surface(S), nat_num(A)).
+
+:- test average_charge(S, A)
+   : (S = [[++,++],[++,++],[++,++]])
+   => (A = s(s(0)))
+   #"Get average charge correctly(1).".
+
+:- test average_charge(S, A)
+   : (S = [[+,++],[+,++],[+,++]])
+   => (A = s(0))
+   #"Get average charge correctly(2).".
+
+:- test average_charge(S, A)
+   : (S = [[++,+++,+++++++], [+,++,++],[++,+++,+],[++,++,++]], A = s(s(s(s(s(s(0))))))) + fails
+   #"Round to lower number.".
+
+:- test average_charge(S, _)
+   : (S = [[],[],[]]) + fails.
+
 
 average_charge([[]], _).
 average_charge(S, A) :-
