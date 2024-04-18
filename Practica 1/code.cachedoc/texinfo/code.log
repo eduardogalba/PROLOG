@@ -1,0 +1,566 @@
+This is TeXk, Version 3.14159265 (TeX Live 2019/Debian) (preloaded format=tex 2024.3.24)  10 APR 2024 15:18
+ file:line:error style messages enabled.
+**\nonstopmode\input code.texic
+(./code.texic (./texinfo.tex Loading texinfo package [Version 2.257]: Basics,
+\bindingoffset=\dimen16
+\normaloffset=\dimen17
+\pagewidth=\dimen18
+\pageheight=\dimen19
+\outerhsize=\dimen20
+\outervsize=\dimen21
+\cornerlong=\dimen22
+\cornerthick=\dimen23
+\topandbottommargin=\dimen24
+\headlinebox=\box16
+\footlinebox=\box17
+\margin=\insert252
+\EMsimple=\toks12
+\singlespaceskip=\skip18
+\groupinvalidhelp=\toks13
+\mil=\dimen25
+\exdentamount=\skip19
+\inmarginspacing=\skip20
+
+fonts,
+\sffam=\fam8
+\mainmagstep=\count26
+\fontdepth=\count27
+ page headings,
+\titlepagetopglue=\skip21
+\titlepagebottomglue=\skip22
+\evenheadline=\toks14
+\oddheadline=\toks15
+\evenfootline=\toks16
+\oddfootline=\toks17
+ tables,
+\tableindent=\dimen26
+\itemindent=\dimen27
+\itemmargin=\dimen28
+\itemmax=\dimen29
+\itemno=\count28
+\multitableparskip=\skip23
+\multitableparindent=\skip24
+\multitablecolspace=\dimen30
+\multitablelinespace=\skip25
+\colcount=\count29
+ indexing,
+\secondaryindent=\skip26
+\partialpage=\box18
+\doublecolumnhsize=\dimen31
+ sectioning,
+\chapno=\count30
+\secno=\count31
+\subsecno=\count32
+\subsubsecno=\count33
+\appendixno=\count34
+\absseclevel=\count35
+\secbase=\count36
+\chapheadingskip=\skip27
+\secheadingskip=\skip28
+\subsecheadingskip=\skip29
+ toc,
+\tocfile=\write0
+\contentsrightmargin=\skip30
+\savepageno=\count37
+\lastnegativepageno=\count38
+\shortappendixwidth=\dimen32
+\tocindent=\dimen33
+ environments,
+\dblarrowbox=\box19
+\longdblarrowbox=\box20
+\pushcharbox=\box21
+\bullbox=\box22
+\equivbox=\box23
+\errorbox=\box24
+\lispnarrowing=\skip31
+\envskipamount=\skip32
+\circthick=\dimen34
+\cartouter=\dimen35
+\cartinner=\dimen36
+\normbskip=\skip33
+\normpskip=\skip34
+\normlskip=\skip35
+\lskip=\skip36
+\rskip=\skip37
+ defuns,
+\defbodyindent=\skip38
+\defargsindent=\skip39
+\deftypemargin=\skip40
+\deflastargmargin=\skip41
+\parencount=\count39
+
+macros,
+\macscribble=\write1
+\paramno=\count40
+\macname=\toks18
+ cross references,
+\auxfile=\write2
+\footnoteno=\count41
+\noepsfhelp=\toks19
+\countUTFx=\count42
+\countUTFy=\count43
+\countUTFz=\count44
+ paper sizes,
+\defaultparindent=\dimen37
+ and turning on texinfo input format.)
+(./code.aux)
+@fnindfile=@write3
+ [1
+\openout2 = `code.aux'.
+
+\openout3 = `code.fn'.
+
+] [2] (./code.toc) [-1] (./codeintro.texic (code)
+\openout0 = `code.toc'.
+
+ [1]
+\openout1 = `code.tmp'.
+
+
+(./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+
+(./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+[2]
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+
+(./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp) [3]
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+
+(./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp) [4]
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+
+(./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+
+(./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+Overfull \hbox (47.30754pt too wide) in paragraph at lines 605--609
+ [] |
+
+@hbox(30.9333+5.79999)x455.24408
+.@glue(@leftskip) 28.90755
+.@vbox(30.9333+5.79999)x473.64407
+..@hbox(6.2+5.79999)x473.64407, glue set 420.73656fil
+...@glue 28.90755
+...@circle ^^K
+...@glue -6.0
+...@leaders 0.0 plus 1.0fil []
+...@glue 6.0
+...etc.
+..@glue(@lineskip) 0.0
+..@hbox(10.60416+2.12917)x462.04407
+...@glue 28.90755
+...@rule(*+*)x0.4
+...@kern 3.0
+...@vbox(10.60416+2.12917)x426.33653 []
+...@kern 3.0
+...etc.
+..@glue(@lineskip) 0.0
+..@hbox(6.2+5.79999)x473.64407, glue set 420.73656fil
+...@glue 28.90755
+...@circle 
+
+...@glue -6.0
+...@leaders 0.0 plus 1.0fil []
+...@glue 6.0
+...etc.
+.@penalty 10000
+.@glue(@parfillskip) 0.0 plus 1.0fil
+.@glue(@rightskip) 0.0
+.etc.
+
+[5]
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+
+(./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+
+(./code.tmp) [6]
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+
+(./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+
+(./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+
+(./code.tmp) [7]
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+
+(./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+
+(./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp) [8]
+\openout1 = `code.tmp'.
+
+
+(./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+
+(./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+
+(./code.tmp) [9]
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+
+(./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+
+(./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp) [10]
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+
+(./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+
+(./code.tmp) [11]
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+
+(./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+ (./code.tmp)
+\openout1 = `code.tmp'.
+
+
+(./code.tmp)) [12] ) 
+Here is how much of TeX's memory you used:
+ 1721 strings out of 497973
+ 15817 string characters out of 6220704
+ 37210 words of memory out of 5000000
+ 2355 multiletter control sequences out of 15000+600000
+ 30088 words of font info for 104 fonts, out of 8000000 for 9000
+ 19 hyphenation exceptions out of 8191
+ 13i,5n,13p,405b,313s stack positions out of 5000i,500n,10000p,200000b,80000s
+
+Output written on code.dvi (15 pages, 38264 bytes).

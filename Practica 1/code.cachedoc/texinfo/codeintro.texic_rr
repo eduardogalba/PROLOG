@@ -1,7 +1,4 @@
-filetype(module).
-main_title([[string_esc("PROLOG: Practica 1")]]).
-sect([level(0)],global_label("PROLOG: Practica 1"),[string_esc("PROLOG: Practica 1")]).
-refs_link(codefulltoc).
+sect([level(1)],global_label("code"),string_esc("code")).
 sect([level(2)],local_label("Usage and interface"),string_esc("Usage and interface")).
 idx(use,code,localnum_label("0"),"mylength/2").
 idx(use,code,localnum_label("1"),"get/3").
@@ -67,7 +64,7 @@ idx(use,prop,localnum_label("48"),"nat_num/1").
 idx(use,prop,localnum_label("49"),"nat_num/1").
 idx(use,prop,localnum_label("50"),"nat_num/1").
 idx(def,pred,local_label("less/2"),"less/2").
-idx(use,op,localnum_label("51"),"&gt;").
+idx(use,op,localnum_label("51"),">").
 idx(use,pred,localnum_label("52"),"less/2").
 idx(use,prop,localnum_label("53"),"nat_num/1").
 idx(use,prop,localnum_label("54"),"nat_num/1").
@@ -90,10 +87,10 @@ idx(use,prop,localnum_label("68"),"fails/1").
 idx(use,prop,localnum_label("69"),"S=[[]]").
 idx(use,prop,localnum_label("70"),"= /2").
 idx(use,prop,localnum_label("71"),"fails/1").
-idx(use,prop,localnum_label("72"),"S=[[_101613]]").
+idx(use,prop,localnum_label("72"),"S=[[_109491]]").
 idx(use,prop,localnum_label("73"),"= /2").
 idx(use,prop,localnum_label("74"),"not_fails/1").
-idx(use,prop,localnum_label("75"),"S=[[_101480,_101482,_101484],[_101488,_101490],[_101494]]").
+idx(use,prop,localnum_label("75"),"S=[[_109358,_109360,_109362],[_109366,_109368],[_109372]]").
 idx(use,prop,localnum_label("76"),"= /2").
 idx(use,prop,localnum_label("77"),"not_fails/1").
 idx(def,prop,local_label("surface/1"),"surface/1").
@@ -110,10 +107,10 @@ idx(use,prop,localnum_label("87"),"fails/1").
 idx(use,prop,localnum_label("88"),"S=[[]]").
 idx(use,prop,localnum_label("89"),"= /2").
 idx(use,prop,localnum_label("90"),"fails/1").
-idx(use,prop,localnum_label("91"),"S=[[_22475]]").
+idx(use,prop,localnum_label("91"),"S=[[_25226]]").
 idx(use,prop,localnum_label("92"),"= /2").
 idx(use,prop,localnum_label("93"),"not_fails/1").
-idx(use,prop,localnum_label("94"),"S=[[_22352,_22354,_22356],[_22360,_22362],[_22366,_22368,_22370]]").
+idx(use,prop,localnum_label("94"),"S=[[_25099,_25101,_25103],[_25107,_25109],[_25113,_25115,_25117]]").
 idx(use,prop,localnum_label("95"),"= /2").
 idx(use,prop,localnum_label("96"),"fails/1").
 idx(def,pred,local_label("surface_acc/2"),"surface_acc/2").
@@ -216,7 +213,7 @@ idx(use,prop,localnum_label("186"),"fails/1").
 idx(use,prop,localnum_label("187"),"S=[[]]").
 idx(use,prop,localnum_label("188"),"= /2").
 idx(use,prop,localnum_label("189"),"fails/1").
-idx(use,prop,localnum_label("190"),"S=[[_105573,_105575,_105577],[_105581,_105583],[_105587]]").
+idx(use,prop,localnum_label("190"),"S=[[_111260,_111262,_111264],[_111268,_111270],[_111274]]").
 idx(use,prop,localnum_label("191"),"= /2").
 idx(use,prop,localnum_label("192"),"fails/1").
 idx(def,pred,local_label("total_charge_aux/2"),"total_charge_aux/2").
@@ -254,4 +251,3 @@ idx(use,code,localnum_label("220"),"condcomp").
 idx(use,code,localnum_label("221"),"assertions").
 idx(use,code,localnum_label("222"),"assertions/assertions_basic").
 idx(use,code,localnum_label("223"),"regtypes").
-refs_link(codesearch).

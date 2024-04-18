@@ -1,0 +1,35 @@
+This is TeXk, Version 3.14159265 (TeX Live 2019/Debian) (preloaded format=tex)
+
+(./code.texic (./texinfo.tex Loading texinfo package [Version 2.257]: Basics,
+fonts, page headings, tables, indexing, sectioning, toc, environments, defuns,
+macros, cross references, paper sizes, and turning on texinfo input format.)
+[1] [2] [-1] (./codeintro.texic (code) [1] (./code.tmp) (./code.tmp)
+(./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp)
+(./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp) [2] (./code.tmp)
+(./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp)
+(./code.tmp) [3] (./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp)
+(./code.tmp) (./code.tmp) [4] (./code.tmp) (./code.tmp) (./code.tmp)
+(./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp)
+(./code.tmp) (./code.tmp)
+Overfull \hbox (47.30754pt too wide) in paragraph at lines 605--609
+ [] |
+[5] (./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp)
+(./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp)
+(./code.tmp) [6] (./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp)
+(./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp)
+(./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp)
+(./code.tmp) [7] (./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp)
+(./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp)
+(./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp) [8]
+(./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp)
+(./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp)
+(./code.tmp) [9] (./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp)
+(./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp)
+(./code.tmp) (./code.tmp) [10] (./code.tmp) (./code.tmp) (./code.tmp)
+(./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp)
+(./code.tmp) [11] (./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp)
+(./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp) (./code.tmp)
+(./code.tmp)) [12] )
+(see the transcript file for additional information)
+Output written on code.dvi (15 pages, 28436 bytes).
+Transcript written on code.log.

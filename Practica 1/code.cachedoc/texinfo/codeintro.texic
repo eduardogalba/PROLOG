@@ -1,0 +1,1634 @@
+
+@node code, , Top, Top
+@comment node-name, next, previous, up
+@unnumbered code
+@section Usage and interface
+@cartouche
+@itemize @bullet
+@item @b{Library usage:}
+
+@code{:- use_module(/home/lumbalu/PROLOG/repo/PROLOG/Practica 1/code.pl).}
+@item @b{Exports:}
+
+@itemize @minus
+@item @i{Predicates:}
+
+@code{mylength/2}, @code{get/3}, @code{myappend/3}, @code{f/2}, @code{equal/2}, @code{plus/3}, @code{minus/3}, @code{less/2}, @code{div/3}, @code{surface_acc/2}, @code{h_line/3}, @code{v_line/3}, @code{v_lines/2}, @code{v_lines_aux/3}, @code{h_sum/2}, @code{total_charge/2}, @code{total_charge_aux/2}, @code{total_cells/2}, @code{average_charge/2}.
+@item @i{Properties:}
+
+@code{author_data/4}, @code{charge/1}, @code{my_list/1}, @code{nat_num/1}, @code{basic_surface/1}, @code{surface/1}.
+@end itemize
+@end itemize
+@end cartouche
+@section Documentation on exports
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{author_data/4 (prop)}}}
+@temp
+@end iftex
+@deffn PROPERTY author_data/4:
+Defines authors in Deliverit system. It is defined as: 
+@smallexample 
+author_data('Gil','Alba','Eduardo','Z170238').
+@end smallexample
+
+@b{Usage:} @code{author_data(Surname1,Surname2,Name,ID)}
+
+@code{Surname1} is your first surname.
+
+@code{Surname2} is your second surname.
+
+@code{Name} is your name.
+
+@code{ID} is university identifier.
+@itemize @minus
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{charge/1 (prop)}}}
+@temp
+@end iftex
+@deffn PROPERTY charge/1:
+Defines possible cell charge values. 
+@smallexample 
+charge(+++++++).
+charge(++++++).
+charge(+++++).
+charge(++++).
+charge(+++).
+charge(++).
+charge(+).
+charge(0).
+@end smallexample
+
+@b{Usage:} @code{charge(C)}
+
+@code{C} is cell charge value
+@itemize @minus
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{my_list/1 (prop)}}}
+@temp
+@end iftex
+@deffn PROPERTY my_list/1:
+Defines a list according to the internal representation @code{[Head|Tail]} in Prolog, which will stores cell charges values. 
+@smallexample 
+my_list([H]) :-
+    charge(H).
+my_list([H|T]) :-
+    charge(H),
+    my_list(T).
+@end smallexample 
+
+The predicate @code{list/1} is called recursively, checking that all elements are charges and that it is a list structure. 
+
+@b{Usage:} @code{my_list(L)}
+
+@code{L} is a list with charge cell values.
+@itemize @minus
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{mylength/2 (pred)}}}
+@temp
+@end iftex
+@deffn PREDICATE mylength/2:
+Calculates the size of a list. 
+@smallexample 
+mylength([],0).
+mylength([_1|T],s(N)) :-
+    mylength(T,N).
+@end smallexample
+
+@b{Usage:} @code{mylength(L,N)}
+
+@itemize @minus
+@item @i{Call and exit should be compatible with:}
+
+@code{L} is a list with charge cell values.
+@iftex
+@hfill
+@end iftex
+ (@code{my_list/1})
+
+@code{N} is a natural number.
+@iftex
+@hfill
+@end iftex
+ (@code{nat_num/1})
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{get/3 (pred)}}}
+@temp
+@end iftex
+@deffn PREDICATE get/3:
+
+@b{Usage:} @code{get(L,I,E)}
+
+@itemize @minus
+@item @i{Call and exit should be compatible with:}
+
+@code{L} is a list with charge cell values.
+@iftex
+@hfill
+@end iftex
+ (@code{my_list/1})
+
+@code{I} is a natural number.
+@iftex
+@hfill
+@end iftex
+ (@code{nat_num/1})
+
+@code{E} is cell charge value
+@iftex
+@hfill
+@end iftex
+ (@code{charge/1})
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{myappend/3 (pred)}}}
+@temp
+@end iftex
+@deffn PREDICATE myappend/3:
+
+@b{Usage:} @code{myappend(L1,L2,R)}
+
+@itemize @minus
+@item @i{Call and exit should be compatible with:}
+
+@code{L1} is a list with charge cell values.
+@iftex
+@hfill
+@end iftex
+ (@code{my_list/1})
+
+@code{L2} is a list with charge cell values.
+@iftex
+@hfill
+@end iftex
+ (@code{my_list/1})
+
+@code{R} is a list with charge cell values.
+@iftex
+@hfill
+@end iftex
+ (@code{my_list/1})
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{f/2 (pred)}}}
+@temp
+@end iftex
+@deffn PREDICATE f/2:
+
+@b{Usage 1:} @code{f(C,N)}
+
+@itemize @minus
+@item @i{Call and exit should be compatible with:}
+
+@code{C} is cell charge value
+@iftex
+@hfill
+@end iftex
+ (@code{charge/1})
+
+@code{N} is a natural number.
+@iftex
+@hfill
+@end iftex
+ (@code{nat_num/1})
+@end itemize
+
+@b{Usage 2:} @code{f(N1,N2)}
+
+@itemize @minus
+@item @i{Call and exit should be compatible with:}
+
+@code{N1} is a natural number.
+@iftex
+@hfill
+@end iftex
+ (@code{nat_num/1})
+
+@code{N2} is a natural number.
+@iftex
+@hfill
+@end iftex
+ (@code{nat_num/1})
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{nat_num/1 (prop)}}}
+@temp
+@end iftex
+@deffn PROPERTY nat_num/1:
+
+@b{Usage:} @code{nat_num(X)}
+
+@code{X} is a natural number.
+@itemize @minus
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{equal/2 (pred)}}}
+@temp
+@end iftex
+@deffn PREDICATE equal/2:
+Defines equality operator @code{==} between two natural numbers in Peano notation. 
+@smallexample 
+equal(0,0).
+equal(s(N),s(N)) :-
+    nat_num(N),
+    equal(N,N).
+@end smallexample
+
+@b{Usage:} @code{equal(N1,N2)}
+
+@code{equal/2} will be true if both numbers are equal
+@itemize @minus
+@item @i{Call and exit should be compatible with:}
+
+@code{N1} is a natural number.
+@iftex
+@hfill
+@end iftex
+ (@code{nat_num/1})
+
+@code{N2} is a natural number.
+@iftex
+@hfill
+@end iftex
+ (@code{nat_num/1})
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{plus/3 (pred)}}}
+@temp
+@end iftex
+@deffn PREDICATE plus/3:
+Defines sum operator @code{+} between two natural numbers in Peano notation. 
+@smallexample 
+plus(0,Y,Y) :-
+    nat_num(Y).
+plus(s(X),Y,s(Z)) :-
+    plus(X,Y,Z).
+@end smallexample 
+
+In case base, the sum of any number with 0, is the same number. The recursive call decrements the value of the first operand to 0, reaching case base, which assigns the second operand to the result and, when returning, increments the result as many times as recursive calls have been made. 
+
+@b{Usage:} @code{plus(Op1,Op2,Res)}
+
+@code{Res} is the sum of @code{Op1} and @code{Op2}
+@itemize @minus
+@item @i{Call and exit should be compatible with:}
+
+@code{Op2} is a natural number.
+@iftex
+@hfill
+@end iftex
+ (@code{nat_num/1})
+
+@code{Op1} is a natural number.
+@iftex
+@hfill
+@end iftex
+ (@code{nat_num/1})
+
+@code{Res} is a natural number.
+@iftex
+@hfill
+@end iftex
+ (@code{nat_num/1})
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{minus/3 (pred)}}}
+@temp
+@end iftex
+@deffn PREDICATE minus/3:
+Defines subtraction operator @code{-} between two natural numbers in Peano notation, using @code{plus/3}. 
+@smallexample 
+minus(X,Y,Z) :-
+    plus(Z,Y,X).
+@end smallexample
+
+@b{Usage:} @code{minus(Op2,Op1,Res)}
+
+@code{Res} is the difference between @code{Op2} and @code{Op1}
+@itemize @minus
+@item @i{Call and exit should be compatible with:}
+
+@code{Op2} is a natural number.
+@iftex
+@hfill
+@end iftex
+ (@code{nat_num/1})
+
+@code{Op1} is a natural number.
+@iftex
+@hfill
+@end iftex
+ (@code{nat_num/1})
+
+@code{Res} is a natural number.
+@iftex
+@hfill
+@end iftex
+ (@code{nat_num/1})
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{less/2 (pred)}}}
+@temp
+@end iftex
+@deffn PREDICATE less/2:
+Defines less than @code{>} operator between two natural numbers in Peano notation. 
+@smallexample 
+less(0,s(X)) :-
+    nat_num(X).
+less(s(X),s(Y)) :-
+    less(X,Y).
+@end smallexample
+
+@b{Usage:} @code{less(N,M)}
+
+@code{less/2} will be true if @code{N} less than @code{M}
+@itemize @minus
+@item @i{Call and exit should be compatible with:}
+
+@code{N} is a natural number.
+@iftex
+@hfill
+@end iftex
+ (@code{nat_num/1})
+
+@code{M} is a natural number.
+@iftex
+@hfill
+@end iftex
+ (@code{nat_num/1})
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{div/3 (pred)}}}
+@temp
+@end iftex
+@deffn PREDICATE div/3:
+Defines division @code{/} between two natural numbers in Peano notation. 
+@smallexample 
+div(0,_1,0).
+div(X,Y,s(0)) :-
+    minus(X,Y,Z),
+    less(Z,Y).
+div(X,Y,s(Q)) :-
+    minus(X,Y,Z),
+    div(Z,Y,Q).
+@end smallexample 
+
+Division is viewed as successive subtractions from the dividend until it becomes 0 or the remainder. 
+
+@b{Usage:} @code{div(Dividend,Divisor,Quotient)}
+
+@itemize @minus
+@item @i{Call and exit should be compatible with:}
+
+@code{Dividend} is a natural number.
+@iftex
+@hfill
+@end iftex
+ (@code{nat_num/1})
+
+@code{Divisor} is a natural number.
+@iftex
+@hfill
+@end iftex
+ (@code{nat_num/1})
+
+@code{Quotient} is a natural number.
+@iftex
+@hfill
+@end iftex
+ (@code{nat_num/1})
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{basic_surface/1 (prop)}}}
+@temp
+@end iftex
+@deffn PROPERTY basic_surface/1:
+Defines a surface of cell charges represented by a list of lists. Internal representation will be @code{[List | [Lists]]}. 
+
+@cartouche  
+@b{Note:} @code{basic_surface/1} must contains at least one non-empty horizontal line. 
+@end cartouche 
+
+It is defined as: 
+@smallexample 
+basic_surface([L]) :-
+    my_list(L).
+basic_surface([L|S2]) :-
+    my_list(L),
+    basic_surface(S2).
+@end smallexample
+
+@b{Usage:} @code{basic_surface(CellList)}
+
+@code{CellList} is a list of lists with charged cells.
+@itemize @minus
+@end itemize
+
+@b{Other properties:} 
+
+
+@b{Test:} @code{basic_surface(S)}
+
+Cannot have blank lines.
+@itemize @minus
+@item @i{If the following properties hold at call time:}
+
+@code{S=[[0,++],[],[+,+++]]}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@i{then the following properties should hold globally:}
+
+Calls of the form @code{basic_surface(S)} fail.
+@iftex
+@hfill
+@end iftex
+ (@code{fails/1})
+@end itemize
+
+@b{Test:} @code{basic_surface(S)}
+
+Line contents must have cell charge values.
+@itemize @minus
+@item @i{If the following properties hold at call time:}
+
+@code{S=[[0,1],[+++,+],[+,++]]}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@i{then the following properties should hold globally:}
+
+Calls of the form @code{basic_surface(S)} fail.
+@iftex
+@hfill
+@end iftex
+ (@code{fails/1})
+@end itemize
+
+@b{Test:} @code{basic_surface(S)}
+
+Cannot be an empty list.
+@itemize @minus
+@item @i{If the following properties hold at call time:}
+
+@code{S=[]}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@i{then the following properties should hold globally:}
+
+Calls of the form @code{basic_surface(S)} fail.
+@iftex
+@hfill
+@end iftex
+ (@code{fails/1})
+@end itemize
+
+@b{Test:} @code{basic_surface(S)}
+
+Cannot be a list with a empty sublist
+@itemize @minus
+@item @i{If the following properties hold at call time:}
+
+@code{S=[[]]}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@i{then the following properties should hold globally:}
+
+Calls of the form @code{basic_surface(S)} fail.
+@iftex
+@hfill
+@end iftex
+ (@code{fails/1})
+@end itemize
+
+@b{Test:} @code{basic_surface(S)}
+
+Line must contain at least one cell.
+@itemize @minus
+@item @i{If the following properties hold at call time:}
+
+@code{S=[[_109491]]}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@i{then the following properties should hold globally:}
+
+All the calls of the form @code{basic_surface(S)} do not fail.
+@iftex
+@hfill
+@end iftex
+ (@code{not_fails/1})
+@end itemize
+
+@b{Test:} @code{basic_surface(S)}
+
+Lines could have different sizes.
+@itemize @minus
+@item @i{If the following properties hold at call time:}
+
+@code{S=[[_109358,_109360,_109362],[_109366,_109368],[_109372]]}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@i{then the following properties should hold globally:}
+
+All the calls of the form @code{basic_surface(S)} do not fail.
+@iftex
+@hfill
+@end iftex
+ (@code{not_fails/1})
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{surface/1 (prop)}}}
+@temp
+@end iftex
+@deffn PROPERTY surface/1:
+Defines a surface of charged cells, represented by a cell charge matrix. 
+@cartouche  
+@b{Note:} @code{surface/1} must contains at least one non-empty horizontal line. 
+@end cartouche 
+
+It is defined as: 
+@smallexample 
+surface([L|L2]) :-
+    basic_surface([L|L2]),
+    mylength(L,Tam),
+    surface_acc([L|L2],Tam).
+@end smallexample
+
+@b{Usage:} @code{surface(CellMatrix)}
+
+@code{CellMatrix} is a matrix with charged cells.
+@itemize @minus
+@end itemize
+
+@b{Other properties:} 
+
+
+@b{Test:} @code{surface(S)}
+
+Call surface correctly.
+@itemize @minus
+@item @i{If the following properties hold at call time:}
+
+@code{S=[[++,+++],[0,+],[+,++]]}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@i{then the following properties should hold globally:}
+
+All the calls of the form @code{surface(S)} do not fail.
+@iftex
+@hfill
+@end iftex
+ (@code{not_fails/1})
+@end itemize
+
+@b{Test:} @code{surface(S)}
+
+Cannot have blank lines.
+@itemize @minus
+@item @i{If the following properties hold at call time:}
+
+@code{S=[[0,++],[],[+,+++]]}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@i{then the following properties should hold globally:}
+
+Calls of the form @code{surface(S)} fail.
+@iftex
+@hfill
+@end iftex
+ (@code{fails/1})
+@end itemize
+
+@b{Test:} @code{surface(S)}
+
+Line contents must have cell charge values.
+@itemize @minus
+@item @i{If the following properties hold at call time:}
+
+@code{S=[[+++,1],[+++,+],[+,++]]}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@i{then the following properties should hold globally:}
+
+Calls of the form @code{surface(S)} fail.
+@iftex
+@hfill
+@end iftex
+ (@code{fails/1})
+@end itemize
+
+@b{Test:} @code{surface(S)}
+
+Cannot be a list with empty sublist.
+@itemize @minus
+@item @i{If the following properties hold at call time:}
+
+@code{S=[[]]}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@i{then the following properties should hold globally:}
+
+Calls of the form @code{surface(S)} fail.
+@iftex
+@hfill
+@end iftex
+ (@code{fails/1})
+@end itemize
+
+@b{Test:} @code{surface(S)}
+
+Line must contain at least one cell.
+@itemize @minus
+@item @i{If the following properties hold at call time:}
+
+@code{S=[[_25226]]}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@i{then the following properties should hold globally:}
+
+All the calls of the form @code{surface(S)} do not fail.
+@iftex
+@hfill
+@end iftex
+ (@code{not_fails/1})
+@end itemize
+
+@b{Test:} @code{surface(S)}
+
+Lines must have same length.
+@itemize @minus
+@item @i{If the following properties hold at call time:}
+
+@code{S=[[_25099,_25101,_25103],[_25107,_25109],[_25113,_25115,_25117]]}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@i{then the following properties should hold globally:}
+
+Calls of the form @code{surface(S)} fail.
+@iftex
+@hfill
+@end iftex
+ (@code{fails/1})
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{surface_acc/2 (pred)}}}
+@temp
+@end iftex
+@deffn PREDICATE surface_acc/2:
+
+@b{Usage:} @code{surface_acc(S,N)}
+
+@itemize @minus
+@item @i{Call and exit should be compatible with:}
+
+@code{S} is a matrix with charged cells.
+@iftex
+@hfill
+@end iftex
+ (@code{surface/1})
+
+@code{N} is a natural number.
+@iftex
+@hfill
+@end iftex
+ (@code{nat_num/1})
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{h_line/3 (pred)}}}
+@temp
+@end iftex
+@deffn PREDICATE h_line/3:
+Extracts a specific horizontal line from surface 
+@smallexample 
+h_line([L],s(0),L).
+h_line(S,N,C) :-
+    get(S,N,C),
+    surface(S).
+@end smallexample
+
+@b{Usage:} @code{h_line(S,I,R)}
+
+@itemize @minus
+@item @i{Call and exit should be compatible with:}
+
+@code{S} is a matrix with charged cells.
+@iftex
+@hfill
+@end iftex
+ (@code{surface/1})
+
+@code{I} is a natural number.
+@iftex
+@hfill
+@end iftex
+ (@code{nat_num/1})
+
+@code{R} is a list with charge cell values.
+@iftex
+@hfill
+@end iftex
+ (@code{my_list/1})
+@end itemize
+
+@b{Other properties:} 
+
+
+@b{Test:} @code{h_line(S,I,R)}
+
+Get horizontal line correctly(1).
+@itemize @minus
+@item @i{If the following properties hold at call time:}
+
+@code{S=[[0,+,++],[+++,++++,+++++]]}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@code{I=s(0)}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@i{then the following properties should hold upon exit:}
+
+@code{R=[0,+,++]}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@i{then the following properties should hold globally:}
+
+All the calls of the form @code{h_line(S,I,R)} do not fail.
+@iftex
+@hfill
+@end iftex
+ (@code{not_fails/1})
+@end itemize
+
+@b{Test:} @code{h_line(S,I,R)}
+
+Get horizontal line correctly(2).
+@itemize @minus
+@item @i{If the following properties hold at call time:}
+
+@code{S=[[0,+,++],[+++,++++,+++++]]}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@code{I=s(s(0))}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@i{then the following properties should hold upon exit:}
+
+@code{R=[+++,++++,+++++]}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@i{then the following properties should hold globally:}
+
+All the calls of the form @code{h_line(S,I,R)} do not fail.
+@iftex
+@hfill
+@end iftex
+ (@code{not_fails/1})
+@end itemize
+
+@b{Test:} @code{h_line(S,I,R)}
+
+Get horizontal line index correctly.
+@itemize @minus
+@item @i{If the following properties hold at call time:}
+
+@code{S=[[0,+,++],[+++,++++,+++++]]}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@code{R=[+++,++++,+++++]}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@i{then the following properties should hold upon exit:}
+
+@code{I=s(s(0))}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@i{then the following properties should hold globally:}
+
+All the calls of the form @code{h_line(S,I,R)} do not fail.
+@iftex
+@hfill
+@end iftex
+ (@code{not_fails/1})
+@end itemize
+
+@b{Test:} @code{h_line(Arg1,I,Arg3)}
+
+Get non-existing horizontal line(1)
+@itemize @minus
+@item @i{If the following properties hold at call time:}
+
+@code{I=0}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@i{then the following properties should hold globally:}
+
+Calls of the form @code{h_line(Arg1,I,Arg3)} fail.
+@iftex
+@hfill
+@end iftex
+ (@code{fails/1})
+@end itemize
+
+@b{Test:} @code{h_line(S,I,Arg3)}
+
+Get non-existing horizontal line(2).
+@itemize @minus
+@item @i{If the following properties hold at call time:}
+
+@code{S=[[0,+,++],[+++,++++,+++++]]}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@code{I=s(s(s(0)))}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@i{then the following properties should hold globally:}
+
+Calls of the form @code{h_line(S,I,Arg3)} fail.
+@iftex
+@hfill
+@end iftex
+ (@code{fails/1})
+@end itemize
+
+@b{Test:} @code{h_line(S,Arg2,Arg3)}
+
+Cannot be an empty surface.
+@itemize @minus
+@item @i{If the following properties hold at call time:}
+
+@code{S=[]}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@i{then the following properties should hold globally:}
+
+Calls of the form @code{h_line(S,Arg2,Arg3)} fail.
+@iftex
+@hfill
+@end iftex
+ (@code{fails/1})
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{v_line/3 (pred)}}}
+@temp
+@end iftex
+@deffn PREDICATE v_line/3:
+Extracts a specific vertical line from surface 
+@smallexample 
+v_line([Fila],Indice,[Elemento]) :-
+    get(Fila,Indice,Elemento).
+v_line([Fila|Filas],Indice,[Elemento|Columna]) :-
+    get(Fila,Indice,Elemento),
+    v_line(Filas,Indice,Columna).
+@end smallexample
+
+@b{Usage:} @code{v_line(S,I,C)}
+
+@itemize @minus
+@item @i{Call and exit should be compatible with:}
+
+@code{S} is a matrix with charged cells.
+@iftex
+@hfill
+@end iftex
+ (@code{surface/1})
+
+@code{I} is a natural number.
+@iftex
+@hfill
+@end iftex
+ (@code{nat_num/1})
+
+@code{C} is a list with charge cell values.
+@iftex
+@hfill
+@end iftex
+ (@code{my_list/1})
+@end itemize
+
+@b{Other properties:} 
+
+
+@b{Test:} @code{v_line(S,I,C)}
+
+Get column correctly
+@itemize @minus
+@item @i{If the following properties hold at call time:}
+
+@code{S=[[0,+,++],[0,+,++]]}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@code{I=s(s(0))}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@i{then the following properties should hold upon exit:}
+
+@code{C=[+,+]}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+@end itemize
+
+@b{Test:} @code{v_line(S,I,C)}
+
+Get index from column correctly
+@itemize @minus
+@item @i{If the following properties hold at call time:}
+
+@code{S=[[0,+,++],[0,+,++]]}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@code{C=[+,+]}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@i{then the following properties should hold upon exit:}
+
+@code{I=s(s(0))}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+@end itemize
+
+@b{Test:} @code{v_line(S,I,Arg3)}
+
+Get non-existing vertical line(1)
+@itemize @minus
+@item @i{If the following properties hold at call time:}
+
+@code{S=[[0,+,++],[0,+,++]]}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@code{I=0}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@i{then the following properties should hold globally:}
+
+Calls of the form @code{v_line(S,I,Arg3)} fail.
+@iftex
+@hfill
+@end iftex
+ (@code{fails/1})
+@end itemize
+
+@b{Test:} @code{v_line(S,I,Arg3)}
+
+Get non-existing vertical line(2)
+@itemize @minus
+@item @i{If the following properties hold at call time:}
+
+@code{S=[[0,+,++],[0,+,++]]}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@code{I=s(s(s(s(0))))}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@i{then the following properties should hold globally:}
+
+Calls of the form @code{v_line(S,I,Arg3)} fail.
+@iftex
+@hfill
+@end iftex
+ (@code{fails/1})
+@end itemize
+
+@b{Test:} @code{v_line(S,Arg2,Arg3)}
+
+Cannot be an empty surface.
+@itemize @minus
+@item @i{If the following properties hold at call time:}
+
+@code{S=[]}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@i{then the following properties should hold globally:}
+
+Calls of the form @code{v_line(S,Arg2,Arg3)} fail.
+@iftex
+@hfill
+@end iftex
+ (@code{fails/1})
+@end itemize
+
+@b{Test:} @code{v_line(S,Arg2,Arg3)}
+
+Surface must have at least one cell
+@itemize @minus
+@item @i{If the following properties hold at call time:}
+
+@code{S=[[]]}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@i{then the following properties should hold globally:}
+
+Calls of the form @code{v_line(S,Arg2,Arg3)} fail.
+@iftex
+@hfill
+@end iftex
+ (@code{fails/1})
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{v_lines/2 (pred)}}}
+@temp
+@end iftex
+@deffn PREDICATE v_lines/2:
+Extracts all vertical lines. 
+@smallexample 
+v_lines([L],L).
+v_lines([L|S2],C) :-
+    mylength(L,Tam),
+    v_lines_aux([L|S2],Tam,C).
+@end smallexample
+
+@b{Usage:} @code{v_lines(S,C)}
+
+@itemize @minus
+@item @i{The following properties should hold at call time:}
+
+@code{S} is a matrix with charged cells.
+@iftex
+@hfill
+@end iftex
+ (@code{surface/1})
+@item @i{The following properties should hold upon exit:}
+
+@code{C} is a matrix with charged cells.
+@iftex
+@hfill
+@end iftex
+ (@code{surface/1})
+@end itemize
+
+@b{Other properties:} 
+
+
+@b{Test:} @code{v_lines(S,C)}
+
+Test with square matrix
+@itemize @minus
+@item @i{If the following properties hold at call time:}
+
+@code{S=[[0,+,++],[0,+,++],[0,+,++]]}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@i{then the following properties should hold upon exit:}
+
+@code{C=[[0,0,0],[+,+,+],[++,++,++]]}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+@end itemize
+
+@b{Test:} @code{v_lines(S,C)}
+
+Test with rectangular matrix
+@itemize @minus
+@item @i{If the following properties hold at call time:}
+
+@code{S=[[0,+,++],[0,+,++]]}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@i{then the following properties should hold upon exit:}
+
+@code{C=[[0,0],[+,+],[++,++]]}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{v_lines_aux/3 (pred)}}}
+@temp
+@end iftex
+@deffn PREDICATE v_lines_aux/3:
+
+@b{Usage:} @code{v_lines_aux(S,T,C)}
+
+@itemize @minus
+@item @i{Call and exit should be compatible with:}
+
+@code{S} is a matrix with charged cells.
+@iftex
+@hfill
+@end iftex
+ (@code{surface/1})
+
+@code{T} is a natural number.
+@iftex
+@hfill
+@end iftex
+ (@code{nat_num/1})
+
+@code{C} is a matrix with charged cells.
+@iftex
+@hfill
+@end iftex
+ (@code{surface/1})
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{h_sum/2 (pred)}}}
+@temp
+@end iftex
+@deffn PREDICATE h_sum/2:
+Sum elements of a horizontal line. 
+@smallexample 
+h_sum([C],N) :-
+    f(C,N).
+h_sum([H|T],Suma) :-
+    h_sum(T,SumaResto),
+    f(H,N),
+    plus(N,SumaResto,Suma).
+@end smallexample
+
+@b{Usage:} @code{h_sum(R,T)}
+
+@itemize @minus
+@item @i{Call and exit should be compatible with:}
+
+@code{R} is a list with charge cell values.
+@iftex
+@hfill
+@end iftex
+ (@code{my_list/1})
+
+@code{T} is a natural number.
+@iftex
+@hfill
+@end iftex
+ (@code{nat_num/1})
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{total_charge/2 (pred)}}}
+@temp
+@end iftex
+@deffn PREDICATE total_charge/2:
+
+@b{Usage:} @code{total_charge(S,T)}
+
+@code{T} is the sum of all elements in a surface.
+@itemize @minus
+@item @i{Call and exit should be compatible with:}
+
+@code{S} is a matrix with charged cells.
+@iftex
+@hfill
+@end iftex
+ (@code{surface/1})
+
+@code{T} is a natural number.
+@iftex
+@hfill
+@end iftex
+ (@code{nat_num/1})
+@end itemize
+
+@b{Other properties:} 
+
+
+@b{Test:} @code{total_charge([[0,+],[++,+++],[++++,+++++]],T)}
+
+@itemize @minus
+@item @i{The following properties should hold upon exit:}
+
+@code{T=s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(0)))))))))))))))}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+@end itemize
+
+@b{Test:} @code{total_charge(S,Arg2)}
+
+@itemize @minus
+@item @i{If the following properties hold at call time:}
+
+@code{S=[[0,+],[++,3],[++++,+++++]]}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@i{then the following properties should hold globally:}
+
+Calls of the form @code{total_charge(S,Arg2)} fail.
+@iftex
+@hfill
+@end iftex
+ (@code{fails/1})
+@end itemize
+
+@b{Test:} @code{total_charge(S,Arg2)}
+
+@itemize @minus
+@item @i{If the following properties hold at call time:}
+
+@code{S=[[]]}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@i{then the following properties should hold globally:}
+
+Calls of the form @code{total_charge(S,Arg2)} fail.
+@iftex
+@hfill
+@end iftex
+ (@code{fails/1})
+@end itemize
+
+@b{Test:} @code{total_charge(S,Arg2)}
+
+@itemize @minus
+@item @i{If the following properties hold at call time:}
+
+@code{S=[[_111260,_111262,_111264],[_111268,_111270],[_111274]]}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@i{then the following properties should hold globally:}
+
+Calls of the form @code{total_charge(S,Arg2)} fail.
+@iftex
+@hfill
+@end iftex
+ (@code{fails/1})
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{total_charge_aux/2 (pred)}}}
+@temp
+@end iftex
+@deffn PREDICATE total_charge_aux/2:
+
+@b{Usage:} @code{total_charge_aux(S,T)}
+
+@itemize @minus
+@item @i{Call and exit should be compatible with:}
+
+@code{S} is a matrix with charged cells.
+@iftex
+@hfill
+@end iftex
+ (@code{surface/1})
+
+@code{T} is a natural number.
+@iftex
+@hfill
+@end iftex
+ (@code{nat_num/1})
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{total_cells/2 (pred)}}}
+@temp
+@end iftex
+@deffn PREDICATE total_cells/2:
+Calculates the number of elements of a surface. 
+@smallexample 
+total_cells([L],N) :-
+    mylength(L,N).
+total_cells([L|S2],Total) :-
+    total_cells(S2,TotalResto),
+    mylength(L,Esta),
+    plus(Esta,TotalResto,Total).
+@end smallexample
+
+@b{Usage:} @code{total_cells(S,N)}
+
+@itemize @minus
+@item @i{Call and exit should be compatible with:}
+
+@code{S} is a matrix with charged cells.
+@iftex
+@hfill
+@end iftex
+ (@code{surface/1})
+
+@code{N} is a natural number.
+@iftex
+@hfill
+@end iftex
+ (@code{nat_num/1})
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{average_charge/2 (pred)}}}
+@temp
+@end iftex
+@deffn PREDICATE average_charge/2:
+Calculates average cell charge value from surface. 
+@smallexample 
+average_charge([[]],_1).
+average_charge(S,A) :-
+    total_charge(S,M),
+    total_cells(S,T),
+    div(M,T,A).
+@end smallexample
+
+@b{Usage:} @code{average_charge(S,A)}
+
+@itemize @minus
+@item @i{Call and exit should be compatible with:}
+
+@code{S} is a matrix with charged cells.
+@iftex
+@hfill
+@end iftex
+ (@code{surface/1})
+
+@code{A} is a natural number.
+@iftex
+@hfill
+@end iftex
+ (@code{nat_num/1})
+@end itemize
+
+@b{Other properties:} 
+
+
+@b{Test:} @code{average_charge(S,A)}
+
+Get average charge correctly(1).
+@itemize @minus
+@item @i{If the following properties hold at call time:}
+
+@code{S=[[++,++],[++,++],[++,++]]}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@i{then the following properties should hold upon exit:}
+
+@code{A=s(s(0))}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+@end itemize
+
+@b{Test:} @code{average_charge(S,A)}
+
+Get average charge correctly(2).
+@itemize @minus
+@item @i{If the following properties hold at call time:}
+
+@code{S=[[+,++],[+,++],[+,++]]}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@i{then the following properties should hold upon exit:}
+
+@code{A=s(0)}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+@end itemize
+
+@b{Test:} @code{average_charge(S,A)}
+
+Round to lower number.
+@itemize @minus
+@item @i{If the following properties hold at call time:}
+
+@code{S=[[++,+++,+++++++],[+,++,++],[++,+++,+],[++,++,++]]}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@code{A=s(s(s(s(s(s(0))))))}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@i{then the following properties should hold globally:}
+
+Calls of the form @code{average_charge(S,A)} fail.
+@iftex
+@hfill
+@end iftex
+ (@code{fails/1})
+@end itemize
+
+@b{Test:} @code{average_charge(S,Arg2)}
+
+@itemize @minus
+@item @i{If the following properties hold at call time:}
+
+@code{S=[[],[],[]]}
+@iftex
+@hfill
+@end iftex
+ (@code{= /2})
+
+@i{then the following properties should hold globally:}
+
+Calls of the form @code{average_charge(S,Arg2)} fail.
+@iftex
+@hfill
+@end iftex
+ (@code{fails/1})
+@end itemize
+@end deffn
+@sp 1
+
+@section Documentation on imports
+This module has the following direct dependencies:
+@itemize @minus
+@item @i{Internal (engine) modules:}
+
+@code{term_basic}, @code{basiccontrol}, @code{basic_props}.
+@item @i{Packages:}
+
+@code{pure}, @code{initial}, @code{condcomp}, @code{assertions}, @code{assertions/assertions_basic}, @code{regtypes}.
+@end itemize

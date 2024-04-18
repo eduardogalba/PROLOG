@@ -1,10 +1,10 @@
 <!DOCTYPE HTML><html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="theme-color" content="#273f79"/><link rel="stylesheet" href="lpdoc.css" type="text/css"/><script type="text/javascript" src="lpdoc.js"></script><title>PROLOG: Practica 1</title></head><body><div class="lpdoc-page fixleftbar"><a href="#" id="sidebar-toggle-button" class="lpdoc-navbutton"><span id="sidebar-button-arrow">&#9776;</span></a><div id="sidebar" class="lpdoc-sidebar"><div class="lpdoc-nav"><span class="lpdoc-on-right"><a class="lpdoc-navbutton" href="/">&#x2302;</a><span class="lpdoc-navbutton-disabled">&#x2190;</span><a class="lpdoc-navbutton" href="codefulltoc.html">&#x2192;</a><a class="lpdoc-navbutton" href="codesearch.html">&#x1F50D;</a></span><span><a href="codefulltoc.html">TOC</a></span></div><hr></hr><ul class="lpdoc-itemize-sectpath"><li><a href=""><strong>PROLOG: Practica 1</strong></a></li></ul><hr></hr><ul></ul></div><div class="lpdoc-main"><div><br/><div class="lpdoc-cover-title"><h1 class="lpdoc-cover-h1">PROLOG: Practica 1</h1></div><div class="lpdoc-cover-authors">Eduardo Gil Alba, z170238<br/></div><div class="lpdoc-cover-subtitle-extra"></div><div class="lpdoc-clearer"></div></div>
-<br/><br/><div id="Usage and interface"><h2>Usage and interface</h2><div class="lpdoc-cartouche"><ul><li><strong>Library usage:</strong><br/><tt>:- use_module(/home/lumbalu/PROLOG/repo/PROLOG/Practica 1/code.pl).</tt><li><strong>Exports:</strong><br/><ul class="lpdoc-itemize-minus"><li><em>Predicates:</em><br/><a class="lpdoc-idx-anchor" id="0" href="#charge/1"><tt>charge/1</tt></a>, <a class="lpdoc-idx-anchor" id="1" href="#my_list/1"><tt>my_list/1</tt></a>, <a class="lpdoc-idx-anchor" id="2" href="#mylength/2"><tt>mylength/2</tt></a>, <a class="lpdoc-idx-anchor" id="3" href="#get/3"><tt>get/3</tt></a>, <a class="lpdoc-idx-anchor" id="4" href="#myappend/3"><tt>myappend/3</tt></a>, <a class="lpdoc-idx-anchor" id="5" href="#f/2"><tt>f/2</tt></a>, <a class="lpdoc-idx-anchor" id="6" href="#minus/3"><tt>minus/3</tt></a>, <a class="lpdoc-idx-anchor" id="7" href="#less/2"><tt>less/2</tt></a>, <a class="lpdoc-idx-anchor" id="8" href="#div/3"><tt>div/3</tt></a>, <a class="lpdoc-idx-anchor" id="9" href="#surface_acc/2"><tt>surface_acc/2</tt></a>, <a class="lpdoc-idx-anchor" id="10" href="#h_line/3"><tt>h_line/3</tt></a>, <a class="lpdoc-idx-anchor" id="11" href="#v_line/3"><tt>v_line/3</tt></a>, <a class="lpdoc-idx-anchor" id="12" href="#v_line_aux/3"><tt>v_line_aux/3</tt></a>, <a class="lpdoc-idx-anchor" id="13" href="#h_sum/2"><tt>h_sum/2</tt></a>, <a class="lpdoc-idx-anchor" id="14" href="#total_charge/2"><tt>total_charge/2</tt></a>, <a class="lpdoc-idx-anchor" id="15" href="#total_cells/2"><tt>total_cells/2</tt></a>, <a class="lpdoc-idx-anchor" id="16" href="#average/2"><tt>average/2</tt></a>.
-<li><em>Properties:</em><br/><a class="lpdoc-idx-anchor" id="17" href="#author_data/4"><tt>author_data/4</tt></a>, <a class="lpdoc-idx-anchor" id="18" href="#igual/2"><tt>igual/2</tt></a>, <a class="lpdoc-idx-anchor" id="19" href="#plus/3"><tt>plus/3</tt></a>, <a class="lpdoc-idx-anchor" id="20" href="#basic_surface/1"><tt>basic_surface/1</tt></a>, <a class="lpdoc-idx-anchor" id="21" href="#surface/1"><tt>surface/1</tt></a>.
+<br/><br/><div id="Usage and interface"><h2>Usage and interface</h2><div class="lpdoc-cartouche"><ul><li><strong>Library usage:</strong><br/><tt>:- use_module(/home/lumbalu/PROLOG/repo/PROLOG/Practica 1/code.pl).</tt><li><strong>Exports:</strong><br/><ul class="lpdoc-itemize-minus"><li><em>Predicates:</em><br/><a class="lpdoc-idx-anchor" id="0" href="#mylength/2"><tt>mylength/2</tt></a>, <a class="lpdoc-idx-anchor" id="1" href="#get/3"><tt>get/3</tt></a>, <a class="lpdoc-idx-anchor" id="2" href="#myappend/3"><tt>myappend/3</tt></a>, <a class="lpdoc-idx-anchor" id="3" href="#f/2"><tt>f/2</tt></a>, <a class="lpdoc-idx-anchor" id="4" href="#equal/2"><tt>equal/2</tt></a>, <a class="lpdoc-idx-anchor" id="5" href="#plus/3"><tt>plus/3</tt></a>, <a class="lpdoc-idx-anchor" id="6" href="#minus/3"><tt>minus/3</tt></a>, <a class="lpdoc-idx-anchor" id="7" href="#less/2"><tt>less/2</tt></a>, <a class="lpdoc-idx-anchor" id="8" href="#div/3"><tt>div/3</tt></a>, <a class="lpdoc-idx-anchor" id="9" href="#surface_acc/2"><tt>surface_acc/2</tt></a>, <a class="lpdoc-idx-anchor" id="10" href="#h_line/3"><tt>h_line/3</tt></a>, <a class="lpdoc-idx-anchor" id="11" href="#v_line/3"><tt>v_line/3</tt></a>, <a class="lpdoc-idx-anchor" id="12" href="#v_lines/2"><tt>v_lines/2</tt></a>, <a class="lpdoc-idx-anchor" id="13" href="#v_lines_aux/3"><tt>v_lines_aux/3</tt></a>, <a class="lpdoc-idx-anchor" id="14" href="#h_sum/2"><tt>h_sum/2</tt></a>, <a class="lpdoc-idx-anchor" id="15" href="#total_charge/2"><tt>total_charge/2</tt></a>, <a class="lpdoc-idx-anchor" id="16" href="#total_charge_aux/2"><tt>total_charge_aux/2</tt></a>, <a class="lpdoc-idx-anchor" id="17" href="#total_cells/2"><tt>total_cells/2</tt></a>, <a class="lpdoc-idx-anchor" id="18" href="#average_charge/2"><tt>average_charge/2</tt></a>.
+<li><em>Properties:</em><br/><a class="lpdoc-idx-anchor" id="19" href="#author_data/4"><tt>author_data/4</tt></a>, <a class="lpdoc-idx-anchor" id="20" href="#charge/1"><tt>charge/1</tt></a>, <a class="lpdoc-idx-anchor" id="21" href="#my_list/1"><tt>my_list/1</tt></a>, <a class="lpdoc-idx-anchor" id="22" href="#nat_num/1"><tt>nat_num/1</tt></a>, <a class="lpdoc-idx-anchor" id="23" href="#basic_surface/1"><tt>basic_surface/1</tt></a>, <a class="lpdoc-idx-anchor" id="24" href="#surface/1"><tt>surface/1</tt></a>.
 </ul></ul></div></div><div id="Documentation on exports"><h2>Documentation on exports</h2><div><div class="lpdoc-defname"><span class="lpdoc-predtag">PROPERTY</span><a class="lpdoc-idx-anchor" id="author_data/4" href="codesearch.html#author_data/4">author_data/4</a></div><div class="lpdoc-deftext">Defines authors in Deliverit system. It is defined as: <pre class="lpdoc-codeblock">author_data(&apos;Gil&apos;,&apos;Alba&apos;,&apos;Eduardo&apos;,&apos;Z170238&apos;).
 </pre><p><span class="lpdoc-usage-header">Usage:</span><span class="lpdoc-usage-decl"><tt>author_data(Surname1,Surname2,Name,ID)</tt>
 </span><p><span class="lpdoc-var">Surname1</span> is your first surname.<p><span class="lpdoc-var">Surname2</span> is your second surname.<p><span class="lpdoc-var">Name</span> is your name.<p><span class="lpdoc-var">ID</span> is university identifier.</p><ul class="lpdoc-itemize-minus"></ul></div></div><p>
-<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PREDICATE</span><a class="lpdoc-idx-anchor" id="charge/1" href="codesearch.html#charge/1">charge/1</a></div><div class="lpdoc-deftext">Define los posibles valores constantes que contendrán las células cargadas. <pre class="lpdoc-codeblock">charge(+++++++).
+<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PROPERTY</span><a class="lpdoc-idx-anchor" id="charge/1" href="codesearch.html#charge/1">charge/1</a></div><div class="lpdoc-deftext">Defines possible cell charge values. <pre class="lpdoc-codeblock">charge(+++++++).
 charge(++++++).
 charge(+++++).
 charge(++++).
@@ -12,68 +12,418 @@ charge(+++).
 charge(++).
 charge(+).
 charge(0).
-</pre></div></div><p>
-<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PREDICATE</span><a class="lpdoc-idx-anchor" id="my_list/1" href="codesearch.html#my_list/1">my_list/1</a></div><div class="lpdoc-deftext">Define una lista según la representación interna <tt>[Head|Tail]</tt> en Prolog, que almacenará los valores de las células cargadas. <pre class="lpdoc-codeblock">my_list([H]) :-
+</pre><p><span class="lpdoc-usage-header">Usage:</span><span class="lpdoc-usage-decl"><tt>charge(C)</tt>
+</span><p><span class="lpdoc-var">C</span> is cell charge value</p><ul class="lpdoc-itemize-minus"></ul></div></div><p>
+<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PROPERTY</span><a class="lpdoc-idx-anchor" id="my_list/1" href="codesearch.html#my_list/1">my_list/1</a></div><div class="lpdoc-deftext">Defines a list according to the internal representation <tt>[Head|Tail]</tt> in Prolog, which will stores cell charges values. <pre class="lpdoc-codeblock">my_list([H]) :-
     charge(H).
-my_list([_H|T]) :-
+my_list([H|T]) :-
+    charge(H),
     my_list(T).
-</pre> <p>El predicado <a class="lpdoc-idx-anchor" id="22" href="codesearch.html#list/1"><tt>list/1</tt></a> se llama de manera recursiva, comprobando que todos los elementos sean cargas y sea una estructura de lista. </div></div><p>
-<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PREDICATE</span><a class="lpdoc-idx-anchor" id="mylength/2" href="codesearch.html#mylength/2">mylength/2</a></div><div class="lpdoc-deftext">No further documentation available for this predicate.</div></div><p>
-<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PREDICATE</span><a class="lpdoc-idx-anchor" id="get/3" href="codesearch.html#get/3">get/3</a></div><div class="lpdoc-deftext">No further documentation available for this predicate.</div></div><p>
-<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PREDICATE</span><a class="lpdoc-idx-anchor" id="myappend/3" href="codesearch.html#myappend/3">myappend/3</a></div><div class="lpdoc-deftext">No further documentation available for this predicate.</div></div><p>
-<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PREDICATE</span><a class="lpdoc-idx-anchor" id="f/2" href="codesearch.html#f/2">f/2</a></div><div class="lpdoc-deftext">No further documentation available for this predicate.</div></div><p>
-<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PROPERTY</span><a class="lpdoc-idx-anchor" id="igual/2" href="codesearch.html#igual/2">igual/2</a></div><div class="lpdoc-deftext">Define la operación <a class="lpdoc-idx-anchor" id="23" href="codesearch.html#=="><tt>==</tt></a> entre dos números naturales descritos en notación de Peano. <pre class="lpdoc-codeblock">igual(0,0).
-igual(s(N),s(N)) :-
-    igual(N,N).
-</pre><p><span class="lpdoc-usage-header">Usage:</span><span class="lpdoc-usage-decl"><tt>igual(N1,N2)</tt>
-</span><p><span class="lpdoc-var">N1</span> es un número natural.<p><span class="lpdoc-var">N2</span> es un número natural. </p><ul class="lpdoc-itemize-minus"></ul></div></div><p>
-<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PROPERTY</span><a class="lpdoc-idx-anchor" id="plus/3" href="codesearch.html#plus/3">plus/3</a></div><div class="lpdoc-deftext">Define la operación <a class="lpdoc-idx-anchor" id="24" href="codesearch.html#+"><tt>+</tt></a> entre dos números naturales descritos en notación de Peano. <pre class="lpdoc-codeblock">plus(0,Y,Y).
+</pre> <p>The predicate <a class="lpdoc-idx-anchor" id="25" href="codesearch.html#list/1"><tt>list/1</tt></a> is called recursively, checking that all elements are charges and that it is a list structure. <p><span class="lpdoc-usage-header">Usage:</span><span class="lpdoc-usage-decl"><tt>my_list(L)</tt>
+</span><p><span class="lpdoc-var">L</span> is a list with charge cell values.</p><ul class="lpdoc-itemize-minus"></ul></div></div><p>
+<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PREDICATE</span><a class="lpdoc-idx-anchor" id="mylength/2" href="codesearch.html#mylength/2">mylength/2</a></div><div class="lpdoc-deftext">Calculates the size of a list. <pre class="lpdoc-codeblock">mylength([],0).
+mylength([_1|T],s(N)) :-
+    mylength(T,N).
+</pre><p><span class="lpdoc-usage-header">Usage:</span><span class="lpdoc-usage-decl"><tt>mylength(L,N)</tt>
+</span><p></p><ul class="lpdoc-itemize-minus"><li><em>Call and exit should be compatible with:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="26" href="#my_list/1"><tt>my_list/1</tt></a>)</span><span><span class="lpdoc-var">L</span> is a list with charge cell values.
+</span><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="27" href="#nat_num/1"><tt>nat_num/1</tt></a>)</span><span><span class="lpdoc-var">N</span> is a natural number.
+</span>
+</ul></div></div><p>
+<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PREDICATE</span><a class="lpdoc-idx-anchor" id="get/3" href="codesearch.html#get/3">get/3</a></div><div class="lpdoc-deftext"><p><span class="lpdoc-usage-header">Usage:</span><span class="lpdoc-usage-decl"><tt>get(L,I,E)</tt>
+</span><p></p><ul class="lpdoc-itemize-minus"><li><em>Call and exit should be compatible with:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="28" href="#my_list/1"><tt>my_list/1</tt></a>)</span><span><span class="lpdoc-var">L</span> is a list with charge cell values.
+</span><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="29" href="#nat_num/1"><tt>nat_num/1</tt></a>)</span><span><span class="lpdoc-var">I</span> is a natural number.
+</span><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="30" href="#charge/1"><tt>charge/1</tt></a>)</span><span><span class="lpdoc-var">E</span> is cell charge value
+</span>
+</ul></div></div><p>
+<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PREDICATE</span><a class="lpdoc-idx-anchor" id="myappend/3" href="codesearch.html#myappend/3">myappend/3</a></div><div class="lpdoc-deftext"><p><span class="lpdoc-usage-header">Usage:</span><span class="lpdoc-usage-decl"><tt>myappend(L1,L2,R)</tt>
+</span><p></p><ul class="lpdoc-itemize-minus"><li><em>Call and exit should be compatible with:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="31" href="#my_list/1"><tt>my_list/1</tt></a>)</span><span><span class="lpdoc-var">L1</span> is a list with charge cell values.
+</span><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="32" href="#my_list/1"><tt>my_list/1</tt></a>)</span><span><span class="lpdoc-var">L2</span> is a list with charge cell values.
+</span><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="33" href="#my_list/1"><tt>my_list/1</tt></a>)</span><span><span class="lpdoc-var">R</span> is a list with charge cell values.
+</span>
+</ul></div></div><p>
+<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PREDICATE</span><a class="lpdoc-idx-anchor" id="f/2" href="codesearch.html#f/2">f/2</a></div><div class="lpdoc-deftext"><p><span class="lpdoc-usage-header">Usage 1:</span><span class="lpdoc-usage-decl"><tt>f(C,N)</tt>
+</span><p></p><ul class="lpdoc-itemize-minus"><li><em>Call and exit should be compatible with:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="34" href="#charge/1"><tt>charge/1</tt></a>)</span><span><span class="lpdoc-var">C</span> is cell charge value
+</span><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="35" href="#nat_num/1"><tt>nat_num/1</tt></a>)</span><span><span class="lpdoc-var">N</span> is a natural number.
+</span>
+</ul><p><span class="lpdoc-usage-header">Usage 2:</span><span class="lpdoc-usage-decl"><tt>f(N1,N2)</tt>
+</span><p></p><ul class="lpdoc-itemize-minus"><li><em>Call and exit should be compatible with:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="36" href="#nat_num/1"><tt>nat_num/1</tt></a>)</span><span><span class="lpdoc-var">N1</span> is a natural number.
+</span><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="37" href="#nat_num/1"><tt>nat_num/1</tt></a>)</span><span><span class="lpdoc-var">N2</span> is a natural number.
+</span>
+</ul></div></div><p>
+<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PROPERTY</span><a class="lpdoc-idx-anchor" id="nat_num/1" href="codesearch.html#nat_num/1">nat_num/1</a></div><div class="lpdoc-deftext"><p><span class="lpdoc-usage-header">Usage:</span><span class="lpdoc-usage-decl"><tt>nat_num(X)</tt>
+</span><p><span class="lpdoc-var">X</span> is a natural number.</p><ul class="lpdoc-itemize-minus"></ul></div></div><p>
+<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PREDICATE</span><a class="lpdoc-idx-anchor" id="equal/2" href="codesearch.html#equal/2">equal/2</a></div><div class="lpdoc-deftext">Defines equality operator <a class="lpdoc-idx-anchor" id="38" href="codesearch.html#=="><tt>==</tt></a> between two natural numbers in Peano notation. <pre class="lpdoc-codeblock">equal(0,0).
+equal(s(N),s(N)) :-
+    nat_num(N),
+    equal(N,N).
+</pre><p><span class="lpdoc-usage-header">Usage:</span><span class="lpdoc-usage-decl"><tt>equal(N1,N2)</tt>
+</span><p><a class="lpdoc-idx-anchor" id="39" href="#equal/2"><tt>equal/2</tt></a> will be true if both numbers are equal</p><ul class="lpdoc-itemize-minus"><li><em>Call and exit should be compatible with:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="40" href="#nat_num/1"><tt>nat_num/1</tt></a>)</span><span><span class="lpdoc-var">N1</span> is a natural number.
+</span><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="41" href="#nat_num/1"><tt>nat_num/1</tt></a>)</span><span><span class="lpdoc-var">N2</span> is a natural number.
+</span>
+</ul></div></div><p>
+<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PREDICATE</span><a class="lpdoc-idx-anchor" id="plus/3" href="codesearch.html#plus/3">plus/3</a></div><div class="lpdoc-deftext">Defines sum operator <a class="lpdoc-idx-anchor" id="42" href="codesearch.html#+"><tt>+</tt></a> between two natural numbers in Peano notation. <pre class="lpdoc-codeblock">plus(0,Y,Y) :-
+    nat_num(Y).
 plus(s(X),Y,s(Z)) :-
     plus(X,Y,Z).
-</pre> <p>En el caso base, la suma de cualquier número con 0, es el mismo número. La llamada recursiva decrementa el valor del primer operando hasta ser 0, el caso base, que asigna el segundo operando al resultado y al regresar, incrementa el resultado tantas veces como llamadas recursivas se hayan realizado. <p><span class="lpdoc-usage-header">Usage:</span><span class="lpdoc-usage-decl"><tt>plus(Op1,Op2,Resultado)</tt>
-</span><p><span class="lpdoc-var">Op1</span> es un numero natural.<p><span class="lpdoc-var">Op2</span> es un numero natural.<p><span class="lpdoc-var">Resultado</span> es el resultado de la operación.</p><ul class="lpdoc-itemize-minus"></ul></div></div><p>
-<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PREDICATE</span><a class="lpdoc-idx-anchor" id="minus/3" href="codesearch.html#minus/3">minus/3</a></div><div class="lpdoc-deftext">Define la operación <a class="lpdoc-idx-anchor" id="25" href="codesearch.html#-"><tt>-</tt></a> entre dos números naturales descritos en notación de Peano, empleando el predicado de la suma <a class="lpdoc-idx-anchor" id="26" href="#plus/3"><tt>plus/3</tt></a>. <pre class="lpdoc-codeblock">minus(A,B,C) :-
-    plus(C,B,A).
-</pre></div></div><p>
-<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PREDICATE</span><a class="lpdoc-idx-anchor" id="less/2" href="codesearch.html#less/2">less/2</a></div><div class="lpdoc-deftext">Define la operación <a class="lpdoc-idx-anchor" id="27" href="codesearch.html#&gt;"><tt>&gt;</tt></a> entre dos números naturales descritos en notación de Peano. <pre class="lpdoc-codeblock">less(0,s(_X)).
+</pre> <p>In case base, the sum of any number with 0, is the same number. The recursive call decrements the value of the first operand to 0, reaching case base, which assigns the second operand to the result and, when returning, increments the result as many times as recursive calls have been made. <p><span class="lpdoc-usage-header">Usage:</span><span class="lpdoc-usage-decl"><tt>plus(Op1,Op2,Res)</tt>
+</span><p><span class="lpdoc-var">Res</span> is the sum of <span class="lpdoc-var">Op1</span> and <span class="lpdoc-var">Op2</span></p><ul class="lpdoc-itemize-minus"><li><em>Call and exit should be compatible with:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="43" href="#nat_num/1"><tt>nat_num/1</tt></a>)</span><span><span class="lpdoc-var">Op2</span> is a natural number.
+</span><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="44" href="#nat_num/1"><tt>nat_num/1</tt></a>)</span><span><span class="lpdoc-var">Op1</span> is a natural number.
+</span><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="45" href="#nat_num/1"><tt>nat_num/1</tt></a>)</span><span><span class="lpdoc-var">Res</span> is a natural number.
+</span>
+</ul></div></div><p>
+<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PREDICATE</span><a class="lpdoc-idx-anchor" id="minus/3" href="codesearch.html#minus/3">minus/3</a></div><div class="lpdoc-deftext">Defines subtraction operator <a class="lpdoc-idx-anchor" id="46" href="codesearch.html#-"><tt>-</tt></a> between two natural numbers in Peano notation, using <a class="lpdoc-idx-anchor" id="47" href="#plus/3"><tt>plus/3</tt></a>. <pre class="lpdoc-codeblock">minus(X,Y,Z) :-
+    plus(Z,Y,X).
+</pre><p><span class="lpdoc-usage-header">Usage:</span><span class="lpdoc-usage-decl"><tt>minus(Op2,Op1,Res)</tt>
+</span><p><span class="lpdoc-var">Res</span> is the difference between <span class="lpdoc-var">Op2</span> and <span class="lpdoc-var">Op1</span></p><ul class="lpdoc-itemize-minus"><li><em>Call and exit should be compatible with:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="48" href="#nat_num/1"><tt>nat_num/1</tt></a>)</span><span><span class="lpdoc-var">Op2</span> is a natural number.
+</span><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="49" href="#nat_num/1"><tt>nat_num/1</tt></a>)</span><span><span class="lpdoc-var">Op1</span> is a natural number.
+</span><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="50" href="#nat_num/1"><tt>nat_num/1</tt></a>)</span><span><span class="lpdoc-var">Res</span> is a natural number.
+</span>
+</ul></div></div><p>
+<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PREDICATE</span><a class="lpdoc-idx-anchor" id="less/2" href="codesearch.html#less/2">less/2</a></div><div class="lpdoc-deftext">Defines less than <a class="lpdoc-idx-anchor" id="51" href="codesearch.html#&gt;"><tt>&gt;</tt></a> operator between two natural numbers in Peano notation. <pre class="lpdoc-codeblock">less(0,s(X)) :-
+    nat_num(X).
 less(s(X),s(Y)) :-
     less(X,Y).
-</pre></div></div><p>
-<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PREDICATE</span><a class="lpdoc-idx-anchor" id="div/3" href="codesearch.html#div/3">div/3</a></div><div class="lpdoc-deftext">Define la operación <a class="lpdoc-idx-anchor" id="28" href="codesearch.html#/"><tt>/</tt></a> entre dos números naturales descritos en notación de Peano. <pre class="lpdoc-codeblock">div(X,Y,s(0)) :-
+</pre><p><span class="lpdoc-usage-header">Usage:</span><span class="lpdoc-usage-decl"><tt>less(N,M)</tt>
+</span><p><a class="lpdoc-idx-anchor" id="52" href="#less/2"><tt>less/2</tt></a> will be true if <span class="lpdoc-var">N</span> less than <span class="lpdoc-var">M</span></p><ul class="lpdoc-itemize-minus"><li><em>Call and exit should be compatible with:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="53" href="#nat_num/1"><tt>nat_num/1</tt></a>)</span><span><span class="lpdoc-var">N</span> is a natural number.
+</span><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="54" href="#nat_num/1"><tt>nat_num/1</tt></a>)</span><span><span class="lpdoc-var">M</span> is a natural number.
+</span>
+</ul></div></div><p>
+<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PREDICATE</span><a class="lpdoc-idx-anchor" id="div/3" href="codesearch.html#div/3">div/3</a></div><div class="lpdoc-deftext">Defines division <a class="lpdoc-idx-anchor" id="55" href="codesearch.html#/"><tt>/</tt></a> between two natural numbers in Peano notation. <pre class="lpdoc-codeblock">div(0,_1,0).
+div(X,Y,s(0)) :-
     minus(X,Y,Z),
     less(Z,Y).
 div(X,Y,s(Q)) :-
     minus(X,Y,Z),
     div(Z,Y,Q).
-</pre> <p>Vista la división como sucesivas restas al dividiendo hasta ser 0 o el resto. </div></div><p>
-<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PROPERTY</span><a class="lpdoc-idx-anchor" id="basic_surface/1" href="codesearch.html#basic_surface/1">basic_surface/1</a></div><div class="lpdoc-deftext">Define una superficie de celulas cargadas <p><div class="lpdoc-note"> <strong>Note:</strong> <a class="lpdoc-idx-anchor" id="29" href="#basic_surface/1"><tt>basic_surface/1</tt></a> debe contener al menos una lista con una célula. </div> <pre class="lpdoc-codeblock">basic_surface([[H|T]]) :-
-    charge(H),
-    my_list(T).
-basic_surface([_L|S2]) :-
-    basic_surface(S2).
-</pre><p><span class="lpdoc-usage-header">Usage:</span><span class="lpdoc-usage-decl"><tt>basic_surface(CellList)</tt>
-</span><p><span class="lpdoc-var">CellList</span> is a list with charged cells.</p><ul class="lpdoc-itemize-minus"></ul>
-<strong>Other properties:</strong> <br/><p><span class="lpdoc-usage-header">Test:</span><span class="lpdoc-usage-decl"><tt>basic_surface(X)</tt>
-</span><p>Cannot be a list with a empty sublist</p><ul class="lpdoc-itemize-minus"><li><em>If the following properties hold at call time:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="31" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="30" href="codesearch.html#X=[[]]"><tt>X=[[]]</tt></a>
-</span>
-<br/><em>then the following properties should hold upon exit:</em>
-<br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="32" href="codesearch.html#fails/1"><tt>fails/1</tt></a>)</span><span>Calls of the form <span class="lpdoc-var">X</span> fail.
+</pre> <p>Division is viewed as successive subtractions from the dividend until it becomes 0 or the remainder. <p><span class="lpdoc-usage-header">Usage:</span><span class="lpdoc-usage-decl"><tt>div(Dividend,Divisor,Quotient)</tt>
+</span><p></p><ul class="lpdoc-itemize-minus"><li><em>Call and exit should be compatible with:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="56" href="#nat_num/1"><tt>nat_num/1</tt></a>)</span><span><span class="lpdoc-var">Dividend</span> is a natural number.
+</span><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="57" href="#nat_num/1"><tt>nat_num/1</tt></a>)</span><span><span class="lpdoc-var">Divisor</span> is a natural number.
+</span><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="58" href="#nat_num/1"><tt>nat_num/1</tt></a>)</span><span><span class="lpdoc-var">Quotient</span> is a natural number.
 </span>
 </ul></div></div><p>
-<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PROPERTY</span><a class="lpdoc-idx-anchor" id="surface/1" href="codesearch.html#surface/1">surface/1</a></div><div class="lpdoc-deftext">Defines a surface of charged cells, represented by a list of lists with same number of cells. It is defined as: <pre class="lpdoc-codeblock">surface([L|L2]) :-
+<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PROPERTY</span><a class="lpdoc-idx-anchor" id="basic_surface/1" href="codesearch.html#basic_surface/1">basic_surface/1</a></div><div class="lpdoc-deftext">Defines a surface of cell charges represented by a list of lists. Internal representation will be <tt>[List | [Lists]]</tt>. <p><div class="lpdoc-note"> <strong>Note:</strong> <a class="lpdoc-idx-anchor" id="59" href="#basic_surface/1"><tt>basic_surface/1</tt></a> must contains at least one non-empty horizontal line. </div> <p>It is defined as: <pre class="lpdoc-codeblock">basic_surface([L]) :-
+    my_list(L).
+basic_surface([L|S2]) :-
+    my_list(L),
+    basic_surface(S2).
+</pre><p><span class="lpdoc-usage-header">Usage:</span><span class="lpdoc-usage-decl"><tt>basic_surface(CellList)</tt>
+</span><p><span class="lpdoc-var">CellList</span> is a list of lists with charged cells.</p><ul class="lpdoc-itemize-minus"></ul>
+<strong>Other properties:</strong> <br/><p><span class="lpdoc-usage-header">Test:</span><span class="lpdoc-usage-decl"><tt>basic_surface(S)</tt>
+</span><p>Cannot have blank lines.</p><ul class="lpdoc-itemize-minus"><li><em>If the following properties hold at call time:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="61" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="60" href="codesearch.html#S=[[0,++],[],[+,+++]]"><tt>S=[[0,++],[],[+,+++]]</tt></a>
+</span>
+<br/><em>then the following properties should hold globally:</em>
+<br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="62" href="codesearch.html#fails/1"><tt>fails/1</tt></a>)</span><span>Calls of the form <span class="lpdoc-var">basic_surface(S)</span> fail.
+</span>
+</ul><p><span class="lpdoc-usage-header">Test:</span><span class="lpdoc-usage-decl"><tt>basic_surface(S)</tt>
+</span><p>Line contents must have cell charge values.</p><ul class="lpdoc-itemize-minus"><li><em>If the following properties hold at call time:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="64" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="63" href="codesearch.html#S=[[0,1],[+++,+],[+,++]]"><tt>S=[[0,1],[+++,+],[+,++]]</tt></a>
+</span>
+<br/><em>then the following properties should hold globally:</em>
+<br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="65" href="codesearch.html#fails/1"><tt>fails/1</tt></a>)</span><span>Calls of the form <span class="lpdoc-var">basic_surface(S)</span> fail.
+</span>
+</ul><p><span class="lpdoc-usage-header">Test:</span><span class="lpdoc-usage-decl"><tt>basic_surface(S)</tt>
+</span><p>Cannot be an empty list.</p><ul class="lpdoc-itemize-minus"><li><em>If the following properties hold at call time:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="67" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="66" href="codesearch.html#S=[]"><tt>S=[]</tt></a>
+</span>
+<br/><em>then the following properties should hold globally:</em>
+<br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="68" href="codesearch.html#fails/1"><tt>fails/1</tt></a>)</span><span>Calls of the form <span class="lpdoc-var">basic_surface(S)</span> fail.
+</span>
+</ul><p><span class="lpdoc-usage-header">Test:</span><span class="lpdoc-usage-decl"><tt>basic_surface(S)</tt>
+</span><p>Cannot be a list with a empty sublist</p><ul class="lpdoc-itemize-minus"><li><em>If the following properties hold at call time:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="70" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="69" href="codesearch.html#S=[[]]"><tt>S=[[]]</tt></a>
+</span>
+<br/><em>then the following properties should hold globally:</em>
+<br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="71" href="codesearch.html#fails/1"><tt>fails/1</tt></a>)</span><span>Calls of the form <span class="lpdoc-var">basic_surface(S)</span> fail.
+</span>
+</ul><p><span class="lpdoc-usage-header">Test:</span><span class="lpdoc-usage-decl"><tt>basic_surface(S)</tt>
+</span><p>Line must contain at least one cell.</p><ul class="lpdoc-itemize-minus"><li><em>If the following properties hold at call time:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="73" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="72" href="codesearch.html#S=[[_101613]]"><tt>S=[[_101613]]</tt></a>
+</span>
+<br/><em>then the following properties should hold globally:</em>
+<br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="74" href="codesearch.html#not_fails/1"><tt>not_fails/1</tt></a>)</span><span>All the calls of the form <span class="lpdoc-var">basic_surface(S)</span> do not fail.
+</span>
+</ul><p><span class="lpdoc-usage-header">Test:</span><span class="lpdoc-usage-decl"><tt>basic_surface(S)</tt>
+</span><p>Lines could have different sizes.</p><ul class="lpdoc-itemize-minus"><li><em>If the following properties hold at call time:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="76" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="75" href="codesearch.html#S=[[_101480,_101482,_101484],[_101488,_101490],[_101494]]"><tt>S=[[_101480,_101482,_101484],[_101488,_101490],[_101494]]</tt></a>
+</span>
+<br/><em>then the following properties should hold globally:</em>
+<br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="77" href="codesearch.html#not_fails/1"><tt>not_fails/1</tt></a>)</span><span>All the calls of the form <span class="lpdoc-var">basic_surface(S)</span> do not fail.
+</span>
+</ul></div></div><p>
+<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PROPERTY</span><a class="lpdoc-idx-anchor" id="surface/1" href="codesearch.html#surface/1">surface/1</a></div><div class="lpdoc-deftext">Defines a surface of charged cells, represented by a cell charge matrix. <div class="lpdoc-note"> <strong>Note:</strong> <a class="lpdoc-idx-anchor" id="78" href="#surface/1"><tt>surface/1</tt></a> must contains at least one non-empty horizontal line. </div> <p>It is defined as: <pre class="lpdoc-codeblock">surface([L|L2]) :-
     basic_surface([L|L2]),
     mylength(L,Tam),
     surface_acc([L|L2],Tam).
-</pre><p><span class="lpdoc-usage-header">Usage:</span><span class="lpdoc-usage-decl"><tt>surface(CellList)</tt>
-</span><p><span class="lpdoc-var">CellList</span> is a list with charged cells.</p><ul class="lpdoc-itemize-minus"></ul></div></div><p>
-<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PREDICATE</span><a class="lpdoc-idx-anchor" id="surface_acc/2" href="codesearch.html#surface_acc/2">surface_acc/2</a></div><div class="lpdoc-deftext">No further documentation available for this predicate.</div></div><p>
-<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PREDICATE</span><a class="lpdoc-idx-anchor" id="h_line/3" href="codesearch.html#h_line/3">h_line/3</a></div><div class="lpdoc-deftext">No further documentation available for this predicate.</div></div><p>
-<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PREDICATE</span><a class="lpdoc-idx-anchor" id="v_line/3" href="codesearch.html#v_line/3">v_line/3</a></div><div class="lpdoc-deftext">No further documentation available for this predicate.</div></div><p>
-<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PREDICATE</span><a class="lpdoc-idx-anchor" id="v_line_aux/3" href="codesearch.html#v_line_aux/3">v_line_aux/3</a></div><div class="lpdoc-deftext">No further documentation available for this predicate.</div></div><p>
-<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PREDICATE</span><a class="lpdoc-idx-anchor" id="h_sum/2" href="codesearch.html#h_sum/2">h_sum/2</a></div><div class="lpdoc-deftext">No further documentation available for this predicate.</div></div><p>
-<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PREDICATE</span><a class="lpdoc-idx-anchor" id="total_charge/2" href="codesearch.html#total_charge/2">total_charge/2</a></div><div class="lpdoc-deftext">No further documentation available for this predicate.</div></div><p>
-<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PREDICATE</span><a class="lpdoc-idx-anchor" id="total_cells/2" href="codesearch.html#total_cells/2">total_cells/2</a></div><div class="lpdoc-deftext">No further documentation available for this predicate.</div></div><p>
-<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PREDICATE</span><a class="lpdoc-idx-anchor" id="average/2" href="codesearch.html#average/2">average/2</a></div><div class="lpdoc-deftext">No further documentation available for this predicate.</div></div><p>
-</div><div id="Documentation on imports"><h2>Documentation on imports</h2>This module has the following direct dependencies:<ul class="lpdoc-itemize-minus"><li><em>Internal (engine) modules:</em><br/><a class="lpdoc-idx-anchor" id="33" href="codesearch.html#term_basic"><tt>term_basic</tt></a>, <a class="lpdoc-idx-anchor" id="34" href="codesearch.html#arithmetic"><tt>arithmetic</tt></a>, <a class="lpdoc-idx-anchor" id="35" href="codesearch.html#atomic_basic"><tt>atomic_basic</tt></a>, <a class="lpdoc-idx-anchor" id="36" href="codesearch.html#basiccontrol"><tt>basiccontrol</tt></a>, <a class="lpdoc-idx-anchor" id="37" href="codesearch.html#exceptions"><tt>exceptions</tt></a>, <a class="lpdoc-idx-anchor" id="38" href="codesearch.html#term_compare"><tt>term_compare</tt></a>, <a class="lpdoc-idx-anchor" id="39" href="codesearch.html#term_typing"><tt>term_typing</tt></a>, <a class="lpdoc-idx-anchor" id="40" href="codesearch.html#debugger_support"><tt>debugger_support</tt></a>, <a class="lpdoc-idx-anchor" id="41" href="codesearch.html#basic_props"><tt>basic_props</tt></a>.
-<li><em>Packages:</em><br/><a class="lpdoc-idx-anchor" id="42" href="codesearch.html#prelude"><tt>prelude</tt></a>, <a class="lpdoc-idx-anchor" id="43" href="codesearch.html#initial"><tt>initial</tt></a>, <a class="lpdoc-idx-anchor" id="44" href="codesearch.html#condcomp"><tt>condcomp</tt></a>, <a class="lpdoc-idx-anchor" id="45" href="codesearch.html#assertions"><tt>assertions</tt></a>, <a class="lpdoc-idx-anchor" id="46" href="codesearch.html#assertions/assertions_basic"><tt>assertions/assertions_basic</tt></a>, <a class="lpdoc-idx-anchor" id="47" href="codesearch.html#regtypes"><tt>regtypes</tt></a>.
+</pre><p><span class="lpdoc-usage-header">Usage:</span><span class="lpdoc-usage-decl"><tt>surface(CellMatrix)</tt>
+</span><p><span class="lpdoc-var">CellMatrix</span> is a matrix with charged cells.</p><ul class="lpdoc-itemize-minus"></ul>
+<strong>Other properties:</strong> <br/><p><span class="lpdoc-usage-header">Test:</span><span class="lpdoc-usage-decl"><tt>surface(S)</tt>
+</span><p>Call surface correctly.</p><ul class="lpdoc-itemize-minus"><li><em>If the following properties hold at call time:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="80" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="79" href="codesearch.html#S=[[++,+++],[0,+],[+,++]]"><tt>S=[[++,+++],[0,+],[+,++]]</tt></a>
+</span>
+<br/><em>then the following properties should hold globally:</em>
+<br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="81" href="codesearch.html#not_fails/1"><tt>not_fails/1</tt></a>)</span><span>All the calls of the form <span class="lpdoc-var">surface(S)</span> do not fail.
+</span>
+</ul><p><span class="lpdoc-usage-header">Test:</span><span class="lpdoc-usage-decl"><tt>surface(S)</tt>
+</span><p>Cannot have blank lines.</p><ul class="lpdoc-itemize-minus"><li><em>If the following properties hold at call time:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="83" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="82" href="codesearch.html#S=[[0,++],[],[+,+++]]"><tt>S=[[0,++],[],[+,+++]]</tt></a>
+</span>
+<br/><em>then the following properties should hold globally:</em>
+<br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="84" href="codesearch.html#fails/1"><tt>fails/1</tt></a>)</span><span>Calls of the form <span class="lpdoc-var">surface(S)</span> fail.
+</span>
+</ul><p><span class="lpdoc-usage-header">Test:</span><span class="lpdoc-usage-decl"><tt>surface(S)</tt>
+</span><p>Line contents must have cell charge values.</p><ul class="lpdoc-itemize-minus"><li><em>If the following properties hold at call time:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="86" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="85" href="codesearch.html#S=[[+++,1],[+++,+],[+,++]]"><tt>S=[[+++,1],[+++,+],[+,++]]</tt></a>
+</span>
+<br/><em>then the following properties should hold globally:</em>
+<br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="87" href="codesearch.html#fails/1"><tt>fails/1</tt></a>)</span><span>Calls of the form <span class="lpdoc-var">surface(S)</span> fail.
+</span>
+</ul><p><span class="lpdoc-usage-header">Test:</span><span class="lpdoc-usage-decl"><tt>surface(S)</tt>
+</span><p>Cannot be a list with empty sublist.</p><ul class="lpdoc-itemize-minus"><li><em>If the following properties hold at call time:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="89" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="88" href="codesearch.html#S=[[]]"><tt>S=[[]]</tt></a>
+</span>
+<br/><em>then the following properties should hold globally:</em>
+<br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="90" href="codesearch.html#fails/1"><tt>fails/1</tt></a>)</span><span>Calls of the form <span class="lpdoc-var">surface(S)</span> fail.
+</span>
+</ul><p><span class="lpdoc-usage-header">Test:</span><span class="lpdoc-usage-decl"><tt>surface(S)</tt>
+</span><p>Line must contain at least one cell.</p><ul class="lpdoc-itemize-minus"><li><em>If the following properties hold at call time:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="92" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="91" href="codesearch.html#S=[[_22475]]"><tt>S=[[_22475]]</tt></a>
+</span>
+<br/><em>then the following properties should hold globally:</em>
+<br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="93" href="codesearch.html#not_fails/1"><tt>not_fails/1</tt></a>)</span><span>All the calls of the form <span class="lpdoc-var">surface(S)</span> do not fail.
+</span>
+</ul><p><span class="lpdoc-usage-header">Test:</span><span class="lpdoc-usage-decl"><tt>surface(S)</tt>
+</span><p>Lines must have same length.</p><ul class="lpdoc-itemize-minus"><li><em>If the following properties hold at call time:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="95" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="94" href="codesearch.html#S=[[_22352,_22354,_22356],[_22360,_22362],[_22366,_22368,_22370]]"><tt>S=[[_22352,_22354,_22356],[_22360,_22362],[_22366,_22368,_22370]]</tt></a>
+</span>
+<br/><em>then the following properties should hold globally:</em>
+<br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="96" href="codesearch.html#fails/1"><tt>fails/1</tt></a>)</span><span>Calls of the form <span class="lpdoc-var">surface(S)</span> fail.
+</span>
+</ul></div></div><p>
+<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PREDICATE</span><a class="lpdoc-idx-anchor" id="surface_acc/2" href="codesearch.html#surface_acc/2">surface_acc/2</a></div><div class="lpdoc-deftext"><p><span class="lpdoc-usage-header">Usage:</span><span class="lpdoc-usage-decl"><tt>surface_acc(S,N)</tt>
+</span><p></p><ul class="lpdoc-itemize-minus"><li><em>Call and exit should be compatible with:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="97" href="#surface/1"><tt>surface/1</tt></a>)</span><span><span class="lpdoc-var">S</span> is a matrix with charged cells.
+</span><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="98" href="#nat_num/1"><tt>nat_num/1</tt></a>)</span><span><span class="lpdoc-var">N</span> is a natural number.
+</span>
+</ul></div></div><p>
+<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PREDICATE</span><a class="lpdoc-idx-anchor" id="h_line/3" href="codesearch.html#h_line/3">h_line/3</a></div><div class="lpdoc-deftext">Extracts a specific horizontal line from surface <pre class="lpdoc-codeblock">h_line([L],s(0),L).
+h_line(S,N,C) :-
+    get(S,N,C),
+    surface(S).
+</pre><p><span class="lpdoc-usage-header">Usage:</span><span class="lpdoc-usage-decl"><tt>h_line(S,I,R)</tt>
+</span><p></p><ul class="lpdoc-itemize-minus"><li><em>Call and exit should be compatible with:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="99" href="#surface/1"><tt>surface/1</tt></a>)</span><span><span class="lpdoc-var">S</span> is a matrix with charged cells.
+</span><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="100" href="#nat_num/1"><tt>nat_num/1</tt></a>)</span><span><span class="lpdoc-var">I</span> is a natural number.
+</span><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="101" href="#my_list/1"><tt>my_list/1</tt></a>)</span><span><span class="lpdoc-var">R</span> is a list with charge cell values.
+</span>
+</ul>
+<strong>Other properties:</strong> <br/><p><span class="lpdoc-usage-header">Test:</span><span class="lpdoc-usage-decl"><tt>h_line(S,I,R)</tt>
+</span><p>Get horizontal line correctly(1).</p><ul class="lpdoc-itemize-minus"><li><em>If the following properties hold at call time:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="103" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="102" href="codesearch.html#S=[[0,+,++],[+++,++++,+++++]]"><tt>S=[[0,+,++],[+++,++++,+++++]]</tt></a>
+</span><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="105" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="104" href="codesearch.html#I=s(0)"><tt>I=s(0)</tt></a>
+</span>
+<br/><em>then the following properties should hold upon exit:</em>
+<br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="107" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="106" href="codesearch.html#R=[0,+,++]"><tt>R=[0,+,++]</tt></a>
+</span>
+<br/><em>then the following properties should hold globally:</em>
+<br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="108" href="codesearch.html#not_fails/1"><tt>not_fails/1</tt></a>)</span><span>All the calls of the form <span class="lpdoc-var">h_line(S,I,R)</span> do not fail.
+</span>
+</ul><p><span class="lpdoc-usage-header">Test:</span><span class="lpdoc-usage-decl"><tt>h_line(S,I,R)</tt>
+</span><p>Get horizontal line correctly(2).</p><ul class="lpdoc-itemize-minus"><li><em>If the following properties hold at call time:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="110" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="109" href="codesearch.html#S=[[0,+,++],[+++,++++,+++++]]"><tt>S=[[0,+,++],[+++,++++,+++++]]</tt></a>
+</span><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="112" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="111" href="codesearch.html#I=s(s(0))"><tt>I=s(s(0))</tt></a>
+</span>
+<br/><em>then the following properties should hold upon exit:</em>
+<br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="114" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="113" href="codesearch.html#R=[+++,++++,+++++]"><tt>R=[+++,++++,+++++]</tt></a>
+</span>
+<br/><em>then the following properties should hold globally:</em>
+<br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="115" href="codesearch.html#not_fails/1"><tt>not_fails/1</tt></a>)</span><span>All the calls of the form <span class="lpdoc-var">h_line(S,I,R)</span> do not fail.
+</span>
+</ul><p><span class="lpdoc-usage-header">Test:</span><span class="lpdoc-usage-decl"><tt>h_line(S,I,R)</tt>
+</span><p>Get horizontal line index correctly.</p><ul class="lpdoc-itemize-minus"><li><em>If the following properties hold at call time:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="117" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="116" href="codesearch.html#S=[[0,+,++],[+++,++++,+++++]]"><tt>S=[[0,+,++],[+++,++++,+++++]]</tt></a>
+</span><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="119" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="118" href="codesearch.html#R=[+++,++++,+++++]"><tt>R=[+++,++++,+++++]</tt></a>
+</span>
+<br/><em>then the following properties should hold upon exit:</em>
+<br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="121" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="120" href="codesearch.html#I=s(s(0))"><tt>I=s(s(0))</tt></a>
+</span>
+<br/><em>then the following properties should hold globally:</em>
+<br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="122" href="codesearch.html#not_fails/1"><tt>not_fails/1</tt></a>)</span><span>All the calls of the form <span class="lpdoc-var">h_line(S,I,R)</span> do not fail.
+</span>
+</ul><p><span class="lpdoc-usage-header">Test:</span><span class="lpdoc-usage-decl"><tt>h_line(Arg1,I,Arg3)</tt>
+</span><p>Get non-existing horizontal line(1)</p><ul class="lpdoc-itemize-minus"><li><em>If the following properties hold at call time:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="124" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="123" href="codesearch.html#I=0"><tt>I=0</tt></a>
+</span>
+<br/><em>then the following properties should hold globally:</em>
+<br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="125" href="codesearch.html#fails/1"><tt>fails/1</tt></a>)</span><span>Calls of the form <span class="lpdoc-var">h_line(Arg1,I,Arg3)</span> fail.
+</span>
+</ul><p><span class="lpdoc-usage-header">Test:</span><span class="lpdoc-usage-decl"><tt>h_line(S,I,Arg3)</tt>
+</span><p>Get non-existing horizontal line(2).</p><ul class="lpdoc-itemize-minus"><li><em>If the following properties hold at call time:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="127" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="126" href="codesearch.html#S=[[0,+,++],[+++,++++,+++++]]"><tt>S=[[0,+,++],[+++,++++,+++++]]</tt></a>
+</span><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="129" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="128" href="codesearch.html#I=s(s(s(0)))"><tt>I=s(s(s(0)))</tt></a>
+</span>
+<br/><em>then the following properties should hold globally:</em>
+<br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="130" href="codesearch.html#fails/1"><tt>fails/1</tt></a>)</span><span>Calls of the form <span class="lpdoc-var">h_line(S,I,Arg3)</span> fail.
+</span>
+</ul><p><span class="lpdoc-usage-header">Test:</span><span class="lpdoc-usage-decl"><tt>h_line(S,Arg2,Arg3)</tt>
+</span><p>Cannot be an empty surface.</p><ul class="lpdoc-itemize-minus"><li><em>If the following properties hold at call time:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="132" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="131" href="codesearch.html#S=[]"><tt>S=[]</tt></a>
+</span>
+<br/><em>then the following properties should hold globally:</em>
+<br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="133" href="codesearch.html#fails/1"><tt>fails/1</tt></a>)</span><span>Calls of the form <span class="lpdoc-var">h_line(S,Arg2,Arg3)</span> fail.
+</span>
+</ul></div></div><p>
+<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PREDICATE</span><a class="lpdoc-idx-anchor" id="v_line/3" href="codesearch.html#v_line/3">v_line/3</a></div><div class="lpdoc-deftext">Extracts a specific vertical line from surface <pre class="lpdoc-codeblock">v_line([Fila],Indice,[Elemento]) :-
+    get(Fila,Indice,Elemento).
+v_line([Fila|Filas],Indice,[Elemento|Columna]) :-
+    get(Fila,Indice,Elemento),
+    v_line(Filas,Indice,Columna).
+</pre><p><span class="lpdoc-usage-header">Usage:</span><span class="lpdoc-usage-decl"><tt>v_line(S,I,C)</tt>
+</span><p></p><ul class="lpdoc-itemize-minus"><li><em>Call and exit should be compatible with:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="134" href="#surface/1"><tt>surface/1</tt></a>)</span><span><span class="lpdoc-var">S</span> is a matrix with charged cells.
+</span><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="135" href="#nat_num/1"><tt>nat_num/1</tt></a>)</span><span><span class="lpdoc-var">I</span> is a natural number.
+</span><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="136" href="#my_list/1"><tt>my_list/1</tt></a>)</span><span><span class="lpdoc-var">C</span> is a list with charge cell values.
+</span>
+</ul>
+<strong>Other properties:</strong> <br/><p><span class="lpdoc-usage-header">Test:</span><span class="lpdoc-usage-decl"><tt>v_line(S,I,C)</tt>
+</span><p>Get column correctly</p><ul class="lpdoc-itemize-minus"><li><em>If the following properties hold at call time:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="138" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="137" href="codesearch.html#S=[[0,+,++],[0,+,++]]"><tt>S=[[0,+,++],[0,+,++]]</tt></a>
+</span><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="140" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="139" href="codesearch.html#I=s(s(0))"><tt>I=s(s(0))</tt></a>
+</span>
+<br/><em>then the following properties should hold upon exit:</em>
+<br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="142" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="141" href="codesearch.html#C=[+,+]"><tt>C=[+,+]</tt></a>
+</span>
+</ul><p><span class="lpdoc-usage-header">Test:</span><span class="lpdoc-usage-decl"><tt>v_line(S,I,C)</tt>
+</span><p>Get index from column correctly</p><ul class="lpdoc-itemize-minus"><li><em>If the following properties hold at call time:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="144" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="143" href="codesearch.html#S=[[0,+,++],[0,+,++]]"><tt>S=[[0,+,++],[0,+,++]]</tt></a>
+</span><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="146" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="145" href="codesearch.html#C=[+,+]"><tt>C=[+,+]</tt></a>
+</span>
+<br/><em>then the following properties should hold upon exit:</em>
+<br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="148" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="147" href="codesearch.html#I=s(s(0))"><tt>I=s(s(0))</tt></a>
+</span>
+</ul><p><span class="lpdoc-usage-header">Test:</span><span class="lpdoc-usage-decl"><tt>v_line(S,I,Arg3)</tt>
+</span><p>Get non-existing vertical line(1)</p><ul class="lpdoc-itemize-minus"><li><em>If the following properties hold at call time:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="150" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="149" href="codesearch.html#S=[[0,+,++],[0,+,++]]"><tt>S=[[0,+,++],[0,+,++]]</tt></a>
+</span><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="152" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="151" href="codesearch.html#I=0"><tt>I=0</tt></a>
+</span>
+<br/><em>then the following properties should hold globally:</em>
+<br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="153" href="codesearch.html#fails/1"><tt>fails/1</tt></a>)</span><span>Calls of the form <span class="lpdoc-var">v_line(S,I,Arg3)</span> fail.
+</span>
+</ul><p><span class="lpdoc-usage-header">Test:</span><span class="lpdoc-usage-decl"><tt>v_line(S,I,Arg3)</tt>
+</span><p>Get non-existing vertical line(2)</p><ul class="lpdoc-itemize-minus"><li><em>If the following properties hold at call time:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="155" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="154" href="codesearch.html#S=[[0,+,++],[0,+,++]]"><tt>S=[[0,+,++],[0,+,++]]</tt></a>
+</span><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="157" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="156" href="codesearch.html#I=s(s(s(s(0))))"><tt>I=s(s(s(s(0))))</tt></a>
+</span>
+<br/><em>then the following properties should hold globally:</em>
+<br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="158" href="codesearch.html#fails/1"><tt>fails/1</tt></a>)</span><span>Calls of the form <span class="lpdoc-var">v_line(S,I,Arg3)</span> fail.
+</span>
+</ul><p><span class="lpdoc-usage-header">Test:</span><span class="lpdoc-usage-decl"><tt>v_line(S,Arg2,Arg3)</tt>
+</span><p>Cannot be an empty surface.</p><ul class="lpdoc-itemize-minus"><li><em>If the following properties hold at call time:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="160" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="159" href="codesearch.html#S=[]"><tt>S=[]</tt></a>
+</span>
+<br/><em>then the following properties should hold globally:</em>
+<br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="161" href="codesearch.html#fails/1"><tt>fails/1</tt></a>)</span><span>Calls of the form <span class="lpdoc-var">v_line(S,Arg2,Arg3)</span> fail.
+</span>
+</ul><p><span class="lpdoc-usage-header">Test:</span><span class="lpdoc-usage-decl"><tt>v_line(S,Arg2,Arg3)</tt>
+</span><p>Surface must have at least one cell</p><ul class="lpdoc-itemize-minus"><li><em>If the following properties hold at call time:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="163" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="162" href="codesearch.html#S=[[]]"><tt>S=[[]]</tt></a>
+</span>
+<br/><em>then the following properties should hold globally:</em>
+<br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="164" href="codesearch.html#fails/1"><tt>fails/1</tt></a>)</span><span>Calls of the form <span class="lpdoc-var">v_line(S,Arg2,Arg3)</span> fail.
+</span>
+</ul></div></div><p>
+<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PREDICATE</span><a class="lpdoc-idx-anchor" id="v_lines/2" href="codesearch.html#v_lines/2">v_lines/2</a></div><div class="lpdoc-deftext">Extracts all vertical lines. <pre class="lpdoc-codeblock">v_lines([L],L).
+v_lines([L|S2],C) :-
+    mylength(L,Tam),
+    v_lines_aux([L|S2],Tam,C).
+</pre><p><span class="lpdoc-usage-header">Usage:</span><span class="lpdoc-usage-decl"><tt>v_lines(S,C)</tt>
+</span><p></p><ul class="lpdoc-itemize-minus"><li><em>The following properties should hold at call time:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="165" href="#surface/1"><tt>surface/1</tt></a>)</span><span><span class="lpdoc-var">S</span> is a matrix with charged cells.
+</span>
+<li><em>The following properties should hold upon exit:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="166" href="#surface/1"><tt>surface/1</tt></a>)</span><span><span class="lpdoc-var">C</span> is a matrix with charged cells.
+</span>
+</ul>
+<strong>Other properties:</strong> <br/><p><span class="lpdoc-usage-header">Test:</span><span class="lpdoc-usage-decl"><tt>v_lines(S,C)</tt>
+</span><p>Test with square matrix</p><ul class="lpdoc-itemize-minus"><li><em>If the following properties hold at call time:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="168" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="167" href="codesearch.html#S=[[0,+,++],[0,+,++],[0,+,++]]"><tt>S=[[0,+,++],[0,+,++],[0,+,++]]</tt></a>
+</span>
+<br/><em>then the following properties should hold upon exit:</em>
+<br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="170" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="169" href="codesearch.html#C=[[0,0,0],[+,+,+],[++,++,++]]"><tt>C=[[0,0,0],[+,+,+],[++,++,++]]</tt></a>
+</span>
+</ul><p><span class="lpdoc-usage-header">Test:</span><span class="lpdoc-usage-decl"><tt>v_lines(S,C)</tt>
+</span><p>Test with rectangular matrix</p><ul class="lpdoc-itemize-minus"><li><em>If the following properties hold at call time:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="172" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="171" href="codesearch.html#S=[[0,+,++],[0,+,++]]"><tt>S=[[0,+,++],[0,+,++]]</tt></a>
+</span>
+<br/><em>then the following properties should hold upon exit:</em>
+<br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="174" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="173" href="codesearch.html#C=[[0,0],[+,+],[++,++]]"><tt>C=[[0,0],[+,+],[++,++]]</tt></a>
+</span>
+</ul></div></div><p>
+<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PREDICATE</span><a class="lpdoc-idx-anchor" id="v_lines_aux/3" href="codesearch.html#v_lines_aux/3">v_lines_aux/3</a></div><div class="lpdoc-deftext"><p><span class="lpdoc-usage-header">Usage:</span><span class="lpdoc-usage-decl"><tt>v_lines_aux(S,T,C)</tt>
+</span><p></p><ul class="lpdoc-itemize-minus"><li><em>Call and exit should be compatible with:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="175" href="#surface/1"><tt>surface/1</tt></a>)</span><span><span class="lpdoc-var">S</span> is a matrix with charged cells.
+</span><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="176" href="#nat_num/1"><tt>nat_num/1</tt></a>)</span><span><span class="lpdoc-var">T</span> is a natural number.
+</span><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="177" href="#surface/1"><tt>surface/1</tt></a>)</span><span><span class="lpdoc-var">C</span> is a matrix with charged cells.
+</span>
+</ul></div></div><p>
+<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PREDICATE</span><a class="lpdoc-idx-anchor" id="h_sum/2" href="codesearch.html#h_sum/2">h_sum/2</a></div><div class="lpdoc-deftext">Sum elements of a horizontal line. <pre class="lpdoc-codeblock">h_sum([C],N) :-
+    f(C,N).
+h_sum([H|T],Suma) :-
+    h_sum(T,SumaResto),
+    f(H,N),
+    plus(N,SumaResto,Suma).
+</pre><p><span class="lpdoc-usage-header">Usage:</span><span class="lpdoc-usage-decl"><tt>h_sum(R,T)</tt>
+</span><p></p><ul class="lpdoc-itemize-minus"><li><em>Call and exit should be compatible with:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="178" href="#my_list/1"><tt>my_list/1</tt></a>)</span><span><span class="lpdoc-var">R</span> is a list with charge cell values.
+</span><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="179" href="#nat_num/1"><tt>nat_num/1</tt></a>)</span><span><span class="lpdoc-var">T</span> is a natural number.
+</span>
+</ul></div></div><p>
+<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PREDICATE</span><a class="lpdoc-idx-anchor" id="total_charge/2" href="codesearch.html#total_charge/2">total_charge/2</a></div><div class="lpdoc-deftext"><p><span class="lpdoc-usage-header">Usage:</span><span class="lpdoc-usage-decl"><tt>total_charge(S,T)</tt>
+</span><p><span class="lpdoc-var">T</span> is the sum of all elements in a surface.</p><ul class="lpdoc-itemize-minus"><li><em>Call and exit should be compatible with:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="180" href="#surface/1"><tt>surface/1</tt></a>)</span><span><span class="lpdoc-var">S</span> is a matrix with charged cells.
+</span><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="181" href="#nat_num/1"><tt>nat_num/1</tt></a>)</span><span><span class="lpdoc-var">T</span> is a natural number.
+</span>
+</ul>
+<strong>Other properties:</strong> <br/><p><span class="lpdoc-usage-header">Test:</span><span class="lpdoc-usage-decl"><tt>total_charge([[0,+],[++,+++],[++++,+++++]],T)</tt>
+</span><p></p><ul class="lpdoc-itemize-minus"><li><em>The following properties should hold upon exit:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="183" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="182" href="codesearch.html#T=s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(0)))))))))))))))"><tt>T=s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(0)))))))))))))))</tt></a>
+</span>
+</ul><p><span class="lpdoc-usage-header">Test:</span><span class="lpdoc-usage-decl"><tt>total_charge(S,Arg2)</tt>
+</span><p></p><ul class="lpdoc-itemize-minus"><li><em>If the following properties hold at call time:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="185" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="184" href="codesearch.html#S=[[0,+],[++,3],[++++,+++++]]"><tt>S=[[0,+],[++,3],[++++,+++++]]</tt></a>
+</span>
+<br/><em>then the following properties should hold globally:</em>
+<br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="186" href="codesearch.html#fails/1"><tt>fails/1</tt></a>)</span><span>Calls of the form <span class="lpdoc-var">total_charge(S,Arg2)</span> fail.
+</span>
+</ul><p><span class="lpdoc-usage-header">Test:</span><span class="lpdoc-usage-decl"><tt>total_charge(S,Arg2)</tt>
+</span><p></p><ul class="lpdoc-itemize-minus"><li><em>If the following properties hold at call time:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="188" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="187" href="codesearch.html#S=[[]]"><tt>S=[[]]</tt></a>
+</span>
+<br/><em>then the following properties should hold globally:</em>
+<br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="189" href="codesearch.html#fails/1"><tt>fails/1</tt></a>)</span><span>Calls of the form <span class="lpdoc-var">total_charge(S,Arg2)</span> fail.
+</span>
+</ul><p><span class="lpdoc-usage-header">Test:</span><span class="lpdoc-usage-decl"><tt>total_charge(S,Arg2)</tt>
+</span><p></p><ul class="lpdoc-itemize-minus"><li><em>If the following properties hold at call time:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="191" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="190" href="codesearch.html#S=[[_105573,_105575,_105577],[_105581,_105583],[_105587]]"><tt>S=[[_105573,_105575,_105577],[_105581,_105583],[_105587]]</tt></a>
+</span>
+<br/><em>then the following properties should hold globally:</em>
+<br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="192" href="codesearch.html#fails/1"><tt>fails/1</tt></a>)</span><span>Calls of the form <span class="lpdoc-var">total_charge(S,Arg2)</span> fail.
+</span>
+</ul></div></div><p>
+<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PREDICATE</span><a class="lpdoc-idx-anchor" id="total_charge_aux/2" href="codesearch.html#total_charge_aux/2">total_charge_aux/2</a></div><div class="lpdoc-deftext"><p><span class="lpdoc-usage-header">Usage:</span><span class="lpdoc-usage-decl"><tt>total_charge_aux(S,T)</tt>
+</span><p></p><ul class="lpdoc-itemize-minus"><li><em>Call and exit should be compatible with:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="193" href="#surface/1"><tt>surface/1</tt></a>)</span><span><span class="lpdoc-var">S</span> is a matrix with charged cells.
+</span><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="194" href="#nat_num/1"><tt>nat_num/1</tt></a>)</span><span><span class="lpdoc-var">T</span> is a natural number.
+</span>
+</ul></div></div><p>
+<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PREDICATE</span><a class="lpdoc-idx-anchor" id="total_cells/2" href="codesearch.html#total_cells/2">total_cells/2</a></div><div class="lpdoc-deftext">Calculates the number of elements of a surface. <pre class="lpdoc-codeblock">total_cells([L],N) :-
+    mylength(L,N).
+total_cells([L|S2],Total) :-
+    total_cells(S2,TotalResto),
+    mylength(L,Esta),
+    plus(Esta,TotalResto,Total).
+</pre><p><span class="lpdoc-usage-header">Usage:</span><span class="lpdoc-usage-decl"><tt>total_cells(S,N)</tt>
+</span><p></p><ul class="lpdoc-itemize-minus"><li><em>Call and exit should be compatible with:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="195" href="#surface/1"><tt>surface/1</tt></a>)</span><span><span class="lpdoc-var">S</span> is a matrix with charged cells.
+</span><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="196" href="#nat_num/1"><tt>nat_num/1</tt></a>)</span><span><span class="lpdoc-var">N</span> is a natural number.
+</span>
+</ul></div></div><p>
+<div><div class="lpdoc-defname"><span class="lpdoc-predtag">PREDICATE</span><a class="lpdoc-idx-anchor" id="average_charge/2" href="codesearch.html#average_charge/2">average_charge/2</a></div><div class="lpdoc-deftext">Calculates average cell charge value from surface. <pre class="lpdoc-codeblock">average_charge([[]],_1).
+average_charge(S,A) :-
+    total_charge(S,M),
+    total_cells(S,T),
+    div(M,T,A).
+</pre><p><span class="lpdoc-usage-header">Usage:</span><span class="lpdoc-usage-decl"><tt>average_charge(S,A)</tt>
+</span><p></p><ul class="lpdoc-itemize-minus"><li><em>Call and exit should be compatible with:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="197" href="#surface/1"><tt>surface/1</tt></a>)</span><span><span class="lpdoc-var">S</span> is a matrix with charged cells.
+</span><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="198" href="#nat_num/1"><tt>nat_num/1</tt></a>)</span><span><span class="lpdoc-var">A</span> is a natural number.
+</span>
+</ul>
+<strong>Other properties:</strong> <br/><p><span class="lpdoc-usage-header">Test:</span><span class="lpdoc-usage-decl"><tt>average_charge(S,A)</tt>
+</span><p>Get average charge correctly(1).</p><ul class="lpdoc-itemize-minus"><li><em>If the following properties hold at call time:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="200" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="199" href="codesearch.html#S=[[++,++],[++,++],[++,++]]"><tt>S=[[++,++],[++,++],[++,++]]</tt></a>
+</span>
+<br/><em>then the following properties should hold upon exit:</em>
+<br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="202" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="201" href="codesearch.html#A=s(s(0))"><tt>A=s(s(0))</tt></a>
+</span>
+</ul><p><span class="lpdoc-usage-header">Test:</span><span class="lpdoc-usage-decl"><tt>average_charge(S,A)</tt>
+</span><p>Get average charge correctly(2).</p><ul class="lpdoc-itemize-minus"><li><em>If the following properties hold at call time:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="204" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="203" href="codesearch.html#S=[[+,++],[+,++],[+,++]]"><tt>S=[[+,++],[+,++],[+,++]]</tt></a>
+</span>
+<br/><em>then the following properties should hold upon exit:</em>
+<br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="206" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="205" href="codesearch.html#A=s(0)"><tt>A=s(0)</tt></a>
+</span>
+</ul><p><span class="lpdoc-usage-header">Test:</span><span class="lpdoc-usage-decl"><tt>average_charge(S,A)</tt>
+</span><p>Round to lower number.</p><ul class="lpdoc-itemize-minus"><li><em>If the following properties hold at call time:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="208" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="207" href="codesearch.html#S=[[++,+++,+++++++],[+,++,++],[++,+++,+],[++,++,++]]"><tt>S=[[++,+++,+++++++],[+,++,++],[++,+++,+],[++,++,++]]</tt></a>
+</span><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="210" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="209" href="codesearch.html#A=s(s(s(s(s(s(0))))))"><tt>A=s(s(s(s(s(s(0))))))</tt></a>
+</span>
+<br/><em>then the following properties should hold globally:</em>
+<br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="211" href="codesearch.html#fails/1"><tt>fails/1</tt></a>)</span><span>Calls of the form <span class="lpdoc-var">average_charge(S,A)</span> fail.
+</span>
+</ul><p><span class="lpdoc-usage-header">Test:</span><span class="lpdoc-usage-decl"><tt>average_charge(S,Arg2)</tt>
+</span><p></p><ul class="lpdoc-itemize-minus"><li><em>If the following properties hold at call time:</em><br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="213" href="codesearch.html#= /2"><tt>= /2</tt></a>)</span><span><a class="lpdoc-idx-anchor" id="212" href="codesearch.html#S=[[],[],[]]"><tt>S=[[],[],[]]</tt></a>
+</span>
+<br/><em>then the following properties should hold globally:</em>
+<br/><span class="lpdoc-on-right"> (<a class="lpdoc-idx-anchor" id="214" href="codesearch.html#fails/1"><tt>fails/1</tt></a>)</span><span>Calls of the form <span class="lpdoc-var">average_charge(S,Arg2)</span> fail.
+</span>
+</ul></div></div><p>
+</div><div id="Documentation on imports"><h2>Documentation on imports</h2>This module has the following direct dependencies:<ul class="lpdoc-itemize-minus"><li><em>Internal (engine) modules:</em><br/><a class="lpdoc-idx-anchor" id="215" href="codesearch.html#term_basic"><tt>term_basic</tt></a>, <a class="lpdoc-idx-anchor" id="216" href="codesearch.html#basiccontrol"><tt>basiccontrol</tt></a>, <a class="lpdoc-idx-anchor" id="217" href="codesearch.html#basic_props"><tt>basic_props</tt></a>.
+<li><em>Packages:</em><br/><a class="lpdoc-idx-anchor" id="218" href="codesearch.html#pure"><tt>pure</tt></a>, <a class="lpdoc-idx-anchor" id="219" href="codesearch.html#initial"><tt>initial</tt></a>, <a class="lpdoc-idx-anchor" id="220" href="codesearch.html#condcomp"><tt>condcomp</tt></a>, <a class="lpdoc-idx-anchor" id="221" href="codesearch.html#assertions"><tt>assertions</tt></a>, <a class="lpdoc-idx-anchor" id="222" href="codesearch.html#assertions/assertions_basic"><tt>assertions/assertions_basic</tt></a>, <a class="lpdoc-idx-anchor" id="223" href="codesearch.html#regtypes"><tt>regtypes</tt></a>.
 </ul></div><div class="lpdoc-footer">Generated with LPdoc using Ciao</div></div><div class="lpdoc-clearer"></div></div></body></html>
