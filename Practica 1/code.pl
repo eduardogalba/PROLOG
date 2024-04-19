@@ -41,6 +41,8 @@ which must consist of at least one line, with each line containing at least one 
 @includedef{basic_surface/1} 
 Additionally, we define @prop{surface/1} as above but in addition must ensure that all lines possess the same number of cells. It is defined by:
 @includedef{surface/1}
+As you can see, an auxiliary predicate has been employed, which accepts the size as a term. In each recursion step, it verifies 
+the length of the horizontal lines.
 @includedef{surface_acc/2}
 
 
@@ -79,7 +81,7 @@ Additionally, we define @prop{surface/1} as above but in addition must ensure th
 We define certain operations that can be performed on surfaces.
 
 @subsection{h_line(S,N,C)}
-@var{C} is the @var{N}th horizontal line of the surface @var{S} \n
+@var{C} is the @var{N}th horizontal line of the surface @var{S} @p
 @var{N} is a natural number in Peano notation.The horizontal lines are represented as lists with load values. 
 To facilitate this objective, an auxiliary predicate has been used, tasked with extracting an element from a list.
  Specifically, it retrieves a list from within a list of lists.
@@ -146,8 +148,8 @@ no
 
 @subsection{v_line(S,N,C)}
 @var{C} is the list of the Nth cells of all horizontal lines of the surface @var{S}. @p
-@var{N} is a natural number in Peano notation. To achieve this, an auxiliary predicate has been used, tasked with extracting an element from a list.
- Specifically, it retrieves a list from within a list of lists.
+@var{N} is a natural number in Peano notation. Similarly to the aforementioned predicate, an auxiliary predicate has been used, 
+tasked with extracting an element from a list. Specifically, it retrieves a list from within a list of lists.
 @subsubsection{Examples}
 @begin{enumerate}
 @item Lines begin from s(0) : 
@@ -207,7 +209,9 @@ no
 @end{enumerate}
 
 @subsection{v_lines(S, C)}
-v_lines(S,C): C es la lista de las lineas verticales de células de la superficie S.
+@var{C} is the list of vertical lines of cells on the surface @var{S}. @p
+It utilizes an auxiliary predicate which, during each recursion, extracts the vertical line and concatenates it 
+to the final list.
 @subsubsection{Examples}
 @begin{enumerate}
 @item Extract all vertical lines:
@@ -224,10 +228,25 @@ C = [[+,+,++,+,++,+,+],[+++,+++,0,+++,0,+,++],[0,0,++,0,++,++,0]] ?
 yes
 ?-
 @end{verbatim}
+@item Surface given with empty horizontal line:
+@begin{verbatim}
+v_lines([[+,+++,0], 
+              [+,+++,0], 
+              [++,0,++], 
+              [], 
+              [++,0,++], 
+              [+,+,++], 
+              [+,++,0]], C).
+
+no
+?-
+@end{verbatim}
 @end{enumerate}
 
 @subsection{total_charge(S,T)}
-@var{T} es la suma de todas las cargas de la superficie @var{S}.
+@var{T} is the sum of all load values in the surface @var{S}. @p
+It employs an auxiliary predicate that utilizes another predicate to calculate the sum of all loads within a horizontal line, 
+with each recursive step contributing to the total sum.
 
 @subsubsection{Examples}
 @begin{enumerate}
@@ -245,7 +264,7 @@ T = s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(0)))))))))))))))))))))
 yes
 ?-
 @end{verbatim}
-@item Check with @prop{basic_surface/1} given:
+@item It does not allow @prop{basic_surface/1}:
 @begin{verbatim}
 ?- total_charge([[+++,+++++++,0,+], 
               [+++++++,+++,0,+,++++], 
@@ -260,9 +279,8 @@ no
 @end{enumerate}
 
 @subsection{average_charge(S,A)}
-@var{S} is the surface given.\n
-@var{A} is the average of all the surface charges.\n
-This entails summing all the loads and dividing by the total number of cells. The result must be rounded by truncation,, i.e. returning the natural prior.
+@var{A} is the average of all load valuesin the surface @var{S}.@p
+This entails summing all the loads and dividing by the total number of cells. The result must be rounded by truncation, i.e. returning the natural prior.
 For this purpose, the aforementioned predicate calculates the total sum of the load values, along with an auxiliary predicate that 
 computes the total number of elements in the surface. Additionally, an integer division predicate is employed.
 @subsubsection{Examples}
@@ -375,7 +393,7 @@ my_append([X|Xs],Ys,[X|Zs]) :-
 %------------------------------------------------------------------------------------------------------------------------%
 
 % OPERACIONES ARITMETICAS
-:- doc(f/2,"Defines equivalences between load values and natural numbers in Peano notation. In order to be able to perform 
+:- doc(f/2,"Define equivalences between load values and natural numbers in Peano notation. In order to be able to perform 
 arithmetic operations. @p
 It is defined by: @includedef{f/2}\n ").
 
@@ -392,6 +410,7 @@ f(++, s(s(0))).
 f(+, s(0)).
 f(0, 0).
 
+/*
 f(s(s(s(s(s(s(s(0))))))), s(s(s(s(s(s(s(0)))))))).
 f(s(s(s(s(s(s(0)))))), s(s(s(s(s(s(0))))))).
 f(s(s(s(s(s(0))))), s(s(s(s(s(0)))))).
@@ -399,6 +418,7 @@ f(s(s(s(s(0)))), s(s(s(s(0))))).
 f(s(s(s(0))), s(s(s(0)))).
 f(s(s(0)), s(s(0))).
 f(s(0), s(0)).
+*/
 
 :- doc(nat_num/1, "Defines natural numbers in Peano notation. @p 
 It is defined as: @includedef{nat_num/1}").
@@ -557,7 +577,7 @@ surface([L|L2]) :-
    surface_acc([L|L2], Tam).
 
 :- doc(surface_acc/2, "Checks length in all horizontal lines. @p
-It is defined by: @includedef{surface_accc/2}").
+It is defined by: @includedef{surface_acc/2}").
 
 :- pred surface_acc(S, N) :: (surface(S), nat_num(N)).
 
@@ -595,7 +615,7 @@ surface_acc([[H|T]|T2], Acc) :-
 
 :- test h_line(_,N, _)
    : (N = 0) + fails
-   #"Get non-existing horizontal line(1)".
+   #"Get non-existing horizontal line(1).".
 
 :- test h_line(S, N, _)
    : (S = [[0,+,++], [+++,++++,+++++]], N = s(s(s(0)))) + fails
@@ -619,20 +639,20 @@ h_line(S, N, C) :-
 :- test v_line(S, N, C)
    : (S = [[0,+,++], [0,+,++]], N = s(s(0)))
    => (C = [+,+])
-   #"Get column correctly".
+   #"Get vertical line correctly.".
 
 :- test v_line(S, N, C)
    : (S = [[0,+,++], [0,+,++]], C = [+,+])
    => (N = s(s(0)))
-   #"Get index from column correctly".
+   #"Get index from vertical line correctly.".
 
 :- test v_line(S, N, _)
    : (S = [[0,+,++], [0,+,++]], N = 0) + fails
-   #"Get non-existing vertical line(1)".
+   #"Get non-existing vertical line(1).".
 
 :- test v_line(S, N, _)
    : (S = [[0,+,++], [0,+,++]], N = s(s(s(s(0))))) + fails
-   #"Get non-existing vertical line(2)".
+   #"Get non-existing vertical line(2).".
 
 :- test v_line(S,_,_)
    : (S = []) + fails
@@ -640,7 +660,7 @@ h_line(S, N, C) :-
 
 :- test v_line(S,_,_)
    : (S = [[]]) + fails
-   #"Surface must have at least one cell".
+   #"Surface must have at least one cell.".
 
 v_line([Fila], Indice, [Elemento]) :- get(Fila, Indice, Elemento).
 v_line([Fila|Filas], Indice, [Elemento|Columna]) :-
@@ -656,12 +676,30 @@ v_line([Fila|Filas], Indice, [Elemento|Columna]) :-
 :- test v_lines(S, C)
    : (S = [[0,+,++],[0,+,++],[0,+,++]])
    => (C = [[0,0,0],[+,+,+],[++,++,++]])
-   #"Test with square matrix".
+   #"Test with square matrix.".
 
 :- test v_lines(S, C)
    : (S = [[0,+,++],[0,+,++]])
    => (C = [[0,0],[+,+],[++,++]])
-   #"Test with rectangular matrix".
+   #"Test with rectangular matrix.".
+
+:- test v_lines(S, C)
+   : (S = [[0,+,++],[0,+,++],[0,+,++],[0,+,++]])
+   => (C = [[0,0,0,0],[+,+,+,+],[++,++,++,++]])
+   #"Extracts all vertical lines (1).".
+
+:- test v_lines(S, C)
+   : (S = [[0,+],[0,+],[0,+],[0,+],[0,+],[0,+],[0,+]])
+   => (C = [[0,0,0,0,0,0,0],[+,+,+,+,+,+,+]])
+   #"Extracts all vertical lines (2).".
+
+:- test v_lines(S, C)
+   : (S = [[0,+,++],[0,+],[0]]) + fails
+   #"Test with basic surface.".
+
+:- test v_lines(S, C)
+   : (S = []) + fails
+   #"Test with empty surface.".
 
 v_lines([L], L).
 v_lines([L|S2], C) :-
@@ -669,7 +707,8 @@ v_lines([L|S2], C) :-
    v_lines_aux([L|S2], Tam, C). 
 
 
-:-doc(v_lines_aux/3, "@includedef{v_lines_aux/3}").
+:-doc(v_lines_aux/3, "Builds the list of vertical lines @p 
+It is defined by: @includedef{v_lines_aux/3}").
 
 :- pred v_lines_aux(S, T, C) :: (surface(S), nat_num(T), surface(C)).
 
@@ -714,23 +753,42 @@ It is defined by: @includedef{total_charge/2}").
    #"@var{T} is the sum of all elements in a surface.".
 
 :- test total_charge([[0,+],[++,+++],[++++,+++++]], T)
-   => T = s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(0))))))))))))))).
+   => (T = s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(0))))))))))))))))
+   #"Calculate the total number of charges (1).".
+
+:- test total_charge(S, T)
+   : (S = [[0,+],[0,+],[0,+],[0,+],[0,+],[0,+],[0,+]])
+   => (T = s(s(s(s(s(s(s(0))))))))
+   #"Calculate the total number of charges (2).".
+
+:- test total_charge(S, T)
+   : (S = [[0,0,0],[0,0,0],[0,0,0]])
+   => (T = 0)
+   #"Surface with all 0s.".
 
 :- test total_charge(S, _)
-   : (S = [[0,+],[++,3],[++++,+++++]]) + fails.
+   : (S = [[0,+],[++,3],[++++,+++++]]) + fails
+   #"Surface wrong load values.".
+
+:- test total_charge(S, T)
+   : (S = [[0,+],[++,+++],[+,++]], T = s(s(s(s(s(0)))))) + fails
+   #"Incorrect number of total.".
 
 :- test total_charge(S, _)
-   : (S = [[]]) + fails.
+   : (S = [[]]) + fails
+   #"Empty surface.".
 
 :- test total_charge(S, _)
-   : (S = [[_,_,_],[_,_],[_]]) + fails.
+   : (S = [[_,_,_],[_,_],[_]]) + fails
+   #"Must be a surface.".
 
 
 total_charge(S, T) :-
    total_charge_aux(S,T), 
    surface(S).
 
-:- doc(total_charge_aux/2, "@includedef{total_charge_aux/2}").
+:- doc(total_charge_aux/2, "Sum of all charges for each horizontal list @p
+It is defined by: @includedef{total_charge_aux/2}").
 
 :- pred total_charge_aux(S, T) :: (surface(S), nat_num(T)).
 
@@ -767,12 +825,26 @@ It is defined by: @includedef{average_charge/2}\n").
    #"Get average charge correctly(2).".
 
 :- test average_charge(S, A)
+   : (S = [[+],[+],[+],[+],[+],[+],[+]])
+   => (T = s(0))
+   #"Get average charge correctly(3).".
+
+:- test average_charge(S, A)
+   : (S = [[0,0,0],[0,0,0],[0,0,0]])
+   => (A = 0)
+   #"Surface with all 0s.".
+
+:- test average_charge(S, A)
    : (S = [[++,+++,+++++++], [+,++,++],[++,+++,+],[++,++,++]], A = s(s(s(s(s(s(0))))))) + fails
-   #"Round to lower number.".
+   #"Round to natural prior.".
 
 :- test average_charge(S, _)
-   : (S = [[],[],[]]) + fails.
+   : (S = [[0,+],[],[++,++]]) + fails
+   #"Surface with empty horizontal line.".
 
+:- test average_charge(S, _)
+   : (S = []) + fails
+   #"Empty surface.".
 
 average_charge([[]], _).
 average_charge(S, A) :-

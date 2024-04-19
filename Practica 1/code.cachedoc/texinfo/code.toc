@@ -1,29 +1,42 @@
 \unnumbchapentry{code}{1}
-\unnumbsecentry{Usage and interface}{1}
-\unnumbsecentry{Documentation on exports}{1}
-\unnumbsubsubsecentry{author\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em height.1ex}data/4 (prop)}{1}
-\unnumbsubsubsecentry{charge/1 (prop)}{1}
-\unnumbsubsubsecentry{my\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em height.1ex}list/1 (prop)}{1}
-\unnumbsubsubsecentry{mylength/2 (pred)}{2}
-\unnumbsubsubsecentry{get/3 (pred)}{2}
-\unnumbsubsubsecentry{myappend/3 (pred)}{2}
-\unnumbsubsubsecentry{f/2 (pred)}{2}
-\unnumbsubsubsecentry{nat\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em height.1ex}num/1 (prop)}{3}
-\unnumbsubsubsecentry{equal/2 (pred)}{3}
-\unnumbsubsubsecentry{plus/3 (pred)}{3}
-\unnumbsubsubsecentry{minus/3 (pred)}{3}
-\unnumbsubsubsecentry{less/2 (pred)}{4}
-\unnumbsubsubsecentry{div/3 (pred)}{4}
-\unnumbsubsubsecentry{basic\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em height.1ex}surface/1 (prop)}{4}
-\unnumbsubsubsecentry{surface/1 (prop)}{5}
-\unnumbsubsubsecentry{surface\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em height.1ex}acc/2 (pred)}{7}
-\unnumbsubsubsecentry{h\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em height.1ex}line/3 (pred)}{7}
-\unnumbsubsubsecentry{v\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em height.1ex}line/3 (pred)}{8}
-\unnumbsubsubsecentry{v\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em height.1ex}lines/2 (pred)}{9}
-\unnumbsubsubsecentry{v\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em height.1ex}lines\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em height.1ex}aux/3 (pred)}{10}
-\unnumbsubsubsecentry{h\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em height.1ex}sum/2 (pred)}{10}
-\unnumbsubsubsecentry{total\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em height.1ex}charge/2 (pred)}{10}
-\unnumbsubsubsecentry{total\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em height.1ex}charge\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em height.1ex}aux/2 (pred)}{11}
-\unnumbsubsubsecentry{total\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em height.1ex}cells/2 (pred)}{11}
-\unnumbsubsubsecentry{average\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em height.1ex}charge/2 (pred)}{11}
-\unnumbsecentry{Documentation on imports}{12}
+\unnumbsecentry{Introduction}{1}
+\unnumbsubsecentry{Some examples of use:}{2}
+\unnumbsecentry{Operations with surfaces}{2}
+\unnumbsubsecentry{h_line(S,N,C)}{2}
+\unnumbsubsubsecentry{Examples}{3}
+\unnumbsubsecentry{v_line(S,N,C)}{4}
+\unnumbsubsubsecentry{Examples}{4}
+\unnumbsubsecentry{v_lines(S, C)}{5}
+\unnumbsubsubsecentry{Examples}{5}
+\unnumbsubsecentry{total_charge(S,T)}{5}
+\unnumbsubsubsecentry{Examples}{5}
+\unnumbsubsecentry{average_charge(S,A)}{6}
+\unnumbsubsubsecentry{Examples}{6}
+\unnumbsecentry{Usage and interface}{7}
+\unnumbsecentry{Documentation on exports}{7}
+\unnumbsubsubsecentry{author\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em height.1ex}data/4 (pred)}{7}
+\unnumbsubsubsecentry{charge/1 (prop)}{7}
+\unnumbsubsubsecentry{my\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em height.1ex}list/1 (prop)}{7}
+\unnumbsubsubsecentry{my\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em height.1ex}length/2 (pred)}{8}
+\unnumbsubsubsecentry{get/3 (pred)}{8}
+\unnumbsubsubsecentry{my\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em height.1ex}append/3 (pred)}{8}
+\unnumbsubsubsecentry{f/2 (pred)}{8}
+\unnumbsubsubsecentry{nat\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em height.1ex}num/1 (prop)}{9}
+\unnumbsubsubsecentry{equal/2 (pred)}{9}
+\unnumbsubsubsecentry{my\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em height.1ex}plus/3 (pred)}{10}
+\unnumbsubsubsecentry{my\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em height.1ex}minus/3 (pred)}{10}
+\unnumbsubsubsecentry{my\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em height.1ex}less/2 (pred)}{10}
+\unnumbsubsubsecentry{div/3 (pred)}{10}
+\unnumbsubsubsecentry{basic\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em height.1ex}surface/1 (prop)}{11}
+\unnumbsubsubsecentry{surface/1 (prop)}{11}
+\unnumbsubsubsecentry{surface\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em height.1ex}acc/2 (pred)}{11}
+\unnumbsubsubsecentry{h\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em height.1ex}line/3 (pred)}{12}
+\unnumbsubsubsecentry{v\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em height.1ex}line/3 (pred)}{12}
+\unnumbsubsubsecentry{v\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em height.1ex}lines/2 (pred)}{12}
+\unnumbsubsubsecentry{v\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em height.1ex}lines\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em height.1ex}aux/3 (pred)}{13}
+\unnumbsubsubsecentry{h\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em height.1ex}sum/2 (pred)}{13}
+\unnumbsubsubsecentry{total\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em height.1ex}charge/2 (pred)}{13}
+\unnumbsubsubsecentry{total\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em height.1ex}charge\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em height.1ex}aux/2 (pred)}{14}
+\unnumbsubsubsecentry{total\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em height.1ex}cells/2 (pred)}{14}
+\unnumbsubsubsecentry{average\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em height.1ex}charge/2 (pred)}{14}
+\unnumbsecentry{Documentation on imports}{14}

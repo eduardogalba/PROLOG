@@ -2,7 +2,7 @@
 \input texinfo @c -*- texinfo -*-
 @comment %**start of header
 @setfilename code
-@settitle PROLOG: Practica 1
+@settitle Pure Logic Programming: Practise 1
 @comment @paragraphindent 0
 @setchapternewpage odd
 @comment @footnotestyle separate
@@ -22,7 +22,7 @@
 @iftex
 
 @titlepage
-@title PROLOG: Practica 1
+@title Pure Logic Programming: Practise 1
 @comment @font@authorrm=cmbx10 scaled @magstep2
 @author Eduardo Gil Alba, z170238
 @comment Copyright page
@@ -38,7 +38,7 @@
 
 
 @node Top, code, (dir), (dir)
-@top PROLOG- Practica 1
+@top Pure Logic Programming- Practise 1
 @end ifinfo
 @menu
 * code::

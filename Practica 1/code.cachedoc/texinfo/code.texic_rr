@@ -1,4 +1,4 @@
 filetype(module).
-main_title([[string_esc("PROLOG: Practica 1")]]).
-sect([level(0)],global_label("PROLOG: Practica 1"),[string_esc("PROLOG: Practica 1")]).
+main_title([[string_esc("Pure Logic Programming: Practise 1")]]).
+sect([level(0)],global_label("Pure Logic Programming: Practise 1"),[string_esc("Pure Logic Programming: Practise 1")]).
 refs_link(codeintro).
