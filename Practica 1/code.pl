@@ -1,5 +1,5 @@
-:- module(_,_,[pure,assertions,regtypes]).
-%:- module(_,_,[assertions,regtypes]).
+%:- module(_,_,[pure,assertions,regtypes]).
+:- module(_,_,[assertions,regtypes]).
 % :- module(_,_,[]).           % For pure LP, depth-first search rule
 %:- module(_,_,['sr/bfall']).   % For pure LP, breadth-first search rule, all predicates
 
@@ -50,8 +50,8 @@ the length of the horizontal lines.
 @begin{enumerate}
 @item Check if a @prop{basic_surface/1} is correct:
 @begin{verbatim}
-
-  ?- basic_surface([[+++,+++++++,0,+], 
+```ciao
+?- basic_surface([[+++,+++++++,0,+], 
               [+++++++,+++,0,+,++++], 
               [+++,0], 
               [+++,+++++++,0], 
@@ -60,7 +60,8 @@ the length of the horizontal lines.
               [+++++++,+++,0]]).
 
   yes
-  ?- 
+?-
+``` 
 @end{verbatim}
 @item Check if a @prop{surface/1} is correct:
 @begin{verbatim}
