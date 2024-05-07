@@ -38,6 +38,8 @@ author_data('Gil', 'Alba', 'Eduardo', 'Z170238').
 :- doc(author, "Eduardo Gil Alba").
 :- doc(module, "").
 
+%---------------------------------------------------------------------------------%
+
 :- prop arbol(T)
     #"@var{T} is a tree.".
 
@@ -49,7 +51,8 @@ arbol(arbol4).
 :- pred lista_de_arboles(LT) 
     #"@var{LT} is a list of trees on the state".
 
-lista_de_arboles([arbol1, arbol2, arbol3, arbol4]).
+lista_de_arboles(LT) :-
+    setof(X,arbol(X),LT).
 
 :- pred de_pozo_a_regar_arbol(A,DA,NV,ND) :: (arbol(A), number(DA), number(NV), number(ND)).
 
@@ -86,3 +89,13 @@ regar_otro_arbol(A,NA,V,NV,D,ND) :-
     camino_arbol_arbol(NA, A, T), 
     !,
     ND is D + T.
+
+%------------------------------------------------------------------------------------%
+% TESTS DINAMICOS
+anadir_camino_pozo(A,D) :- assert(camino_arbol_pozo(A,D)).
+eliminar_camino_pozo(A,D) :- retract(camino_arbol_pozo(A,D)).
+anadir_camino_arbol(A1,A2,D) :- assert(camino_arbol_arbol(A1,A2,D)).
+eliminar_camino_arbol(A1,A2,D) :- retract(camino_arbol_arbol(A1,A2,D)).
+anadir_capacidad(C) :- assert(capacidad(C)).
+eliminar_capacidad() :- retract(capacidad(C)).
+%------------------------------------------------------------------------------------%
