@@ -27,7 +27,7 @@ necesita( arbol4 , 4 ).
 :- dynamic(capacidad/1).
 % Capacidad del cubo.
 :- prop capacidad(C) :: (number(C)).
-capacidad(11).
+capacidad(5).
 
 %----------------------------------------------------------------------------------%
 :- doc(author_data/4,"Defines authors in Deliverit system.").
@@ -112,8 +112,48 @@ regar_otro_arbol(A,NA,V,NV,D,ND) :-
     : (A = arbol2, NA = arbol1, V = 1, D = 20) + fails
     #"Not enough water to target tree".
 
-:- test (regar_otro_arbol(A,NA,V,NV,D,ND))
-    : ()
+% [3,1,2,4] 0
+% P -> 3 -> 1 -> 2 -> P -> 4 -> P
+% (0) -> (22) -> (41) -> (59) -> (78) -> (112) -> (146)
+% (5) -> (3) -> (1) -> (0) -> (5) -> (1) -> (5)
+% P -> 1 -> 2 -> P
+% [1,2,3,4]
+%  P -> 1 -> 2 -> 3 -> 4 -> P
+
+movimiento_desde_pozo([H], DA, DT) :-
+    de_pozo_a_regar_arbol(H, DA, _, DT).
+
+movimiento_desde_pozo([H|T], DA, DT) :-
+    capacidad(C),
+    necesita(H, V),
+    NV is C - V,
+    movimiento_desde_pozo([H], 0, NT),
+    NA is DA + NT,
+    movimiento_desde_arbol(T, H, NV, NA, DT), !.
+
+% A = 1 T = [2,4] V = 5 DA = 74
+%   1 -> 2 (V = 4 DT = 92) -> 4 (V = 0 DT = 112) -> P DT = 146 
+%
+%
+
+movimiento_desde_arbol([], A, _V, DA, DT) :-
+    movimiento_desde_pozo([A], DA, DT), !.
+
+movimiento_desde_arbol([H|T], A, V, DA, DT) :-
+    necesita(H, V2),
+    V >= V2, !,
+    regar_otro_arbol(A, H, V, NV, DA, ND),
+    movimiento_desde_arbol(T, H, NV, ND, DT).
+
+movimiento_desde_arbol([H|T], A, _V, DA, DT) :-
+    movimiento_desde_pozo([A], 0, N),
+    T1 is DA + N,
+    movimiento_desde_pozo([H], T1, NT),
+    necesita(H, VH),
+    capacidad(C),
+    NV is C - VH,
+    movimiento_desde_arbol(T, H, NV, NT, DT).
+
 %------------------------------------------------------------------------------------%
 % TESTS DINAMICOS
 anadir_camino_pozo(A,D) :- assert(camino_arbol_pozo(A,D)).
