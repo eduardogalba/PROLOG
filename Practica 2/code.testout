@@ -1,0 +1,10 @@
+test_output_db('code#92#96',st(result_id(1,1,1),[],[],true)).
+test_output_error_db('code#92#96',[],[]).
+test_output_db('code#97#101',st(result_id(1,1,1),[],[],true)).
+test_output_error_db('code#97#101',[],[]).
+test_output_db('code#102#105',st(result_id(1,1,1),[],[],true)).
+test_output_error_db('code#102#105',[],[]).
+test_output_db('code#106#109',st(result_id(1,1,1),[],[],true)).
+test_output_error_db('code#106#109',[],[]).
+test_output_db('code#110#113',st(result_id(1,1,1),[],[],true)).
+test_output_error_db('code#110#113',[],[]).

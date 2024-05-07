@@ -90,6 +90,30 @@ regar_otro_arbol(A,NA,V,NV,D,ND) :-
     !,
     ND is D + T.
 
+:- test (regar_otro_arbol(A,NA,V,NV,D,ND))
+    : (A = arbol1, NA = arbol2, V = 10, D = 20)
+    => (ND = 38, NV = 9)
+    #"Correctly use".
+
+:- test (regar_otro_arbol(A,NA,V,NV,D,ND))
+    : (A = arbol2, NA = arbol1, V = 10, D = 20)
+    => (ND = 38, NV = 8)
+    #"Both directions with missing path clause".
+
+:- test (regar_otro_arbol(A,NA,V,NV,D,ND))
+    : (A = arbol5) + fails
+    #"Non existing tree on the state".
+
+:- test (regar_otro_arbol(A,NA,V,NV,D,ND))
+    : (V = 13) + fails
+    #"Volume is over the capacity".
+
+:- test (regar_otro_arbol(A,NA,V,NV,D,ND))
+    : (A = arbol2, NA = arbol1, V = 1, D = 20) + fails
+    #"Not enough water to target tree".
+
+:- test (regar_otro_arbol(A,NA,V,NV,D,ND))
+    : ()
 %------------------------------------------------------------------------------------%
 % TESTS DINAMICOS
 anadir_camino_pozo(A,D) :- assert(camino_arbol_pozo(A,D)).
@@ -97,5 +121,5 @@ eliminar_camino_pozo(A,D) :- retract(camino_arbol_pozo(A,D)).
 anadir_camino_arbol(A1,A2,D) :- assert(camino_arbol_arbol(A1,A2,D)).
 eliminar_camino_arbol(A1,A2,D) :- retract(camino_arbol_arbol(A1,A2,D)).
 anadir_capacidad(C) :- assert(capacidad(C)).
-eliminar_capacidad() :- retract(capacidad(C)).
+eliminar_capacidad(C) :- retract(capacidad(C)).
 %------------------------------------------------------------------------------------%
