@@ -56,6 +56,10 @@ lista_de_arboles(LT) :-
 
 :- pred de_pozo_a_regar_arbol(A,DA,NV,ND) :: (arbol(A), number(DA), number(NV), number(ND)).
 
+/* Asumo que si el robot esta en el pozo, el cubo esta lleno de agua, se comprueba la cantidad
+que necesita el arbol, pero en principio todos los arboles deberian de necesitar menos de 
+la capacidad o nunca seran regados */
+
 de_pozo_a_regar_arbol(A,DA,NV,ND) :-
     arbol(A), 
     capacidad(C),
@@ -63,6 +67,27 @@ de_pozo_a_regar_arbol(A,DA,NV,ND) :-
     NV is C - V,
     camino_arbol_pozo(A, D),
     ND is DA + D.
+
+:- test (de_pozo_a_regar_arbol(A, DA, NV, ND)) 
+    : (A = arbol1, DA = 0)
+    => (NV = 3, ND = 13)
+    #"Correctly use".
+
+:- test (de_pozo_a_regar_arbol(A, DA, NV, ND))
+    : (DA = 0, ND = 22)
+    => (A = arbol3, NV = 3)
+    #"Asking which tree with time passed given".
+
+:- test (de_pozo_a_regar_arbol(A, DA, NV, _))
+    : (DA = 0, NV = 3)
+    => (A = arbol1 ; A = arbol3, ND = 13 ; ND = 22)
+    #"Asking which tree with new volume water given".
+
+:- test (de_pozo_a_regar_arbol(A, _, _, _))
+    : (A = arbol5) + fails
+    #"Non existing tree on the state given".
+
+
 
 :- pred regar_otro_arbol(A,NA,V,NV,D,ND) :: (arbol(A),arbol(NA),number(V),number(NV),number(D),number(ND)).
 
@@ -92,12 +117,12 @@ regar_otro_arbol(A,NA,V,NV,D,ND) :-
 
 :- test (regar_otro_arbol(A,NA,V,NV,D,ND))
     : (A = arbol1, NA = arbol2, V = 10, D = 20)
-    => (ND = 38, NV = 9)
+    => (ND = 38, NV = 9) + not_fails
     #"Correctly use".
 
 :- test (regar_otro_arbol(A,NA,V,NV,D,ND))
     : (A = arbol2, NA = arbol1, V = 10, D = 20)
-    => (ND = 38, NV = 8)
+    => (ND = 38, NV = 8) + not_fails
     #"Both directions with missing path clause".
 
 :- test (regar_otro_arbol(A,NA,V,NV,D,ND))
@@ -164,14 +189,14 @@ trayectoria_valida(A, D, T) :-
     movimiento_desde_pozo(T, 0, D).
 
 
-min_list( [H], H).
-min_list([H,K|T],M) :- H =< K, min_list([H|T],M). 
-min_list([H,K|T],M) :- H > K,  min_list([K|T],M).
+max_list( [H], H).
+max_list([H,K|T],M) :- H >= K, !, max_list([H|T],M). 
+max_list([H,K|T],M) :- H < K,  max_list([K|T],M).
 
 riego(T, D) :-
     lista_de_arboles(LT),
     findall(D1, trayectoria_valida(LT, D1, _), S),
-    min_list(S, D),
+    max_list(S, D),
     nth(N, S, D),
     findall(T1, trayectoria_valida(LT, _, T1), S2),
     nth(N, S2, T).

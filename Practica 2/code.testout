@@ -1,10 +1,19 @@
-test_output_db('code#92#96',st(result_id(1,1,1),[],[],true)).
-test_output_error_db('code#92#96',[],[]).
-test_output_db('code#97#101',st(result_id(1,1,1),[],[],true)).
-test_output_error_db('code#97#101',[],[]).
-test_output_db('code#102#105',st(result_id(1,1,1),[],[],true)).
-test_output_error_db('code#102#105',[],[]).
-test_output_db('code#106#109',st(result_id(1,1,1),[],[],true)).
-test_output_error_db('code#106#109',[],[]).
-test_output_db('code#110#113',st(result_id(1,1,1),[],[],true)).
-test_output_error_db('code#110#113',[],[]).
+test_output_db('code#70#74',st(result_id(1,1,1),[],[],true)).
+test_output_error_db('code#70#74',[],[]).
+test_output_db('code#75#79',st(result_id(1,1,1),[],[],true)).
+test_output_error_db('code#75#79',[],[]).
+test_output_db('code#80#84',st(result_id(1,1,1),[],[],true)).
+test_output_db('code#80#84',st(result_id(1,1,2),[],[],true)).
+test_output_error_db('code#80#84',[],[]).
+test_output_db('code#85#88',st(result_id(1,1,1),[],[],true)).
+test_output_error_db('code#85#88',[],[]).
+test_output_db('code#117#121',st(result_id(1,1,1),[rtcheck(comp,regar_otro_arbol(A,B,C,D,E,F),['A'=arbol1,'D'=20,'NA'=arbol2,'ND'=_,'NV'=_,'V'=10],not_fails,[fails],[predloc(regar_otro_arbol(A,B,C,D,E,F),loc('/home/lumbalu/PROLOG/repo/PROLOG/Practica 2/code.pl',93,104)),asrloc(loc('/home/lumbalu/PROLOG/repo/PROLOG/Practica 2/code.pl',117,121))])],[],rtcheck_error)).
+test_output_error_db('code#117#121',[],[]).
+test_output_db('code#122#126',st(result_id(1,1,1),[rtcheck(comp,regar_otro_arbol(A,B,C,D,E,F),['A'=arbol2,'D'=20,'NA'=arbol1,'ND'=_,'NV'=_,'V'=10],not_fails,[fails],[predloc(regar_otro_arbol(A,B,C,D,E,F),loc('/home/lumbalu/PROLOG/repo/PROLOG/Practica 2/code.pl',93,104)),asrloc(loc('/home/lumbalu/PROLOG/repo/PROLOG/Practica 2/code.pl',122,126))])],[],rtcheck_error)).
+test_output_error_db('code#122#126',[],[]).
+test_output_db('code#127#130',st(result_id(1,1,1),[],[],true)).
+test_output_error_db('code#127#130',[],[]).
+test_output_db('code#131#134',st(result_id(1,1,1),[],[],true)).
+test_output_error_db('code#131#134',[],[]).
+test_output_db('code#135#138',st(result_id(1,1,1),[],[],true)).
+test_output_error_db('code#135#138',[],[]).
