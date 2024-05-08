@@ -154,6 +154,28 @@ movimiento_desde_arbol([H|T], A, _V, DA, DT) :-
     NV is C - VH,
     movimiento_desde_arbol(T, H, NV, NT, DT).
 
+permute([], []).
+permute(List, [X|Permuted]) :-
+    select(X, List, Rest),
+    permute(Rest, Permuted).
+
+trayectoria_valida(A, D, T) :-
+    permute(A, T), 
+    movimiento_desde_pozo(T, 0, D).
+
+
+min_list( [H], H).
+min_list([H,K|T],M) :- H =< K, min_list([H|T],M). 
+min_list([H,K|T],M) :- H > K,  min_list([K|T],M).
+
+riego(T, D) :-
+    lista_de_arboles(LT),
+    findall(D1, trayectoria_valida(LT, D1, _), S),
+    min_list(S, D),
+    nth(N, S, D),
+    findall(T1, trayectoria_valida(LT, _, T1), S2),
+    nth(N, S2, T).
+    
 %------------------------------------------------------------------------------------%
 % TESTS DINAMICOS
 anadir_camino_pozo(A,D) :- assert(camino_arbol_pozo(A,D)).
