@@ -29,7 +29,7 @@ necesita( arbol4 , 4 ).
 :- dynamic(capacidad/1).
 % Capacidad del cubo.
 :- prop capacidad(C) :: (number(C)).
-capacidad(10).
+capacidad(5).
 
 %----------------------------------------------------------------------------------%
 :- doc(author_data/4,"Defines authors in Deliverit system.").
@@ -74,6 +74,17 @@ It's essential to note that state descriptions are solely based on predicate rep
 ensuring consistency and compatibility with the implemented predicates.").
 
 %---------------------------------------------------------------------------------%
+% OPERACIONES CON LISTAS
+is_set([]).
+is_set([H|T]) :-
+    \+ member(H, T),  
+    is_set(T). 
+
+permute([], []).
+permute(LT, [H|P]) :-
+    select(H, LT, T),
+    permute(T, P).
+%---------------------------------------------------------------------------------%
 
 :- prop arbol(T)
     #" A property, defined as follows:
@@ -109,16 +120,16 @@ de_pozo_a_regar_arbol(A,DA,NV,ND) :-
 
 :- test (de_pozo_a_regar_arbol(A, DA, NV, ND)) 
     : (A = arbol1, DA = 0)
-    => (NV = 3, ND = 13)
+    => (NV = 8, ND = 13)
     #"Correctly use".
 
 :- test (de_pozo_a_regar_arbol(A, DA, NV, ND))
     : (DA = 0, ND = 22)
-    => (A = arbol3, NV = 3)
+    => (A = arbol3, NV = 8)
     #"Asking which tree with time passed given".
 
 :- test (de_pozo_a_regar_arbol(A, DA, NV, _))
-    : (DA = 0, NV = 3)
+    : (DA = 0, NV = 8)
     => (A = arbol1 ; A = arbol3, ND = 13 ; ND = 22)
     #"Asking which tree with new volume water given".
 
@@ -135,8 +146,6 @@ de_pozo_a_regar_arbol(A,DA,NV,ND) :-
 regar_otro_arbol(A,NA,V,NV,D,ND) :-
     arbol(A),
     arbol(NA),
-    capacidad(C),
-    V =< C,
     necesita(NA, N),
     V >= N,
     NV is V - N,
@@ -147,8 +156,6 @@ regar_otro_arbol(A,NA,V,NV,D,ND) :-
 regar_otro_arbol(A,NA,V,NV,D,ND) :-
     arbol(A),
     arbol(NA),
-    capacidad(C),
-    V =< C,
     necesita(NA, N),
     V >= N,
     NV is V - N,
@@ -192,13 +199,25 @@ regar_otro_arbol(A,NA,V,NV,D,ND) :-
 movimiento_desde_pozo([H], DA, DT) :-
     de_pozo_a_regar_arbol(H, DA, _, DT).
 
-movimiento_desde_pozo([H|T], DA, DT) :-
+movimiento_desde_pozo([H|[K|T]], DA, DT) :-
+    is_set([H|[K|T]]),
     capacidad(C),
+    camino_arbol_arbol(H,K,_), !,
     necesita(H, V),
     NV is C - V,
     movimiento_desde_pozo([H], 0, NT),
     NA is DA + NT,
-    movimiento_desde_arbol(T, H, NV, NA, DT), !.
+    movimiento_desde_arbol([K|T], H, NV, NA, DT), !.
+
+movimiento_desde_pozo([H|[K|T]], DA, DT) :-
+    is_set([H|[K|T]]),
+    capacidad(C),
+    camino_arbol_arbol(K,H,_), !,
+    necesita(H, V),
+    NV is C - V,
+    movimiento_desde_pozo([H], 0, NT),
+    NA is DA + NT,
+    movimiento_desde_arbol([K|T], H, NV, NA, DT), !.
 
 % A = 1 T = [2,4] V = 5 DA = 74
 %   1 -> 2 (V = 4 DT = 92) -> 4 (V = 0 DT = 112) -> P DT = 146 
@@ -221,16 +240,39 @@ movimiento_desde_arbol([H|T], A, V, DA, DT) :-
 movimiento_desde_arbol([H|T], A, _V, DA, DT) :-
     movimiento_desde_pozo([A], 0, N),
     T1 is DA + N,
-    movimiento_desde_pozo([H], T1, NT),
+    movimiento_desde_pozo([H], T1, NT), !,
     necesita(H, VH),
     capacidad(C),
     NV is C - VH,
     movimiento_desde_arbol(T, H, NV, NT, DT).
 
-permute([], []).
-permute(List, [X|Permuted]) :-
-    select(X, List, Rest),
-    permute(Rest, Permuted).
+:- test (movimiento_desde_arbol(T,A,V,DA,DT))
+    : (T = [arbol1], A = arbol2, V = 10, DA = 20) + not_fails
+    #"Test 6.1: De un árbol a otro".
+
+:-test (movimiento_desde_arbol(T,A,V,DA,DT))
+    : (T = [arbol2], A = arbol1, V = 10, DA = 20) + not_fails
+    #"Test 6.2: De un árbol a otro (en sentido inverso)".
+
+:- test (movimiento_desde_arbol(T,A,V,DA,DT))
+    : (T = [arbol3], A = arbol1, V = 10, DA = 20) + not_fails
+    #"Test 6.3: De un árbol a otro".
+
+:- test (movimiento_desde_arbol(T,A,V,DA,DT))
+    : (T = [arbol1,arbol3], A = arbol2, V = 10, DA = 20) + not_fails
+    #"Test 6.5: De un árbol a otros dos".
+
+:- test (movimiento_desde_arbol(T,A,V,DA,DT))
+    : (T = [arbol1,arbol3,arbol4], A = arbol2, V = 10, DA = 20) + not_fails
+    #"Test 6.6: De un árbol a los otros tres".
+
+:- test (movimiento_desde_arbol(T,A,V,DA,DT))
+    : (T = [arbol1,arbol3,arbol4], A = arbol2, V = 8, DA = 20) + not_fails
+    #"Test 6.7: De un árbol a los otros tres".
+
+:- test (movimiento_desde_arbol(T,A,V,DA,DT))
+    : (T = [arbol4,arbol3,arbol1], A = arbol2, V = 0, DA = 20) + not_fails
+    #"Test 6.8: De un árbol a los otros tres".
 
 :- pred (trayectoria_valida(A,D,T)) 
     :: (lista_de_arboles(A), number(D), lista_de_arboles(T))
@@ -257,7 +299,6 @@ riego(T, D) :-
     nth(N, S, D),
     findall(T1, trayectoria_valida(LT, _, T1), S2),
     nth(N, S2, T).
-    
 %------------------------------------------------------------------------------------%
 % TESTS DINAMICOS
 anadir_camino_pozo(A,D) :- assert(camino_arbol_pozo(A,D)).
