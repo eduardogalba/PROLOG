@@ -184,6 +184,30 @@ regar_otro_arbol(A,NA,V,NV,D,ND) :-
     : (A = arbol2, NA = arbol1, V = 1, D = 20) + fails
     #"Not enough water to target tree".
 
+:- test (movimiento_desde_pozo(T, DA, DT)) 
+    : (T = [arbol2,arbol1], DA = 20) + not_fails
+    #"Test 5.1: De un árbol a otro".
+
+:- test (movimiento_desde_pozo(T, DA, DT)) 
+    : (T = [arbol1,arbol4], DA = 20) + fails
+    #"Test 5.4: De un árbol a otro, movimiento no posible".
+
+:- test (movimiento_desde_pozo(T, DA, DT)) 
+    : (T = [arbol2,arbol1,arbol3], DA = 20) + not_fails
+    #"Test 5.5: De un árbol a otros dos".
+
+:- test (movimiento_desde_pozo(T, DA, DT)) 
+    : (T = [arbol2,arbol1,arbol3,arbol4], DA = 20) + not_fails
+    #"Test 5.6: De un árbol a los otros tres".
+
+:- test (movimiento_desde_pozo(T, DA, DT)) 
+    : (T = [arbol2,arbol1,arbol4,arbol3], DA = 20) + fails
+    #"Test 5.7: Movimiento no posible".
+
+:- test (movimiento_desde_pozo(T, DA, DT)) 
+    : (T = [arbol2,arbol4,arbol3,arbol1], DA = 20) + not_fails
+    #"Test 5.8: De un árbol a los otros tres".
+
 % [3,1,2,4] 0
 % P   ->  3   ->  1   ->  2   ->  P   ->  4    ->  P
 % (0) -> (22) -> (41) -> (59) -> (78) -> (112) -> (146)
@@ -273,6 +297,10 @@ movimiento_desde_arbol([H|T], A, _V, DA, DT) :-
 :- test (movimiento_desde_arbol(T,A,V,DA,DT))
     : (T = [arbol4,arbol3,arbol1], A = arbol2, V = 0, DA = 20) + not_fails
     #"Test 6.8: De un árbol a los otros tres".
+
+:- test (movimiento_desde_arbol(T,A,V,DA,DT))
+    : (T = [arbol1,arbol3,arbol4], A = arbol2, V = 7, DA = 20) + fails
+    #"Test 6.11: Movimiento no posible".
 
 :- pred (trayectoria_valida(A,D,T)) 
     :: (lista_de_arboles(A), number(D), lista_de_arboles(T))
