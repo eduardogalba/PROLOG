@@ -7,13 +7,13 @@ test_output_db('code#80#84',st(result_id(1,1,2),[],[],true)).
 test_output_error_db('code#80#84',[],[]).
 test_output_db('code#85#88',st(result_id(1,1,1),[],[],true)).
 test_output_error_db('code#85#88',[],[]).
-test_output_db('code#117#121',st(result_id(1,1,1),[rtcheck(comp,regar_otro_arbol(A,B,C,D,E,F),['A'=arbol1,'D'=20,'NA'=arbol2,'ND'=_,'NV'=_,'V'=10],not_fails,[fails],[predloc(regar_otro_arbol(A,B,C,D,E,F),loc('/home/lumbalu/PROLOG/repo/PROLOG/Practica 2/code.pl',93,104)),asrloc(loc('/home/lumbalu/PROLOG/repo/PROLOG/Practica 2/code.pl',117,121))])],[],rtcheck_error)).
-test_output_error_db('code#117#121',[],[]).
-test_output_db('code#122#126',st(result_id(1,1,1),[rtcheck(comp,regar_otro_arbol(A,B,C,D,E,F),['A'=arbol2,'D'=20,'NA'=arbol1,'ND'=_,'NV'=_,'V'=10],not_fails,[fails],[predloc(regar_otro_arbol(A,B,C,D,E,F),loc('/home/lumbalu/PROLOG/repo/PROLOG/Practica 2/code.pl',93,104)),asrloc(loc('/home/lumbalu/PROLOG/repo/PROLOG/Practica 2/code.pl',122,126))])],[],rtcheck_error)).
-test_output_error_db('code#122#126',[],[]).
-test_output_db('code#127#130',st(result_id(1,1,1),[],[],true)).
-test_output_error_db('code#127#130',[],[]).
-test_output_db('code#131#134',st(result_id(1,1,1),[],[],true)).
-test_output_error_db('code#131#134',[],[]).
-test_output_db('code#135#138',st(result_id(1,1,1),[],[],true)).
-test_output_error_db('code#135#138',[],[]).
+test_output_db('code#116#120',st(result_id(1,1,1),[],[],true)).
+test_output_error_db('code#116#120',[],[]).
+test_output_db('code#121#125',st(result_id(1,1,1),[],[],true)).
+test_output_error_db('code#121#125',[],[]).
+test_output_db('code#126#129',st(result_id(1,1,1),[],[],true)).
+test_output_error_db('code#126#129',[],[]).
+test_output_db('code#130#133',st(result_id(1,1,1),[],[],true)).
+test_output_error_db('code#130#133',[],[]).
+test_output_db('code#134#137',st(result_id(1,1,1),[],[],true)).
+test_output_error_db('code#134#137',[],[]).

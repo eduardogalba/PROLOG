@@ -18,7 +18,9 @@ camino_arbol_pozo( arbol3 , 22 ).
 camino_arbol_pozo( arbol4 , 34 ).
 :- dynamic(necesita/2).
 % Cantidad de agua necesaria para regar cada arbol.
-:- pred necesita(T, D) :: (arbol(T), number(D)).
+:- pred necesita(T, D) 
+    :: (arbol(T), number(D))
+    #"@includedef{necesita/2}".
 
 necesita( arbol1 , 2 ).
 necesita( arbol2 , 1 ).
@@ -27,34 +29,71 @@ necesita( arbol4 , 4 ).
 :- dynamic(capacidad/1).
 % Capacidad del cubo.
 :- prop capacidad(C) :: (number(C)).
-capacidad(5).
+capacidad(10).
 
 %----------------------------------------------------------------------------------%
 :- doc(author_data/4,"Defines authors in Deliverit system.").
 
 author_data('Gil', 'Alba', 'Eduardo', 'Z170238').
 
-:- doc(title, "ISO Prolog: Practise 2").
+:- doc(title, "ISO Prolog Programming: Practise 2").
 :- doc(author, "Eduardo Gil Alba").
-:- doc(module, "").
+:- doc(module, "
+@section{Introduction}
+On the state, daily watering of trees is essential. To automate this task, the state owner has
+procured a robotic device capable of autonomously watering trees and preparing soil for new
+plantings. This robotic system initiates operation at dawn, tasked with watering each tree
+individually. Each tree is identified by a constant Prolog term and requires a specific 
+amount of water, denoted by a binary predicate, indicating if tree T needs C units of water
+daily. @p
+The watering procedure is as follows: every morning, the robot positions itself by the well.
+Upon activation, it fills its initially empty bucket with water from the well, then proceeds 
+to water each tree sequentially. If the bucket empties before all trees are watered, the 
+robot returns to the well, refills the bucket, and resumes watering. Once all trees are 
+watered or the bucket empties again, the robot refills the bucket if necessary and continues 
+the task. Upon completion, it notifies the state owner telematically.@p
+Additionally, the robot must adhere to the following rules: @p
+@begin{enumerate}
+@item It must never attempt to water a tree without sufficient water in the bucket, constrained 
+by the bucket's capacity (determined by the predicate).
+@item Paths connecting trees and the well vary in length, each taking a specific time to 
+traverse. These paths are represented by ternary and binary predicates, ensuring efficient 
+movement.
+@item Due to potential obstacles (e.g., ponds, buildings, fences), not all points on the 
+state may be connected. Consequently, the robot may encounter inaccessible areas.
+@item The robot can return to the well only when the bucket is empty, except after 
+completing all watering cycles.
+@item Bucket refilling at the well always takes a fixed amount of time.
+@item Each tree must be visited and watered exactly once during the task execution.
+@item All distances, time units, and water quantities involved are represented as integers.
+@end{enumerate}
+Moreover, the robot, simulating artificial intelligence, anticipates future tasks such as 
+digging holes for new tree planting, prompting it to prolong watering tasks while adhering 
+to the aforementioned rules. @p
+It's essential to note that state descriptions are solely based on predicate representations, 
+ensuring consistency and compatibility with the implemented predicates.").
 
 %---------------------------------------------------------------------------------%
 
 :- prop arbol(T)
-    #"@var{T} is a tree.".
+    #" A property, defined as follows:
+    @includedef{arbol/1}
+    @var{T} is a tree.".
 
 arbol(arbol1).
 arbol(arbol2).
 arbol(arbol3).
 arbol(arbol4).
 
-:- pred lista_de_arboles(LT) 
+:- prop lista_de_arboles(LT) 
     #"@var{LT} is a list of trees on the state".
 
 lista_de_arboles(LT) :-
     setof(X,arbol(X),LT).
 
-:- pred de_pozo_a_regar_arbol(A,DA,NV,ND) :: (arbol(A), number(DA), number(NV), number(ND)).
+:- pred de_pozo_a_regar_arbol(A,DA,NV,ND) 
+    :: (arbol(A), number(DA), number(NV), number(ND))
+    #"@includedef{de_pozo_a_regar_arbol/4}".
 
 /* Asumo que si el robot esta en el pozo, el cubo esta lleno de agua, se comprueba la cantidad
 que necesita el arbol, pero en principio todos los arboles deberian de necesitar menos de 
@@ -89,7 +128,9 @@ de_pozo_a_regar_arbol(A,DA,NV,ND) :-
 
 
 
-:- pred regar_otro_arbol(A,NA,V,NV,D,ND) :: (arbol(A),arbol(NA),number(V),number(NV),number(D),number(ND)).
+:- pred regar_otro_arbol(A,NA,V,NV,D,ND) 
+    :: (arbol(A),arbol(NA),number(V),number(NV),number(D),number(ND))
+    #"@includedef{regar_otro_arbol/6}".
 
 regar_otro_arbol(A,NA,V,NV,D,ND) :-
     arbol(A),
@@ -112,17 +153,16 @@ regar_otro_arbol(A,NA,V,NV,D,ND) :-
     V >= N,
     NV is V - N,
     camino_arbol_arbol(NA, A, T), 
-    !,
     ND is D + T.
 
 :- test (regar_otro_arbol(A,NA,V,NV,D,ND))
-    : (A = arbol1, NA = arbol2, V = 10, D = 20)
-    => (ND = 38, NV = 9) + not_fails
+    : (A = arbol1, NA = arbol2, V = 4, D = 20)
+    => (ND = 38, NV = 3) + not_fails
     #"Correctly use".
 
 :- test (regar_otro_arbol(A,NA,V,NV,D,ND))
-    : (A = arbol2, NA = arbol1, V = 10, D = 20)
-    => (ND = 38, NV = 8) + not_fails
+    : (A = arbol2, NA = arbol1, V = 4, D = 20)
+    => (ND = 38, NV = 2) + not_fails
     #"Both directions with missing path clause".
 
 :- test (regar_otro_arbol(A,NA,V,NV,D,ND))
@@ -138,12 +178,16 @@ regar_otro_arbol(A,NA,V,NV,D,ND) :-
     #"Not enough water to target tree".
 
 % [3,1,2,4] 0
-% P -> 3 -> 1 -> 2 -> P -> 4 -> P
+% P   ->  3   ->  1   ->  2   ->  P   ->  4    ->  P
 % (0) -> (22) -> (41) -> (59) -> (78) -> (112) -> (146)
-% (5) -> (3) -> (1) -> (0) -> (5) -> (1) -> (5)
+% (5) -> (3)  -> (1)  -> (0)  -> (5)  -> (1)   -> (5)
 % P -> 1 -> 2 -> P
 % [1,2,3,4]
 %  P -> 1 -> 2 -> 3 -> 4 -> P
+
+:- pred (movimiento_desde_pozo(A, DA, DT)) 
+    :: (lista_de_arboles(A), number(DA), number(DT))
+    #"@includedef{movimiento_desde_pozo/3}".
 
 movimiento_desde_pozo([H], DA, DT) :-
     de_pozo_a_regar_arbol(H, DA, _, DT).
@@ -160,6 +204,10 @@ movimiento_desde_pozo([H|T], DA, DT) :-
 %   1 -> 2 (V = 4 DT = 92) -> 4 (V = 0 DT = 112) -> P DT = 146 
 %
 %
+
+:- pred (movimiento_desde_arbol(T, A, V, DA, DT)) 
+    :: (lista_de_arboles(T), arbol(A), number(V), number(DT))
+    #"@includedef{movimiento_desde_arbol/5}".
 
 movimiento_desde_arbol([], A, _V, DA, DT) :-
     movimiento_desde_pozo([A], DA, DT), !.
@@ -184,6 +232,10 @@ permute(List, [X|Permuted]) :-
     select(X, List, Rest),
     permute(Rest, Permuted).
 
+:- pred (trayectoria_valida(A,D,T)) 
+    :: (lista_de_arboles(A), number(D), lista_de_arboles(T))
+    #"@includedef{trayectoria_valida/3}".
+
 trayectoria_valida(A, D, T) :-
     permute(A, T), 
     movimiento_desde_pozo(T, 0, D).
@@ -192,6 +244,11 @@ trayectoria_valida(A, D, T) :-
 max_list( [H], H).
 max_list([H,K|T],M) :- H >= K, !, max_list([H|T],M). 
 max_list([H,K|T],M) :- H < K,  max_list([K|T],M).
+
+:- pred (riego(T,D)) 
+    : (var(T), var(D)) 
+    => (lista_de_arboles(T), number(D))
+    #"@includedef{riego/2}".
 
 riego(T, D) :-
     lista_de_arboles(LT),
