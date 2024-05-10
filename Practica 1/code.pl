@@ -38,7 +38,18 @@ groups cells by rows, with each element representing a load value. Thus, the abo
 Surfaces can have an arbitrary number of cells in both dimensions. @p
 In order to accomplish this, we define two types of surfaces, both containing load values. We establish @prop{basic_surface/1}
 which must consist of at least one line, with each line containing at least one cell. It is defined by:
-@includedef{basic_surface/1} 
+```ciao_runnable
+:- module(_, _, []).
+my_list([H]) :- charge(H).
+my_list([H|T]) :- 
+   charge(H),
+   my_list(T).
+basic_surface([L]) :-
+    my_list(L).
+basic_surface([L|S2]) :-
+    my_list(L),
+    basic_surface(S2).
+```
 Additionally, we define @prop{surface/1} as above but in addition must ensure that all lines possess the same number of cells. It is defined by:
 @includedef{surface/1}
 As you can see, an auxiliary predicate has been employed, which accepts the size as a term. In each recursion step, it verifies 
@@ -49,8 +60,7 @@ the length of the horizontal lines.
 @subsection{Some examples of use:}
 @begin{enumerate}
 @item Check if a @prop{basic_surface/1} is correct:
-@begin{verbatim}
-```ciao
+```ciao_runnable
 ?- basic_surface([[+++,+++++++,0,+], 
               [+++++++,+++,0,+,++++], 
               [+++,0], 
@@ -58,11 +68,7 @@ the length of the horizontal lines.
               [+++++++,0,+++,+,++++], 
               [+++], 
               [+++++++,+++,0]]).
-
-  yes
-?-
 ``` 
-@end{verbatim}
 @item Check if a @prop{surface/1} is correct:
 @begin{verbatim}
   ?- surface([[+++,+++++++,0,+,++++,0], 

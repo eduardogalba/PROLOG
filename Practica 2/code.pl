@@ -46,6 +46,21 @@ plantings. This robotic system initiates operation at dawn, tasked with watering
 individually. Each tree is identified by a constant Prolog term and requires a specific 
 amount of water, denoted by a binary predicate, indicating if tree T needs C units of water
 daily. @p
+@begin{verbatim}
+💧🌳                      🌳💧
+ 2 1 ________18____________ 2 1
+   |\\                    / |
+   | \\                  /  |
+   |  13               19  |
+   |   \\____      ____/    |
+  19     ___ ⛲🤖____     15
+   |    /             \\    |
+   |  22               \\   |
+   |  /                 34 |
+   | /                   \\ |
+💧🌳                      🌳💧
+ 2 3 _________8___________ 4 4
+@end{verbatim}
 The watering procedure is as follows: every morning, the robot positions itself by the well.
 Upon activation, it fills its initially empty bucket with water from the well, then proceeds 
 to water each tree sequentially. If the bucket empties before all trees are watered, the 
