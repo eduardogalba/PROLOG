@@ -99,6 +99,10 @@ permute([], []).
 permute(LT, [H|P]) :-
     select(H, LT, T),
     permute(T, P).
+
+max_list( [H], H).
+max_list([H,K|T],M) :- H >= K, !, max_list([H|T],M). 
+max_list([H,K|T],M) :- H < K,  max_list([K|T],M).
 %---------------------------------------------------------------------------------%
 
 :- prop arbol(T)
@@ -111,11 +115,65 @@ arbol(arbol2).
 arbol(arbol3).
 arbol(arbol4).
 
+:- test (arbol(A))
+    :(A = arbol1) + not_fails
+    #"Test 1.1: Arbol existente en la finca(1)".
+
+:- test (arbol(A))
+    :(A =arbol2) + not_fails
+    #"Test 1.2: Arbol existente en la finca(2)".
+
+:- test (arbol(A))
+    :(A = arbol3) + not_fails
+    #"Test 1.3: Arbol existente en la finca(3)".
+
+:- test (arbol(A))
+    :(A = arbol4) + not_fails
+    #"Test 1.4: Arbol existente en la finca(4)".
+
+:- test (arbol(A))
+    :(A = arbol5) + fails
+    #"Test 1.5: No existe ese arbol en la finca (1)".
+
+:- test (arbol(A))
+    :(A = arbol6) + fails
+    #"Test 1.6: No existe ese arbol en la finca (2)".
+
+
+
 :- prop lista_de_arboles(LT) 
     #"@var{LT} is a list of trees on the state".
 
 lista_de_arboles(LT) :-
     setof(X,arbol(X),LT).
+
+:- test (lista_de_arboles(LT))
+    : (LT = [arbol1, arbol2, arbol3, arbol4]) + not_fails
+    #"Test 2.1: Lista ordenada correcta".
+
+:- test (lista_de_arboles(LT))
+    : (LT = [arbol2, arbol1, arbol3, arbol4]) + fails
+    #"Test 2.2: La lista no esta ordenada(1)".
+
+:- test (lista_de_arboles(LT))
+    : (LT = [arbol3, arbol2, arbol1, arbol4]) + fails
+    #"Test 2.3: La lista no esta ordenada(2)".
+
+:- test (lista_de_arboles(LT))
+    : (LT = [arbol1, arbol2, arbol2, arbol4]) + fails
+    #"Test 2.4: La lista tiene duplicados(1)".
+
+:- test (lista_de_arboles(LT))
+    : (LT = [arbol1, arbol2, arbol3, arbol2, arbol4]) + fails
+    #"Test 2.5: La lista tiene duplicados(2)".
+
+:- test (lista_de_arboles(LT))
+    : (LT = [arbol1, arbol2, arbol3, arbol5]) + fails
+    #"Test 2.6: La lista contiene arboles que no existen(1)".
+
+:- test (lista_de_arboles(LT))
+    : (LT = [arbol1, arbol2, arbol3, arbol4, arbol5]) + fails
+    #"Test 2.7: La lista contiene arboles que no existen(2)".
 
 :- pred de_pozo_a_regar_arbol(A,DA,NV,ND) 
     :: (arbol(A), number(DA), number(NV), number(ND))
@@ -136,21 +194,31 @@ de_pozo_a_regar_arbol(A,DA,NV,ND) :-
 :- test (de_pozo_a_regar_arbol(A, DA, NV, ND)) 
     : (A = arbol1, DA = 0)
     => (NV = 3, ND = 13)
-    #"Correctly use".
+    #"Test 3.1: Devuelveme cuanto queda en el cubo y que tiempo ha transcurrido".
 
 :- test (de_pozo_a_regar_arbol(A, DA, NV, ND))
     : (DA = 0, ND = 22)
     => (A = arbol3, NV = 3)
-    #"Asking which tree with time passed given".
+    #"Test 3.2: Arbol visitado si ha transcurrido este tiempo(1)".
+
+:- test (de_pozo_a_regar_arbol(A, DA, NV, ND))
+    : (DA = 0, ND = 19)
+    => (A = arbol2, NV = 4)
+    #"Test 3.3: Arbol visitado si ha transcurrido este tiempo(2)".
 
 :- test (de_pozo_a_regar_arbol(A, DA, NV, _))
     : (DA = 0, NV = 3)
-    => (A = arbol1 ; A = arbol3, ND = 13 ; ND = 22)
-    #"Asking which tree with new volume water given".
+    => (A = arbol1 ; A = arbol3)
+    #"Test 3.4:Arbol visitado si esto me queda en el cubo(1)".
+
+:- test (de_pozo_a_regar_arbol(A, DA, NV, _))
+    : (DA = 0, NV = 1)
+    => (A = arbol4)
+    #"Test 3.5: Arbol visitado si esto me queda en el cubo(2)".
 
 :- test (de_pozo_a_regar_arbol(A, _, _, _))
     : (A = arbol5) + fails
-    #"Non existing tree on the state given".
+    #"Test 3.6: Ve a un arbol que no existe".
 
 
 
@@ -180,45 +248,31 @@ regar_otro_arbol(A,NA,V,NV,D,ND) :-
 :- test (regar_otro_arbol(A,NA,V,NV,D,ND))
     : (A = arbol1, NA = arbol2, V = 4, D = 20)
     => (ND = 38, NV = 3) + not_fails
-    #"Correctly use".
+    #"Test 4.1: De un arbol a otro".
 
 :- test (regar_otro_arbol(A,NA,V,NV,D,ND))
     : (A = arbol2, NA = arbol1, V = 4, D = 20)
     => (ND = 38, NV = 2) + not_fails
-    #"Both directions with missing path clause".
+    #"Test 4.2: De un arbol a otro (camino inverso)".
+
+:- test (regar_otro_arbol(A,NA,V,NV,D,ND))
+    : (A = arbol2, V = 4, D = 20, ND = 32)
+    => (NA = arbol3, NV = 2) + not_fails
+    #"Test 4.3: Arbol visitado si ha transcurrido este tiempo(1)".
+
+:- test (regar_otro_arbol(A,NA,V,NV,D,ND))
+    : (A = arbol4, V = 5, D = 20, ND = 40)
+    => (NA = arbol2, NV = 4) + not_fails
+    #"Test 4.4: Arbol visitado si ha transcurrido este tiempo(2)".
 
 :- test (regar_otro_arbol(A,NA,V,NV,D,ND))
     : (A = arbol5) + fails
-    #"Non existing tree on the state".
-
+    #"Test 4.5: De un arbol a otro que no existe".
 
 :- test (regar_otro_arbol(A,NA,V,NV,D,ND))
     : (A = arbol2, NA = arbol1, V = 1, D = 20) + fails
-    #"Not enough water to target tree".
+    #"Test 4.6: No te queda suficiente agua".
 
-:- test (movimiento_desde_pozo(T, DA, DT)) 
-    : (T = [arbol2,arbol1], DA = 20) + not_fails
-    #"Test 5.1: De un árbol a otro".
-
-:- test (movimiento_desde_pozo(T, DA, DT)) 
-    : (T = [arbol1,arbol4], DA = 20) + fails
-    #"Test 5.4: De un árbol a otro, movimiento no posible".
-
-:- test (movimiento_desde_pozo(T, DA, DT)) 
-    : (T = [arbol2,arbol1,arbol3], DA = 20) + not_fails
-    #"Test 5.5: De un árbol a otros dos".
-
-:- test (movimiento_desde_pozo(T, DA, DT)) 
-    : (T = [arbol2,arbol1,arbol3,arbol4], DA = 20) + not_fails
-    #"Test 5.6: De un árbol a los otros tres".
-
-:- test (movimiento_desde_pozo(T, DA, DT)) 
-    : (T = [arbol2,arbol1,arbol4,arbol3], DA = 20) + fails
-    #"Test 5.7: Movimiento no posible".
-
-:- test (movimiento_desde_pozo(T, DA, DT)) 
-    : (T = [arbol2,arbol4,arbol3,arbol1], DA = 20) + not_fails
-    #"Test 5.8: De un árbol a los otros tres".
 
 % [3,1,2,4] 0
 % P   ->  3   ->  1   ->  2   ->  P   ->  4    ->  P
@@ -255,12 +309,45 @@ movimiento_desde_pozo([H|[K|T]], DA, DT) :-
     NA is DA + NT,
     movimiento_desde_arbol([K|T], H, NV, NA, DT), !.
 
+:- test (movimiento_desde_pozo(T, DA, DT)) 
+    : (T = [arbol2,arbol1], DA = 20) + not_fails
+    #"Test 5.1: De un árbol a otro".
+
+:- test (movimiento_desde_pozo(T, DA, DT)) 
+    : (T = [arbol1,arbol2], DA = 20) + not_fails
+    #"Test 5.2: De un árbol a otro (camino inverso)".
+
+:- test (movimiento_desde_pozo(T, DA, DT)) 
+    : (T = [arbol2,arbol4], DA = 20) + not_fails
+    #"Test 5.3: De un árbol a otro".
+
+:- test (movimiento_desde_pozo(T, DA, DT)) 
+    : (T = [arbol1,arbol4], DA = 20) + fails
+    #"Test 5.4: De un árbol a otro, movimiento no posible".
+
+:- test (movimiento_desde_pozo(T, DA, DT)) 
+    : (T = [arbol2,arbol1,arbol3], DA = 20) + not_fails
+    #"Test 5.5: De un árbol a otros dos".
+
+:- test (movimiento_desde_pozo(T, DA, DT)) 
+    : (T = [arbol2,arbol1,arbol3,arbol4], DA = 20) + not_fails
+    #"Test 5.6: De un árbol a los otros tres".
+
+:- test (movimiento_desde_pozo(T, DA, DT)) 
+    : (T = [arbol2,arbol1,arbol4,arbol3], DA = 20) + fails
+    #"Test 5.7: Movimiento no posible".
+
+:- test (movimiento_desde_pozo(T, DA, DT)) 
+    : (T = [arbol2,arbol4,arbol3,arbol1], DA = 20) + not_fails
+    #"Test 5.8: De un árbol a los otros tres".
+
+
 % A = 1 T = [2,4] V = 5 DA = 74
 %   1 -> 2 (V = 4 DT = 92) -> 4 (V = 0 DT = 112) -> P DT = 146 
 %
 %
 
-:- dynamic(first_call/0).
+:- dynamic(first_tree/0).
 
 
 :- pred (movimiento_desde_arbol(T, A, V, DA, DT)) 
@@ -271,7 +358,7 @@ movimiento_desde_arbol([], A, _V, DA, DT) :-
     movimiento_desde_pozo([A], DA, DT), !.
 
 movimiento_desde_arbol([H|T], A, V, DA, DT) :-
-    (first_call -> 
+    (first_tree -> 
         (necesita(H, V2), V >= V2 -> 
             regar_otro_arbol(A, H, V, NV, DA, ND),
             movimiento_desde_arbol(T, H, NV, ND, DT)
@@ -282,10 +369,10 @@ movimiento_desde_arbol([H|T], A, V, DA, DT) :-
         (necesita(H, V2), V >= V2 -> 
             regar_otro_arbol(A, H, V, NV, DA, ND),
             movimiento_desde_arbol(T, H, NV, ND, DT),
-            assert(first_call)
+            assert(first_tree)
         ;    
             movimiento_desde_arbol_r([H|T],A,V,DA,DT),
-            assert(first_call)
+            assert(first_tree)
         )
     ).
     
@@ -312,6 +399,10 @@ movimiento_desde_arbol_r([H|T], A, _V, DA, DT) :-
     #"Test 6.3: De un árbol a otro".
 
 :- test (movimiento_desde_arbol(T,A,V,DA,DT))
+    : (T = [arbol4], A = arbol1, V = 10, DA = 20) + fails
+    #"Test 6.4: De un árbol a otro, movimiento no posible".
+
+:- test (movimiento_desde_arbol(T,A,V,DA,DT))
     : (T = [arbol1,arbol3], A = arbol2, V = 10, DA = 20) + not_fails
     #"Test 6.5: De un árbol a otros dos".
 
@@ -335,14 +426,46 @@ movimiento_desde_arbol_r([H|T], A, _V, DA, DT) :-
     :: (lista_de_arboles(A), number(D), lista_de_arboles(T))
     #"@includedef{trayectoria_valida/3}".
 
+
+num_solutions(F, N) :-
+    findall(_, F, S),
+    length(S, N).
+
 trayectoria_valida(A, D, T) :-
     permute(A, T), 
     movimiento_desde_pozo(T, 0, D).
 
+:- test (trayectoria_valida(A, D, T))
+    : (A = [arbol1,arbol4]) + fails
+    #"Test 7.5: Dos árboles para los que no hay trayectoria".
 
-max_list( [H], H).
-max_list([H,K|T],M) :- H >= K, !, max_list([H|T],M). 
-max_list([H,K|T],M) :- H < K,  max_list([K|T],M).
+:- test (trayectoria_valida(A, D, T))
+    : (A = [arbol4,arbol1]) + fails
+    #"Test 7.6: Dos árboles para los que no hay trayectoria".
+
+:- test (trayectoria_valida(A, D, T))
+    : (A = [arbol1,arbol2,arbol3,arbol4])
+    => (D=133,T=[arbol1,arbol2,arbol3,arbol4];
+    D=131,T=[arbol1,arbol3,arbol2,arbol4];
+    D=146,T=[arbol2,arbol1,arbol3,arbol4];
+    D=131,T=[arbol2,arbol3,arbol1,arbol4];
+    D=127,T=[arbol2,arbol4,arbol1,arbol3];
+    D=127,T=[arbol2,arbol4,arbol3,arbol1];
+    D=146,T=[arbol3,arbol1,arbol2,arbol4];
+    D=133,T=[arbol3,arbol2,arbol1,arbol4];
+    D=127,T=[arbol4,arbol2,arbol1,arbol3];
+    D=127,T=[arbol4,arbol2,arbol3,arbol1])
+    #"Test 7.8: Trayectoria válida entre los 4 árboles, finca del enunciado (probar 4 soluciones)".
+
+:- test (trayectoria_valida(A, D, T))
+    : (A = [arbol1,arbol2,arbol3,arbol4] )
+    => (num_solutions(trayectoria_valida([arbol1,arbol2,arbol3,arbol4], D, T), 10))
+    #"Test 7.9: Trayectoria válida entre los 4 árboles, finca del enunciado, todas las soluciones (deben ser 10)".
+
+/* :- test (trayectoria_valida(A, D, T))
+    : (D=133,T=[arbol1,arbol2,arbol3,arbol4];
+    D=131,T=[arbol1,arbol3,arbol2,arbol4])
+    #"Test 7.8: Trayectoria válida entre los 4 árboles, finca del enunciado (probar 4 soluciones)". */
 
 :- pred (riego(T,D)) 
     : (var(T), var(D)) 
@@ -356,6 +479,11 @@ riego(T, D) :-
     nth(N, S, D),
     findall(T1, trayectoria_valida(LT, _, T1), S2),
     nth(N, S2, T).
+
+:- test (riego(T, D))
+    => num_solutions(riego(T, D), 2), member(T, [[arbol2,arbol1,arbol3,arbol4],[arbol3,arbol1,arbol2,arbol4]])
+    #"Test 8.2: Generar trayectorias y duraciones, finca del enunciado (al menos 2 soluciones)".
+
 %------------------------------------------------------------------------------------%
 % TESTS DINAMICOS
 anadir_camino_pozo(A,D) :- assert(camino_arbol_pozo(A,D)).
