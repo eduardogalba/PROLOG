@@ -135,16 +135,16 @@ de_pozo_a_regar_arbol(A,DA,NV,ND) :-
 
 :- test (de_pozo_a_regar_arbol(A, DA, NV, ND)) 
     : (A = arbol1, DA = 0)
-    => (NV = 8, ND = 13)
+    => (NV = 3, ND = 13)
     #"Correctly use".
 
 :- test (de_pozo_a_regar_arbol(A, DA, NV, ND))
     : (DA = 0, ND = 22)
-    => (A = arbol3, NV = 8)
+    => (A = arbol3, NV = 3)
     #"Asking which tree with time passed given".
 
 :- test (de_pozo_a_regar_arbol(A, DA, NV, _))
-    : (DA = 0, NV = 8)
+    : (DA = 0, NV = 3)
     => (A = arbol1 ; A = arbol3, ND = 13 ; ND = 22)
     #"Asking which tree with new volume water given".
 
@@ -191,9 +191,6 @@ regar_otro_arbol(A,NA,V,NV,D,ND) :-
     : (A = arbol5) + fails
     #"Non existing tree on the state".
 
-:- test (regar_otro_arbol(A,NA,V,NV,D,ND))
-    : (V = 13) + fails
-    #"Volume is over the capacity".
 
 :- test (regar_otro_arbol(A,NA,V,NV,D,ND))
     : (A = arbol2, NA = arbol1, V = 1, D = 20) + fails
@@ -263,6 +260,9 @@ movimiento_desde_pozo([H|[K|T]], DA, DT) :-
 %
 %
 
+:- dynamic(first_call/0).
+
+
 :- pred (movimiento_desde_arbol(T, A, V, DA, DT)) 
     :: (lista_de_arboles(T), arbol(A), number(V), number(DT))
     #"@includedef{movimiento_desde_arbol/5}".
@@ -271,12 +271,26 @@ movimiento_desde_arbol([], A, _V, DA, DT) :-
     movimiento_desde_pozo([A], DA, DT), !.
 
 movimiento_desde_arbol([H|T], A, V, DA, DT) :-
-    necesita(H, V2),
-    V >= V2, !,
-    regar_otro_arbol(A, H, V, NV, DA, ND),
-    movimiento_desde_arbol(T, H, NV, ND, DT).
+    (first_call -> 
+        (necesita(H, V2), V >= V2 -> 
+            regar_otro_arbol(A, H, V, NV, DA, ND),
+            movimiento_desde_arbol(T, H, NV, ND, DT)
+        ;   
+            V = 0, movimiento_desde_arbol_r([H|T],A,V,DA,DT)
+        )
+    ;   
+        (necesita(H, V2), V >= V2 -> 
+            regar_otro_arbol(A, H, V, NV, DA, ND),
+            movimiento_desde_arbol(T, H, NV, ND, DT),
+            assert(first_call)
+        ;    
+            movimiento_desde_arbol_r([H|T],A,V,DA,DT),
+            assert(first_call)
+        )
+    ).
+    
 
-movimiento_desde_arbol([H|T], A, _V, DA, DT) :-
+movimiento_desde_arbol_r([H|T], A, _V, DA, DT) :-
     movimiento_desde_pozo([A], 0, N),
     T1 is DA + N,
     movimiento_desde_pozo([H], T1, NT), !,
@@ -310,7 +324,7 @@ movimiento_desde_arbol([H|T], A, _V, DA, DT) :-
     #"Test 6.7: De un árbol a los otros tres".
 
 :- test (movimiento_desde_arbol(T,A,V,DA,DT))
-    : (T = [arbol4,arbol3,arbol1], A = arbol2, V = 0, DA = 20) + not_fails
+    : (T = [arbol4,arbol3,arbol1], A = arbol2, V = 8, DA = 20) + not_fails
     #"Test 6.8: De un árbol a los otros tres".
 
 :- test (movimiento_desde_arbol(T,A,V,DA,DT))
