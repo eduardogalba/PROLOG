@@ -93,6 +93,3 @@ test_output_error_db('code#445#458',[],[]).
 test_output_db('code#459#463',st(result_id(1,1,1),[],[],true)).
 test_output_db('code#459#463',st(result_id(1,1,2),[],[],true)).
 test_output_error_db('code#459#463',[],[]).
-test_output_db('code#482#485',st(result_id(1,1,1),[],[],true)).
-test_output_db('code#482#485',st(result_id(1,1,2),[],[],true)).
-test_output_error_db('code#482#485',[],[]).
