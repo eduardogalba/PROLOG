@@ -86,7 +86,272 @@ Moreover, the robot, simulating artificial intelligence, anticipates future task
 digging holes for new tree planting, prompting it to prolong watering tasks while adhering 
 to the aforementioned rules. @p
 It's essential to note that state descriptions are solely based on predicate representations, 
-ensuring consistency and compatibility with the implemented predicates.").
+ensuring consistency and compatibility with the implemented predicates.
+@subsection{Some examples of use:}
+@begin{enumerate}
+@item Check if a @prop{basic_surface/1} is correct:
+```ciao_runnable
+?- basic_surface([[+++,+++++++,0,+], 
+              [+++++++,+++,0,+,++++], 
+              [+++,0], 
+              [+++,+++++++,0], 
+              [+++++++,0,+++,+,++++], 
+              [+++], 
+              [+++++++,+++,0]]).
+``` 
+@item Check if a @prop{surface/1} is correct:
+@begin{verbatim}
+  ?- surface([[+++,+++++++,0,+,++++,0], 
+              [+++++++,+++,0,+,++++,0], 
+              [+++,0,+++++++,+,0,++++], 
+              [+++,+++++++,0,++++,+,0], 
+              [+++++++,0,+++,+,++++,0], 
+              [+++,+++++++,+++,+,0,+], 
+              [+++++++,+++,0,+,++++,0]]).
+
+  yes
+  ?- 
+@end{verbatim}
+@end{enumerate}
+
+@section{Operations with surfaces}
+We define certain operations that can be performed on surfaces.
+
+@subsection{h_line(S,N,C)}
+@var{C} is the @var{N}th horizontal line of the surface @var{S} @p
+@var{N} is a natural number in Peano notation.The horizontal lines are represented as lists with load values. 
+To facilitate this objective, an auxiliary predicate has been used, tasked with extracting an element from a list.
+ Specifically, it retrieves a list from within a list of lists.
+
+@subsubsection{Examples}
+@begin{enumerate}
+@item Lines begin from s(0) : 
+@begin{verbatim}
+h_line([[+,+++,0], 
+              [+,+++,0], 
+              [++,0,++], 
+              [+,+++,0], 
+              [++,0,++], 
+              [+,+,++], 
+              [+,++,0]], 0, L).
+
+no
+?-
+@end{verbatim}
+@item Extract 4th horizontal line: 
+@begin{verbatim}
+h_line([[+,+++,0], 
+              [+,+++,0], 
+              [++,0,++], 
+              [+,+++,0], 
+              [++,0,++], 
+              [+,+,++], 
+              [+,++,0]], s(s(s(s(0)))), L).
+
+L = [+,+++,0] ? 
+yes
+?-
+@end{verbatim}
+@item Returns position from line given:
+@begin{verbatim}
+h_line([[+,+++,0], 
+              [+,+++,0], 
+              [++,0,++], 
+              [+,+++,0], 
+              [++,0,++], 
+              [+,+,++], 
+              [+,++,0]], N, [+,+++,0]).
+
+N = s(0) ? ;
+N = s(s(0)) ? ;
+N = s(s(s(s(0)))) ? ; 
+yes
+?-
+@end{verbatim}
+@item Passing non-existing line:
+@begin{verbatim}
+h_line([[+,+++,0], 
+              [+,+++,0], 
+              [++,0,++], 
+              [+,+++,0], 
+              [++,0,++], 
+              [+,+,++], 
+              [+,++,0]], N, [++,+++++,++++]).
+
+no
+?-
+@end{verbatim}
+@end{enumerate}
+
+@subsection{v_line(S,N,C)}
+@var{C} is the list of the Nth cells of all horizontal lines of the surface @var{S}. @p
+@var{N} is a natural number in Peano notation. Similarly to the aforementioned predicate, an auxiliary predicate has been used, 
+tasked with extracting an element from a list. Specifically, it retrieves a list from within a list of lists.
+@subsubsection{Examples}
+@begin{enumerate}
+@item Lines begin from s(0) : 
+@begin{verbatim}
+v_line([[+,+++,0], 
+              [+,+++,0], 
+              [++,0,++], 
+              [+,+++,0], 
+              [++,0,++], 
+              [+,+,++], 
+              [+,++,0]], 0, C).
+
+no
+?-
+@end{verbatim}
+@item Extract 2nd vertical line:
+@begin{verbatim}
+v_line([[+,+++,0], 
+              [+,+++,0], 
+              [++,0,++], 
+              [+,+++,0], 
+              [++,0,++], 
+              [+,+,++], 
+              [+,++,0]], s(s(0)), C).
+
+C = [+++,+++,0,+++,0,+,++] ? 
+yes
+?-
+@end{verbatim}
+@item Returns position from line given:
+@begin{verbatim}
+v_line([[+,+++,0], 
+              [+,+++,0], 
+              [++,0,++], 
+              [+,+++,0], 
+              [++,0,++], 
+              [+,+,++], 
+              [+,++,0]], N, [0,0,++,0,++,++,0]).
+
+N = s(s(s(0))) ? 
+yes
+?-
+@end{verbatim}
+@item Passing non-existing line:
+@begin{verbatim}
+v_line([[+,+++,0], 
+              [+,+++,0], 
+              [++,0,++], 
+              [+,+++,0], 
+              [++,0,++], 
+              [+,+,++], 
+              [+,++,0]], N, [++,0,+,+++++,++++,++,0]).
+
+no
+?-
+@end{verbatim}
+@end{enumerate}
+
+@subsection{v_lines(S, C)}
+@var{C} is the list of vertical lines of cells on the surface @var{S}. @p
+It utilizes an auxiliary predicate which, during each recursion, extracts the vertical line and concatenates it 
+to the final list.
+@subsubsection{Examples}
+@begin{enumerate}
+@item Extract all vertical lines:
+@begin{verbatim}
+v_lines([[+,+++,0], 
+              [+,+++,0], 
+              [++,0,++], 
+              [+,+++,0], 
+              [++,0,++], 
+              [+,+,++], 
+              [+,++,0]], C).
+
+C = [[+,+,++,+,++,+,+],[+++,+++,0,+++,0,+,++],[0,0,++,0,++,++,0]] ?
+yes
+?-
+@end{verbatim}
+@item Surface given with empty horizontal line:
+@begin{verbatim}
+v_lines([[+,+++,0], 
+              [+,+++,0], 
+              [++,0,++], 
+              [], 
+              [++,0,++], 
+              [+,+,++], 
+              [+,++,0]], C).
+
+no
+?-
+@end{verbatim}
+@end{enumerate}
+
+@subsection{total_charge(S,T)}
+@var{T} is the sum of all load values in the surface @var{S}. @p
+It employs an auxiliary predicate that utilizes another predicate to calculate the sum of all loads within a horizontal line, 
+with each recursive step contributing to the total sum.
+
+@subsubsection{Examples}
+@begin{enumerate}
+@item Calculates total charge:
+@begin{verbatim}
+?- total_charge([[+,+++,0], 
+              [+,+++,0], 
+              [++,0,++], 
+              [+,+++,0], 
+              [++,0,++], 
+              [+,+,++], 
+              [+,++,0]], T).
+
+T = s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(0))))))))))))))))))))))))))) ?  
+yes
+?-
+@end{verbatim}
+@item It does not allow @prop{basic_surface/1}:
+@begin{verbatim}
+?- total_charge([[+++,+++++++,0,+], 
+              [+++++++,+++,0,+,++++], 
+              [+++,0], 
+              [+++,+++++++,0], 
+              [+++++++,0,+++,+,++++], 
+              [+++], 
+              [+++++++,+++,0]], T).
+no
+?-
+@end{verbatim}
+@end{enumerate}
+
+@subsection{average_charge(S,A)}
+@var{A} is the average of all load valuesin the surface @var{S}.@p
+This entails summing all the loads and dividing by the total number of cells. The result must be rounded by truncation, i.e. returning the natural prior.
+For this purpose, the aforementioned predicate calculates the total sum of the load values, along with an auxiliary predicate that 
+computes the total number of elements in the surface. Additionally, an integer division predicate is employed.
+@subsubsection{Examples}
+@begin{enumerate}
+
+@item Calculates average charge from example:
+@begin{verbatim}
+?- average_charge([[+++,+++++++,0,+,++++,0], 
+              [+++++++,+++,0,+,++++,0], 
+              [+++,0,+++++++,+,0,++++], 
+              [+++,+++++++,0,++++,+,0], 
+              [+++++++,0,+++,+,++++,0], 
+              [+++,+++++++,+++,+,0,+], 
+              [+++++++,+++,0,+,++++,0]], A).
+
+A = s(s(0)) ? 
+yes
+?-
+@end{verbatim}
+
+@item Surface given with wrong load values:
+@begin{verbatim}
+?- average_charge([[3,7,0,1,4,0], 
+              [7,3,0,1,4,0], 
+              [3,0,7,1,0,4], 
+              [3,7,0,4,1,0], 
+              [7,0,3,1,4,0], 
+              [3,7,3,1,0,1], 
+              [7,3,0,1,4,0]], A).
+
+no
+?-
+@end{verbatim}
+@end{enumerate}").
 
 %---------------------------------------------------------------------------------%
 % OPERACIONES CON LISTAS
@@ -254,8 +519,7 @@ regar_otro_arbol(A,NA,V,NV,D,ND) :-
     necesita(NA, N),
     V >= N,
     NV is V - N,
-    camino_arbol_arbol(A, NA, T), 
-    !,
+    camino_arbol_arbol(A, NA, T),
     ND is D + T.
 
 regar_otro_arbol(A,NA,V,NV,D,ND) :-
@@ -387,14 +651,6 @@ movimiento_desde_arbol([H|T], A, V, DA, DT) :-
 movimiento_desde_arbol([], A, _V, DA, DT) :-
     movimiento_desde_pozo([A], DA, DT).
 
-movimiento_desde_arbol_([H|T], A, V, DA, DT) :-
-    (necesita(H, V2), V >= V2 -> 
-        regar_otro_arbol(A, H, V, NV, DA, ND),
-        movimiento_desde_arbol_(T, H, NV, ND, DT)
-    ;   
-        V =:= 0, movimiento_desde_arbol_r([H|T],A,V,DA,DT)
-    ).
-
 movimiento_desde_arbol_r([H|T], A, _V, DA, DT) :-
     movimiento_desde_pozo([A], 0, N),
     T1 is DA + N,
@@ -502,12 +758,4 @@ riego(T, D) :-
     => num_solutions(riego(T, D), 2), member(T, [[arbol2,arbol1,arbol3,arbol4],[arbol3,arbol1,arbol2,arbol4]])
     #"Test 8.2: Generar trayectorias y duraciones, finca del enunciado (al menos 2 soluciones)". */
 
-%------------------------------------------------------------------------------------%
-% TESTS DINAMICOS
-anadir_camino_pozo(A,D) :- assert(camino_arbol_pozo(A,D)).
-eliminar_camino_pozo(A,D) :- retract(camino_arbol_pozo(A,D)).
-anadir_camino_arbol(A1,A2,D) :- assert(camino_arbol_arbol(A1,A2,D)).
-eliminar_camino_arbol(A1,A2,D) :- retract(camino_arbol_arbol(A1,A2,D)).
-anadir_capacidad(C) :- assert(capacidad(C)).
-eliminar_capacidad(C) :- retract(capacidad(C)).
 %------------------------------------------------------------------------------------%
