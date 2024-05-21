@@ -20,7 +20,8 @@ camino_arbol_pozo( arbol4 , 34 ).
 % Cantidad de agua necesaria para regar cada arbol.
 :- pred necesita(T, D) 
     :: (arbol(T), number(D))
-    #"@includedef{necesita/2}".
+    #"Defines the water units that a tree needs. It is defined by: 
+    @includedef{necesita/2}".
 
 necesita( arbol1 , 2 ).
 necesita( arbol2 , 1 ).
@@ -89,276 +90,300 @@ It's essential to note that state descriptions are solely based on predicate rep
 ensuring consistency and compatibility with the implemented predicates.
 @subsection{Some examples of use:}
 @begin{enumerate}
-@item Check if a @prop{basic_surface/1} is correct:
+@item Enum possible trees on the state:
 ```ciao_runnable
-?- basic_surface([[+++,+++++++,0,+], 
-              [+++++++,+++,0,+,++++], 
-              [+++,0], 
-              [+++,+++++++,0], 
-              [+++++++,0,+++,+,++++], 
-              [+++], 
-              [+++++++,+++,0]]).
+:- module(_,_,[classic ,assertions ,regtypes]).
+arbol(arbol1).
+arbol(arbol2).
+arbol(arbol3).
+arbol(arbol4).
+camino_arbol_arbol( arbol1 , arbol2 , 18 ).
+camino_arbol_arbol( arbol2 , arbol3 , 12 ).
+camino_arbol_arbol( arbol1 , arbol3 , 19 ).
+camino_arbol_arbol( arbol4 , arbol3 , 8 ).
+camino_arbol_arbol( arbol4 , arbol2 , 20 ).
+camino_arbol_pozo( arbol1 , 13 ).
+camino_arbol_pozo( arbol2 , 19 ).
+camino_arbol_pozo( arbol3 , 22 ).
+camino_arbol_pozo( arbol4 , 34 ).
+necesita( arbol1 , 2 ).
+necesita( arbol2 , 1 ).
+necesita( arbol3 , 2 ).
+necesita( arbol4 , 4 ).
+```
+```ciao_runnable
+?- arbol(T).
 ``` 
-@item Check if a @prop{surface/1} is correct:
-@begin{verbatim}
-  ?- surface([[+++,+++++++,0,+,++++,0], 
-              [+++++++,+++,0,+,++++,0], 
-              [+++,0,+++++++,+,0,++++], 
-              [+++,+++++++,0,++++,+,0], 
-              [+++++++,0,+++,+,++++,0], 
-              [+++,+++++++,+++,+,0,+], 
-              [+++++++,+++,0,+,++++,0]]).
-
-  yes
-  ?- 
-@end{verbatim}
+@item Enum possible paths between trees:
+```ciao_runnable
+?- camino_arbol_arbol(T1, T2, D).
+``` 
+@item Enum possible paths between trees and well:
+```ciao_runnable
+?- camino_arbol_pozo(T, D).
+``` 
+@item Enum water units needed by trees:
+```ciao_runnable
+?- necesita( T, W).
+``` 
 @end{enumerate}
 
-@section{Operations with surfaces}
-We define certain operations that can be performed on surfaces.
+@section{Movement and Watering on the state}
+We define certain changes of state which indicates robot movements and watering order.
 
-@subsection{h_line(S,N,C)}
-@var{C} is the @var{N}th horizontal line of the surface @var{S} @p
-@var{N} is a natural number in Peano notation.The horizontal lines are represented as lists with load values. 
-To facilitate this objective, an auxiliary predicate has been used, tasked with extracting an element from a list.
- Specifically, it retrieves a list from within a list of lists.
+@subsection{From well to a tree}
+de_pozo_a_regar_arbol(A, D, NV, ND) @p
+Represents the change of state if the robot is initially located in the well, 
+the robot goes directly from there to the tree @var{A} and waters it.
+@subsubsection{Examples}
+@begin{enumerate}
+@item Let´s water tree 1 at the beginning: 
+```ciao_runnable
+?- necesita(arbol1, V).
+```
+```ciao_runnable
+?- camino_arbol_pozo(arbol1, D).
+```
+```ciao
+?- de_pozo_a_regar_arbol(arbol1, 0, NV, ND).
+
+ND = 13,
+NV = 3 ? 
+
+yes
+?-
+```
+@item Let´s water tree 5 at the beginning: 
+```ciao_runnable
+?- arbol(arbol5).
+```
+```ciao
+?- de_pozo_a_regar_arbol(arbol5, 0, NV, ND).
+
+no
+?-
+````
+@end{enumerate}
+
+@subsection{From a tree to another tree}
+regar_otro_arbol(A, NA, V, NV, D, ND) @p
+Represents the change of state if the robot is initially located in tree @var{A} and the robot 
+goes directly from there to tree @var{NA} and waters it.
+@subsubsection{Examples}
+@begin{enumerate}
+@item Let´s water tree 2 from tree 1 (at 20 time units with enough water units): 
+```ciao_runnable
+?- camino_arbol_arbol(arbol1, arbol2, D).
+```
+```ciao_runnable
+?- necesita(arbol2, V).
+```
+```ciao
+?- regar_otro_arbol(arbol1, arbol2,5,NV,20,ND).
+
+ND = 38,
+NV = 4 ? 
+
+yes
+?-
+```
+@item Let´s water tree 1 from tree 2 (There´s no path clause):
+```ciao_runnable
+?- camino_arbol_arbol(arbol2, arbol1, D).
+```
+```ciao_runnable
+?- necesita(arbol1, V).
+```
+```ciao
+?- regar_otro_arbol(arbol2, arbol1,5,NV,20,ND).
+
+ND = 38,
+NV = 4 ? 
+
+yes
+?-
+```
+@item Let´s water with not enough water units:
+```ciao_runnable
+?- necesita(arbol4, V).
+```
+```ciao
+?- regar_otro_arbol(arbol2,arbol4,3,NV,20,ND).
+
+no
+?-
+```
+@end{enumerate}
+
+@subsection{Movement from the well}
+movimiento_desde_pozo(T, DA, DT) @p
+Will be possible if @var{DT} is the number of time units elapsed from the start of watering 
+until the robot has watered all trees in sequence @var{T} and has returned to the well.
+This predicate can be called both at the beginning and at an intermediate point  when the 
+bucket needs to be refilled, i.e., after the bucket has been refilled.
+@subsubsection{Examples}
+@begin{enumerate}
+@item From a tree to another:
+```ciao
+?- movimiento_desde_pozo([arbol2,arbol1], 20, DT).
+
+DT = 70 ? 
+
+yes
+?-
+```
+@item From a tree to another (no possible move):
+```ciao
+?- movimiento_desde_pozo([arbol1,arbol4], 20, DT).
+
+no
+?-
+```
+@item From a tree to others:
+```ciao
+?- movimiento_desde_pozo([arbol3,arbol1,arbol2,arbol4], 0, DT).
+
+DT = 146 ? 
+
+yes
+?-
+```
+@end{enumerate}
+
+@subsection{Movement from a tree to another}
+movimiento_desde_arbol(T, A, V, DA, DT) @p
+Will be possible if @var{DT} is the number of time units elapsed from the start of watering 
+until the robot has watered all the trees in the sequence @var{T}. Sometimes there will not 
+be enough water available to water the first tree in sequence T . In this case, this predicate 
+must not fail, so we must return to the well.
 
 @subsubsection{Examples}
 @begin{enumerate}
-@item Lines begin from s(0) : 
-@begin{verbatim}
-h_line([[+,+++,0], 
-              [+,+++,0], 
-              [++,0,++], 
-              [+,+++,0], 
-              [++,0,++], 
-              [+,+,++], 
-              [+,++,0]], 0, L).
+@item From a tree to another:
+```ciao
+?- movimiento_desde_arbol([arbol1], arbol2, 10, 20, DT).
+
+DT = 57 ? 
+
+yes
+?-
+```
+@item From a tree to another (reverse path):
+```ciao
+?- movimiento_desde_arbol([arbol2], arbol1, 10, 20, DT).
+
+DT = 57 ? 
+
+yes
+?-
+```
+@item From a tree to another (no possible move):
+```ciao
+?- movimiento_desde_arbol([arbol4], arbol1, 10, 20, DT).
 
 no
 ?-
-@end{verbatim}
-@item Extract 4th horizontal line: 
-@begin{verbatim}
-h_line([[+,+++,0], 
-              [+,+++,0], 
-              [++,0,++], 
-              [+,+++,0], 
-              [++,0,++], 
-              [+,+,++], 
-              [+,++,0]], s(s(s(s(0)))), L).
+```
+@item From a tree to others:
+```ciao
+?- movimiento_desde_arbol([arbol1,arbol3,arbol4], arbol2, 8, 20, DT).
 
-L = [+,+++,0] ? 
+DT = 99 ? 
+
 yes
 ?-
-@end{verbatim}
-@item Returns position from line given:
-@begin{verbatim}
-h_line([[+,+++,0], 
-              [+,+++,0], 
-              [++,0,++], 
-              [+,+++,0], 
-              [++,0,++], 
-              [+,+,++], 
-              [+,++,0]], N, [+,+++,0]).
-
-N = s(0) ? ;
-N = s(s(0)) ? ;
-N = s(s(s(s(0)))) ? ; 
-yes
-?-
-@end{verbatim}
-@item Passing non-existing line:
-@begin{verbatim}
-h_line([[+,+++,0], 
-              [+,+++,0], 
-              [++,0,++], 
-              [+,+++,0], 
-              [++,0,++], 
-              [+,+,++], 
-              [+,++,0]], N, [++,+++++,++++]).
+```
+@item From a tree to others (no possible move):
+```ciao
+?- movimiento_desde_arbol([arbol1,arbol3,arbol4], arbol2, 7, 20, DT).
 
 no
 ?-
-@end{verbatim}
+```
 @end{enumerate}
 
-@subsection{v_line(S,N,C)}
-@var{C} is the list of the Nth cells of all horizontal lines of the surface @var{S}. @p
-@var{N} is a natural number in Peano notation. Similarly to the aforementioned predicate, an auxiliary predicate has been used, 
-tasked with extracting an element from a list. Specifically, it retrieves a list from within a list of lists.
-@subsubsection{Examples}
-@begin{enumerate}
-@item Lines begin from s(0) : 
-@begin{verbatim}
-v_line([[+,+++,0], 
-              [+,+++,0], 
-              [++,0,++], 
-              [+,+++,0], 
-              [++,0,++], 
-              [+,+,++], 
-              [+,++,0]], 0, C).
-
-no
-?-
-@end{verbatim}
-@item Extract 2nd vertical line:
-@begin{verbatim}
-v_line([[+,+++,0], 
-              [+,+++,0], 
-              [++,0,++], 
-              [+,+++,0], 
-              [++,0,++], 
-              [+,+,++], 
-              [+,++,0]], s(s(0)), C).
-
-C = [+++,+++,0,+++,0,+,++] ? 
-yes
-?-
-@end{verbatim}
-@item Returns position from line given:
-@begin{verbatim}
-v_line([[+,+++,0], 
-              [+,+++,0], 
-              [++,0,++], 
-              [+,+++,0], 
-              [++,0,++], 
-              [+,+,++], 
-              [+,++,0]], N, [0,0,++,0,++,++,0]).
-
-N = s(s(s(0))) ? 
-yes
-?-
-@end{verbatim}
-@item Passing non-existing line:
-@begin{verbatim}
-v_line([[+,+++,0], 
-              [+,+++,0], 
-              [++,0,++], 
-              [+,+++,0], 
-              [++,0,++], 
-              [+,+,++], 
-              [+,++,0]], N, [++,0,+,+++++,++++,++,0]).
-
-no
-?-
-@end{verbatim}
-@end{enumerate}
-
-@subsection{v_lines(S, C)}
-@var{C} is the list of vertical lines of cells on the surface @var{S}. @p
-It utilizes an auxiliary predicate which, during each recursion, extracts the vertical line and concatenates it 
-to the final list.
-@subsubsection{Examples}
-@begin{enumerate}
-@item Extract all vertical lines:
-@begin{verbatim}
-v_lines([[+,+++,0], 
-              [+,+++,0], 
-              [++,0,++], 
-              [+,+++,0], 
-              [++,0,++], 
-              [+,+,++], 
-              [+,++,0]], C).
-
-C = [[+,+,++,+,++,+,+],[+++,+++,0,+++,0,+,++],[0,0,++,0,++,++,0]] ?
-yes
-?-
-@end{verbatim}
-@item Surface given with empty horizontal line:
-@begin{verbatim}
-v_lines([[+,+++,0], 
-              [+,+++,0], 
-              [++,0,++], 
-              [], 
-              [++,0,++], 
-              [+,+,++], 
-              [+,++,0]], C).
-
-no
-?-
-@end{verbatim}
-@end{enumerate}
-
-@subsection{total_charge(S,T)}
-@var{T} is the sum of all load values in the surface @var{S}. @p
-It employs an auxiliary predicate that utilizes another predicate to calculate the sum of all loads within a horizontal line, 
-with each recursive step contributing to the total sum.
-
-@subsubsection{Examples}
-@begin{enumerate}
-@item Calculates total charge:
-@begin{verbatim}
-?- total_charge([[+,+++,0], 
-              [+,+++,0], 
-              [++,0,++], 
-              [+,+++,0], 
-              [++,0,++], 
-              [+,+,++], 
-              [+,++,0]], T).
-
-T = s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(0))))))))))))))))))))))))))) ?  
-yes
-?-
-@end{verbatim}
-@item It does not allow @prop{basic_surface/1}:
-@begin{verbatim}
-?- total_charge([[+++,+++++++,0,+], 
-              [+++++++,+++,0,+,++++], 
-              [+++,0], 
-              [+++,+++++++,0], 
-              [+++++++,0,+++,+,++++], 
-              [+++], 
-              [+++++++,+++,0]], T).
-no
-?-
-@end{verbatim}
-@end{enumerate}
-
-@subsection{average_charge(S,A)}
-@var{A} is the average of all load valuesin the surface @var{S}.@p
-This entails summing all the loads and dividing by the total number of cells. The result must be rounded by truncation, i.e. returning the natural prior.
-For this purpose, the aforementioned predicate calculates the total sum of the load values, along with an auxiliary predicate that 
-computes the total number of elements in the surface. Additionally, an integer division predicate is employed.
+@subsection{Trajectories}
+trayectoria_valida(A,D,T) @p
+Will be possible if @var{T} is a valid watering trajectory of duration @var{D} time units, 
+created from the trees belonging to list @var{A} . A watering trajectory is defined as a sequence 
+of tree identifiers indicating the order in which the robot has watered the trees in it. @p
+A watering trajectory is valid if and only if 
+- It contains exactly once each and every tree on the state. 
+- It can be executed by the robot following the rules given in the statement.
 @subsubsection{Examples}
 @begin{enumerate}
 
-@item Calculates average charge from example:
-@begin{verbatim}
-?- average_charge([[+++,+++++++,0,+,++++,0], 
-              [+++++++,+++,0,+,++++,0], 
-              [+++,0,+++++++,+,0,++++], 
-              [+++,+++++++,0,++++,+,0], 
-              [+++++++,0,+++,+,++++,0], 
-              [+++,+++++++,+++,+,0,+], 
-              [+++++++,+++,0,+,++++,0]], A).
+@item Valid trajectory between all the trees:
+```ciao
+?- trayectoria_valida([arbol1,arbol2,arbol3,arbol4], D, T).
 
-A = s(s(0)) ? 
-yes
-?-
-@end{verbatim}
+D = 131,
+T = [arbol1,arbol3,arbol2,arbol4] ? ;
 
-@item Surface given with wrong load values:
-@begin{verbatim}
-?- average_charge([[3,7,0,1,4,0], 
-              [7,3,0,1,4,0], 
-              [3,0,7,1,0,4], 
-              [3,7,0,4,1,0], 
-              [7,0,3,1,4,0], 
-              [3,7,3,1,0,1], 
-              [7,3,0,1,4,0]], A).
+D = 146,
+T = [arbol2,arbol1,arbol3,arbol4] ? ;
+
+D = 131,
+T = [arbol2,arbol3,arbol1,arbol4] ? ;
+
+D = 127,
+T = [arbol2,arbol4,arbol1,arbol3] ? ;
+
+D = 127,
+T = [arbol2,arbol4,arbol3,arbol1] ? ;
+
+...
+```
+
+@item Two trees with no trajectory:
+```ciao
+?- trayectoria_valida([arbol1,arbol4], D, T).
 
 no
 ?-
-@end{verbatim}
+```
+@end{enumerate}
+@subsection{Optimal watering trajectories}
+riego(D,T) @p
+Will be possible if @var{T} is a valid watering trajectory that takes D units of time and is 
+optimal, in order to maximising the duration of watering. This means, there is no other valid 
+trajectory whose duration is shorter than @var{D}.
+    
+@subsubsection{Examples}
+@begin{enumerate}
+
+@item Optimal watering trajectories on this state:
+```ciao
+?- riego(T,D).
+
+D = 146,
+T = [arbol2,arbol1,arbol3,arbol4] ? ;
+
+D = 146,
+T = [arbol3,arbol1,arbol2,arbol4] ? ;
+
+no
+?-
+```
 @end{enumerate}").
 
 %---------------------------------------------------------------------------------%
 % OPERACIONES CON LISTAS
+
+:-pred is_set(L) 
+    :: (list(L))
+    #"Checks there is not duplicates in a list. It is defined by:
+    @includedef{is_set/1}".
+
 is_set([]).
 is_set([H|T]) :-
     \+ member(H, T),  
     is_set(T). 
+
+:-pred permute(L, P) 
+    :: (list(L), list(P))
+    #"Generate permutations from a list. It is defined by:
+    @includedef{permute/2}".
 
 permute(LT, T) :-
     ground(LT),var(T),
@@ -367,18 +392,40 @@ permute(LT, T) :-
     ground(T),
     qsort(T, LT). 
 
+:-pred permute_(L, P) 
+    :: (list(L), list(P))
+    #"Auxiliary predicate which helps predicate @pred{permute/2}. It is defined by:
+    @includedef{permute_/2}".
+
 permute_([],[]).
 permute_(LT, [H|P]) :-
     select(H,LT,T),
     permute_(T, P).
 
+:- pred qsort(S, SL) 
+    :: (list(S), list(SL))
+    #"Sort a list lexicographically. It is defined by:
+    @includedef{qsort/2}".
+
 qsort(L,SL) :-
     qsort_(L,SL,[]).
+
+:- pred qsort_(L, SL, SLE) 
+    :: (list(L), list(SL), list(SLE))
+    #"Auxiliary predicate which helps predicate @pred{qsort/2}. It is defined by:
+    @includedef{qsort_/3}".
+
 qsort_([],SLE,SLE).
 qsort_([X|L],SL,SLE) :-
     partition(L,X,S,B),
     qsort_(S,SL,[X|BS]),
     qsort_(B,BS,SLE).
+
+:- pred partition(L, E, Smalls, Bigs)
+    :: (list(L), number(E), list(Smalls), list(Bigs))
+    #"Splits a list in two lists sorted by an element. It is defined by:
+    @includedef{partition/4}". 
+
 partition([],_P,[],[]).
 partition([E|R],P,[E|Smalls],Bigs) :- % Take first element E
     E @< P, % If E < P add to list of smaller ones
@@ -387,15 +434,18 @@ partition([E|R],P,Smalls ,[E|Bigs]) :-
     E @> P, % If E >= P add to list of larger ones
     partition(R,P,Smalls ,Bigs).
 
+:- pred max_list(L, E) 
+    :: (list(L), number(E))
+    #"Extracts the maximum element of a list. It is defined by:
+    @includedef{max_list/2}".
+
 max_list( [H], H).
 max_list([H,K|T],M) :- H >= K, !, max_list([H|T],M). 
 max_list([H,K|T],M) :- H < K,  max_list([K|T],M).
 %---------------------------------------------------------------------------------%
 
 :- prop arbol(T)
-    #" A property, defined as follows:
-    @includedef{arbol/1}
-    @var{T} is a tree.".
+    #"@var{T} is a tree.".
 
 arbol(arbol1).
 arbol(arbol2).
@@ -464,7 +514,9 @@ lista_de_arboles(LT) :-
 
 :- pred de_pozo_a_regar_arbol(A,DA,NV,ND) 
     :: (arbol(A), number(DA), number(NV), number(ND))
-    #"@includedef{de_pozo_a_regar_arbol/4}".
+    #"Represents the change of state if the robot is initially located in the well, 
+    the robot goes directly from there to the tree @var{A} and waters it. It is defined by:
+    @includedef{de_pozo_a_regar_arbol/4}".
 
 /* Asumo que si el robot esta en el pozo, el cubo esta lleno de agua, se comprueba la cantidad
 que necesita el arbol, pero en principio todos los arboles deberian de necesitar menos de 
@@ -511,7 +563,9 @@ de_pozo_a_regar_arbol(A,DA,NV,ND) :-
 
 :- pred regar_otro_arbol(A,NA,V,NV,D,ND) 
     :: (arbol(A),arbol(NA),number(V),number(NV),number(D),number(ND))
-    #"@includedef{regar_otro_arbol/6}".
+    #"Represents the change of state if the robot is initially located in tree @var{A} and the robot 
+    goes directly from there to tree @var{NA} and waters it. It is defined by:
+    @includedef{regar_otro_arbol/6}".
 
 regar_otro_arbol(A,NA,V,NV,D,ND) :-
     arbol(A),
@@ -570,7 +624,9 @@ regar_otro_arbol(A,NA,V,NV,D,ND) :-
 
 :- pred (movimiento_desde_pozo(A, DA, DT)) 
     :: (lista_de_arboles(A), number(DA), number(DT))
-    #"@includedef{movimiento_desde_pozo/3}".
+    #"It is true if and only if @var{DT} is the number of time units elapsed from the start of watering 
+    until the robot has watered all trees in sequence @var{T} and has returned to the well. It is defined by:
+    @includedef{movimiento_desde_pozo/3}".
 
 movimiento_desde_pozo([H], DA, DT) :-
     de_pozo_a_regar_arbol(H, DA, _, DT).
@@ -633,12 +689,11 @@ movimiento_desde_pozo([H|[K|T]], DA, DT) :-
 %
 %
 
-:- dynamic(first_tree/0).
-
-
 :- pred (movimiento_desde_arbol(T, A, V, DA, DT)) 
     :: (lista_de_arboles(T), arbol(A), number(V), number(DT))
-    #"@includedef{movimiento_desde_arbol/5}".
+    #"It is true if and only if @var{DT} is the number of time units elapsed from the start of watering 
+    until the robot has watered all the trees in the sequence @var{T}. It is defined by: 
+    @includedef{movimiento_desde_arbol/5}".
 
 movimiento_desde_arbol([H|T], A, V, DA, DT) :-
     (necesita(H, V2), V >= V2 -> 
@@ -650,6 +705,12 @@ movimiento_desde_arbol([H|T], A, V, DA, DT) :-
 
 movimiento_desde_arbol([], A, _V, DA, DT) :-
     movimiento_desde_pozo([A], DA, DT).
+
+:- pred movimiento_desde_arbol_r(L, A, V, DA, DT)
+    :: (list(L), arbol(A), number(V), number(DA), number(DT))
+    #"Auxiliary predicate which helps predicate @pred{movimiento_desde_arbol/5}, represents when the
+    robot needs to return the well. It is defined by:
+    @includedef{movimiento_desde_arbol_r/5}".
 
 movimiento_desde_arbol_r([H|T], A, _V, DA, DT) :-
     movimiento_desde_pozo([A], 0, N),
@@ -698,8 +759,12 @@ movimiento_desde_arbol_r([H|T], A, _V, DA, DT) :-
 
 :- pred (trayectoria_valida(A,D,T)) 
     :: (lista_de_arboles(A), number(D), lista_de_arboles(T))
-    #"@includedef{trayectoria_valida/3}".
+    #"It is true if and only if @var{T} is a valid watering trajectory of duration @var{D} time units, 
+    created from the trees belonging to list @var{A} . A watering trajectory is defined as a sequence 
+    of tree identifiers indicating the order in which the robot has watered the trees in it. It is defined by:
+    @includedef{trayectoria_valida/3}".
 
+:- doc(num_solutions/2, "Counts solutions of a predicate. Used in test cases.").
 
 num_solutions(F, N) :-
     findall(_, F, S),
@@ -744,7 +809,9 @@ trayectoria_valida(A, D, T) :-
 :- pred (riego(T,D)) 
     : (var(T), var(D)) 
     => (lista_de_arboles(T), number(D))
-    #"@includedef{riego/2}".
+    #"is true if and only if @var{T} is a valid watering trajectory that takes D units of time and is 
+    optimal, in order to maximising the duration of watering. It is defined by:
+    @includedef{riego/2}".
 
 riego(T, D) :-
     lista_de_arboles(LT),
@@ -753,6 +820,16 @@ riego(T, D) :-
     nth(N, S, D),
     findall(T1, trayectoria_valida(LT, _, T1), S2),
     nth(N, S2, T).
+
+:- test (riego(T, D))
+    => (D = 146, T = [arbol2,arbol1,arbol3,arbol4];
+    D = 146, T = [arbol3,arbol1,arbol2,arbol4])
+    #"Test 8.1: Trayectorias optimas (en la finca del enunciado)".
+
+:- test (riego(T,D))
+    => (num_solutions(riego(T,D), 2))
+    #"Test 8.2: Trayectorias optimas (en la finca del enunciado, todas las soluciones, deben ser 2)".
+
 
 /* :- test (riego(T, D))
     => num_solutions(riego(T, D), 2), member(T, [[arbol2,arbol1,arbol3,arbol4],[arbol3,arbol1,arbol2,arbol4]])
