@@ -38,7 +38,7 @@ the length of the horizontal lines. @p
 @includedef{surface_acc/2}
 
 
-###Some examples of use:
+### Some examples of use:
 @begin{enumerate}
 @item Check if a @prop{basic_surface/1} is correct:
 ``
@@ -55,7 +55,7 @@ the length of the horizontal lines. @p
 ?-
 ``` 
 ``
-@item Check if a @prop{surface/1} is correct:
+@item Check if a @prop{surface/1} is correct: @p
 ``
   ?- surface([[+++,+++++++,0,+,++++,0], 
               [+++++++,+++,0,+,++++,0], 
@@ -73,7 +73,7 @@ the length of the horizontal lines. @p
 @section{Operations with surfaces}
 We define certain operations that can be performed on surfaces.
 
-###h_line(S,N,C)
+### h_line(S,N,C)
 @var{C} is the @var{N}th horizontal line of the surface @var{S} @p
 @var{N} is a natural number in Peano notation.The horizontal lines are represented as lists with load values. 
 To facilitate this objective, an auxiliary predicate has been used, tasked with extracting an element from a list.
@@ -94,7 +94,7 @@ h_line([[+,+++,0],
 no
 ?-
 ``
-@item Extract 4th horizontal line: 
+@item Extract 4th horizontal line: @p 
 ``
 h_line([[+,+++,0], 
               [+,+++,0], 
@@ -124,7 +124,7 @@ N = s(s(s(s(0)))) ? ;
 yes
 ?-
 ``
-@item Passing non-existing line:
+@item Passing non-existing line: @p
 ``
 h_line([[+,+++,0], 
               [+,+++,0], 
@@ -139,7 +139,7 @@ no
 ``
 @end{enumerate}
 
-###v_line(S,N,C)
+### v_line(S,N,C)
 @var{C} is the list of the Nth cells of all horizontal lines of the surface @var{S}. @p
 @var{N} is a natural number in Peano notation. Similarly to the aforementioned predicate, an auxiliary predicate has been used, 
 tasked with extracting an element from a list. Specifically, it retrieves a list from within a list of lists.
@@ -158,7 +158,7 @@ v_line([[+,+++,0],
 no
 ?-
 ``
-@item Extract 2nd vertical line:
+@item Extract 2nd vertical line: @p
 ``
 v_line([[+,+++,0], 
               [+,+++,0], 
@@ -186,7 +186,7 @@ N = s(s(s(0))) ?
 yes
 ?-
 ``
-@item Passing non-existing line:
+@item Passing non-existing line: @p
 ``
 v_line([[+,+++,0], 
               [+,+++,0], 
@@ -201,7 +201,7 @@ no
 ``
 @end{enumerate}
 
-###v_lines(S, C)
+### v_lines(S, C)
 @var{C} is the list of vertical lines of cells on the surface @var{S}. @p
 It utilizes an auxiliary predicate which, during each recursion, extracts the vertical line and concatenates it 
 to the final list.
@@ -221,7 +221,7 @@ C = [[+,+,++,+,++,+,+],[+++,+++,0,+++,0,+,++],[0,0,++,0,++,++,0]] ?
 yes
 ?-
 ``
-@item Surface given with empty horizontal line:
+@item Surface given with empty horizontal line: @p
 ``
 v_lines([[+,+++,0], 
               [+,+++,0], 
@@ -236,7 +236,7 @@ no
 ``
 @end{enumerate}
 
-###total_charge(S,T)
+### total_charge(S,T)
 @var{T} is the sum of all load values in the surface @var{S}. @p
 It employs an auxiliary predicate that utilizes another predicate to calculate the sum of all loads within a horizontal line, 
 with each recursive step contributing to the total sum.
@@ -257,7 +257,7 @@ T = s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(s(0)))))))))))))))))))))
 yes
 ?-
 ``
-@item It does not allow @prop{basic_surface/1}:
+@item It does not allow @prop{basic_surface/1}: @p
 ``
 ?- total_charge([[+++,+++++++,0,+], 
               [+++++++,+++,0,+,++++], 
@@ -271,7 +271,7 @@ no
 ``
 @end{enumerate}
 
-###average_charge(S,A)
+### average_charge(S,A)
 @var{A} is the average of all load valuesin the surface @var{S}.@p
 This entails summing all the loads and dividing by the total number of cells. The result must be rounded by truncation, i.e. returning the natural prior.
 For this purpose, the aforementioned predicate calculates the total sum of the load values, along with an auxiliary predicate that 
@@ -294,7 +294,7 @@ yes
 ?-
 ``
 
-@item Surface given with wrong load values:
+@item Surface given with wrong load values: @p
 ``
 ?- average_charge([[3,7,0,1,4,0], 
               [7,3,0,1,4,0], 
