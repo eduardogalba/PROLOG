@@ -6,7 +6,7 @@ discrete points. To facilitate analysis, we adopt several simplifications. First
 according to the following predicate: @includedef{charge/1} Here, each charge is denoted by the number of '+' symbols, e.g., 
 '++++' signifies a charge of four units. @p
 Furthermore, we discretize the two-dimensional surface, conceptualizing it as a grid of cells where each cell can hold one of 
-the predefined charge values. An illustrative example of such a surface is:
+the predefined charge values. An illustrative example of such a surface is: @p
 ``
    +++    +++++++    0      +    ++++    0
  +++++++    +++      0      +    ++++    0
@@ -17,7 +17,7 @@ the predefined charge values. An illustrative example of such a surface is:
  +++++++    +++      0      +    ++++    0
 ``
 For representation purposes, we employ a list of lists. The inner lists delineate cells horizontally, while the outer list 
-groups cells by rows, with each element representing a load value. Thus, the above surface is structured as follows:
+groups cells by rows, with each element representing a load value. Thus, the above surface is structured as follows:@p
 ``
 [ [ +++ , +++++++ , 0 , + , ++++ , 0 ],
 [ +++++++ , +++ , 0 , + , ++++ , 0 ],
@@ -29,16 +29,16 @@ groups cells by rows, with each element representing a load value. Thus, the abo
 ``
 Surfaces can have an arbitrary number of cells in both dimensions. @p
 In order to accomplish this, we define two types of surfaces, both containing load values. We establish @prop{basic_surface/1}
-which must consist of at least one line, with each line containing at least one cell. It is defined by:
+which must consist of at least one line, with each line containing at least one cell. It is defined by:@p
 @includedef{basic_surface/1} 
-Additionally, we define @prop{surface/1} as above but in addition must ensure that all lines possess the same number of cells. It is defined by:
+Additionally, we define @prop{surface/1} as above but in addition must ensure that all lines possess the same number of cells. It is defined by:@p
 @includedef{surface/1}
 As you can see, an auxiliary predicate has been employed, which accepts the size as a term. In each recursion step, it verifies 
-the length of the horizontal lines.
+the length of the horizontal lines. @p
 @includedef{surface_acc/2}
 
 
-@subsection{Some examples of use:}
+###Some examples of use:
 @begin{enumerate}
 @item Check if a @prop{basic_surface/1} is correct:
 ``
@@ -73,7 +73,7 @@ the length of the horizontal lines.
 @section{Operations with surfaces}
 We define certain operations that can be performed on surfaces.
 
-@subsection{h_line(S,N,C)}
+###h_line(S,N,C)
 @var{C} is the @var{N}th horizontal line of the surface @var{S} @p
 @var{N} is a natural number in Peano notation.The horizontal lines are represented as lists with load values. 
 To facilitate this objective, an auxiliary predicate has been used, tasked with extracting an element from a list.
@@ -139,7 +139,7 @@ no
 ``
 @end{enumerate}
 
-@subsection{v_line(S,N,C)}
+###v_line(S,N,C)
 @var{C} is the list of the Nth cells of all horizontal lines of the surface @var{S}. @p
 @var{N} is a natural number in Peano notation. Similarly to the aforementioned predicate, an auxiliary predicate has been used, 
 tasked with extracting an element from a list. Specifically, it retrieves a list from within a list of lists.
@@ -201,7 +201,7 @@ no
 ``
 @end{enumerate}
 
-@subsection{v_lines(S, C)}
+###v_lines(S, C)
 @var{C} is the list of vertical lines of cells on the surface @var{S}. @p
 It utilizes an auxiliary predicate which, during each recursion, extracts the vertical line and concatenates it 
 to the final list.
@@ -236,7 +236,7 @@ no
 ``
 @end{enumerate}
 
-@subsection{total_charge(S,T)}
+###total_charge(S,T)
 @var{T} is the sum of all load values in the surface @var{S}. @p
 It employs an auxiliary predicate that utilizes another predicate to calculate the sum of all loads within a horizontal line, 
 with each recursive step contributing to the total sum.
@@ -271,7 +271,7 @@ no
 ``
 @end{enumerate}
 
-@subsection{average_charge(S,A)}
+###average_charge(S,A)
 @var{A} is the average of all load valuesin the surface @var{S}.@p
 This entails summing all the loads and dividing by the total number of cells. The result must be rounded by truncation, i.e. returning the natural prior.
 For this purpose, the aforementioned predicate calculates the total sum of the load values, along with an auxiliary predicate that 
