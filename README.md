@@ -321,4 +321,316 @@ yes
 no
 ?-
 ```
+## ISO PROLOG Programming: Practise 2
 
+## Introduction
+On the state, daily watering of trees is essential. To automate this task, the state owner has
+procured a robotic device capable of autonomously watering trees and preparing soil for new
+plantings. This robotic system initiates operation at dawn, tasked with watering each tree
+individually. Each tree is identified by a constant Prolog term and requires a specific 
+amount of water, denoted by a binary predicate, indicating if tree T needs C units of water
+daily. @p
+@begin{verbatim}
+💧🌳                      🌳💧
+ 2 1 ________18____________ 2 1
+   |\\                    / |
+   | \\                  /  |
+   |  13               19  |
+   |   \\____      ____/    |
+  19     ___ ⛲🤖____     15
+   |    /             \\    |
+   |  22               \\   |
+   |  /                 34 |
+   | /                   \\ |
+💧🌳                      🌳💧
+ 2 3 _________8___________ 4 4
+@end{verbatim}
+The watering procedure is as follows: every morning, the robot positions itself by the well.
+Upon activation, it fills its initially empty bucket with water from the well, then proceeds 
+to water each tree sequentially. If the bucket empties before all trees are watered, the 
+robot returns to the well, refills the bucket, and resumes watering. Once all trees are 
+watered or the bucket empties again, the robot refills the bucket if necessary and continues 
+the task. Upon completion, it notifies the state owner telematically.@p
+Additionally, the robot must adhere to the following rules: @p
+- It must never attempt to water a tree without sufficient water in the bucket, constrained 
+by the bucket's capacity (determined by the predicate).
+- Paths connecting trees and the well vary in length, each taking a specific time to 
+traverse. These paths are represented by ternary and binary predicates, ensuring efficient 
+movement.
+- Due to potential obstacles (e.g., ponds, buildings, fences), not all points on the 
+state may be connected. Consequently, the robot may encounter inaccessible areas.
+- The robot can return to the well only when the bucket is empty, except after 
+completing all watering cycles.
+- Bucket refilling at the well always takes a fixed amount of time.
+- Each tree must be visited and watered exactly once during the task execution.
+- All distances, time units, and water quantities involved are represented as integers.
+Moreover, the robot, simulating artificial intelligence, anticipates future tasks such as 
+digging holes for new tree planting, prompting it to prolong watering tasks while adhering 
+to the aforementioned rules. @p
+It's essential to note that state descriptions are solely based on predicate representations, 
+ensuring consistency and compatibility with the implemented predicates.
+### Some examples of use:
+1. Enum possible trees on the state:
+```
+:- module(_,_,[classic ,assertions ,regtypes]).
+arbol(arbol1).
+arbol(arbol2).
+arbol(arbol3).
+arbol(arbol4).
+camino_arbol_arbol( arbol1 , arbol2 , 18 ).
+camino_arbol_arbol( arbol2 , arbol3 , 12 ).
+camino_arbol_arbol( arbol1 , arbol3 , 19 ).
+camino_arbol_arbol( arbol4 , arbol3 , 8 ).
+camino_arbol_arbol( arbol4 , arbol2 , 20 ).
+camino_arbol_pozo( arbol1 , 13 ).
+camino_arbol_pozo( arbol2 , 19 ).
+camino_arbol_pozo( arbol3 , 22 ).
+camino_arbol_pozo( arbol4 , 34 ).
+necesita( arbol1 , 2 ).
+necesita( arbol2 , 1 ).
+necesita( arbol3 , 2 ).
+necesita( arbol4 , 4 ).
+```
+```
+?- arbol(T).
+``` 
+2. Enum possible paths between trees:
+```ciao_runnable
+?- camino_arbol_arbol(T1, T2, D).
+``` 
+3. Enum possible paths between trees and well:
+```ciao_runnable
+?- camino_arbol_pozo(T, D).
+``` 
+4. Enum water units needed by trees:
+```ciao_runnable
+?- necesita( T, W).
+``` 
+
+## Movement and Watering on the state
+We define certain changes of state which indicates robot movements and watering order.
+
+### From well to a tree
+de_pozo_a_regar_arbol(A, D, NV, ND) @p
+Represents the change of state if the robot is initially located in the well, 
+the robot goes directly from there to the tree `A` and waters it.
+#### Examples:
+1. Let´s water tree 1 at the beginning: 
+```
+?- necesita(arbol1, V).
+```
+```
+?- camino_arbol_pozo(arbol1, D).
+```
+```
+?- de_pozo_a_regar_arbol(arbol1, 0, NV, ND).
+
+ND = 13,
+NV = 3 ? 
+
+yes
+?-
+```
+2. Let´s water tree 5 at the beginning: 
+```
+?- arbol(arbol5).
+```
+```
+?- de_pozo_a_regar_arbol(arbol5, 0, NV, ND).
+
+no
+?-
+````
+
+### From a tree to another tree
+regar_otro_arbol(A, NA, V, NV, D, ND) @p
+Represents the change of state if the robot is initially located in tree `A` and the robot 
+goes directly from there to tree `NA` and waters it.
+#### Examples:
+1. Let´s water tree 2 from tree 1 (at 20 time units with enough water units): 
+```
+?- camino_arbol_arbol(arbol1, arbol2, D).
+```
+```
+?- necesita(arbol2, V).
+```
+```
+?- regar_otro_arbol(arbol1, arbol2,5,NV,20,ND).
+
+ND = 38,
+NV = 4 ? 
+
+yes
+?-
+```
+2. Let´s water tree 1 from tree 2 (There´s no path clause):
+```
+?- camino_arbol_arbol(arbol2, arbol1, D).
+```
+```
+?- necesita(arbol1, V).
+```
+```
+?- regar_otro_arbol(arbol2, arbol1,5,NV,20,ND).
+
+ND = 38,
+NV = 4 ? 
+
+yes
+?-
+```
+3. Let´s water with not enough water units:
+```
+?- necesita(arbol4, V).
+```
+```
+?- regar_otro_arbol(arbol2,arbol4,3,NV,20,ND).
+
+no
+?-
+```
+
+### Movement from the well
+movimiento_desde_pozo(T, DA, DT) @p
+Will be possible if `DT` is the number of time units elapsed from the start of watering 
+until the robot has watered all trees in sequence `T` and has returned to the well.
+This predicate can be called both at the beginning and at an intermediate point  when the 
+bucket needs to be refilled, i.e., after the bucket has been refilled.
+#### Examples:
+1. From a tree to another:
+```
+?- movimiento_desde_pozo([arbol2,arbol1], 20, DT).
+
+DT = 70 ? 
+
+yes
+?-
+```
+2. From a tree to another (no possible move):
+```
+?- movimiento_desde_pozo([arbol1,arbol4], 20, DT).
+
+no
+?-
+```
+3. From a tree to others:
+```
+?- movimiento_desde_pozo([arbol3,arbol1,arbol2,arbol4], 0, DT).
+
+DT = 146 ? 
+
+yes
+?-
+```
+
+### Movement from a tree to another
+movimiento_desde_arbol(T, A, V, DA, DT) @p
+Will be possible if `DT` is the number of time units elapsed from the start of watering 
+until the robot has watered all the trees in the sequence `T`. Sometimes there will not 
+be enough water available to water the first tree in sequence T . In this case, this predicate 
+must not fail, so we must return to the well.
+
+#### Examples:
+1. From a tree to another:
+```
+?- movimiento_desde_arbol([arbol1], arbol2, 10, 20, DT).
+
+DT = 57 ? 
+
+yes
+?-
+```
+2. From a tree to another (reverse path):
+```
+?- movimiento_desde_arbol([arbol2], arbol1, 10, 20, DT).
+
+DT = 57 ? 
+
+yes
+?-
+```
+3. From a tree to another (no possible move):
+```
+?- movimiento_desde_arbol([arbol4], arbol1, 10, 20, DT).
+
+no
+?-
+```
+4. From a tree to others:
+```
+?- movimiento_desde_arbol([arbol1,arbol3,arbol4], arbol2, 8, 20, DT).
+
+DT = 99 ? 
+
+yes
+?-
+```
+5. From a tree to others (no possible move):
+```
+?- movimiento_desde_arbol([arbol1,arbol3,arbol4], arbol2, 7, 20, DT).
+
+no
+?-
+```
+
+### Trajectories
+trayectoria_valida(A,D,T) @p
+Will be possible if `T` is a valid watering trajectory of duration `D` time units, 
+created from the trees belonging to list `A` . A watering trajectory is defined as a sequence 
+of tree identifiers indicating the order in which the robot has watered the trees in it. @p
+A watering trajectory is valid if and only if 
+- It contains exactly once each and every tree on the state. 
+- It can be executed by the robot following the rules given in the statement.
+#### Examples:
+
+1. Valid trajectory between all the trees:
+```
+?- trayectoria_valida([arbol1,arbol2,arbol3,arbol4], D, T).
+
+D = 131,
+T = [arbol1,arbol3,arbol2,arbol4] ? ;
+
+D = 146,
+T = [arbol2,arbol1,arbol3,arbol4] ? ;
+
+D = 131,
+T = [arbol2,arbol3,arbol1,arbol4] ? ;
+
+D = 127,
+T = [arbol2,arbol4,arbol1,arbol3] ? ;
+
+D = 127,
+T = [arbol2,arbol4,arbol3,arbol1] ? ;
+
+...
+```
+
+2. Two trees with no trajectory:
+```
+?- trayectoria_valida([arbol1,arbol4], D, T).
+
+no
+?-
+```
+
+### Optimal watering trajectories
+riego(D,T) @p
+Will be possible if `T` is a valid watering trajectory that takes D units of time and is 
+optimal, in order to maximising the duration of watering. This means, there is no other valid 
+trajectory whose duration is shorter than `D`.
+    
+#### Examples:
+
+1. Optimal watering trajectories on this state:
+```
+?- riego(T,D).
+
+D = 146,
+T = [arbol2,arbol1,arbol3,arbol4] ? ;
+
+D = 146,
+T = [arbol3,arbol1,arbol2,arbol4] ? ;
+
+no
+?-
+```
