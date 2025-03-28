@@ -4,7 +4,7 @@
 The task at hand involves validating representations of statically loaded surfaces with variable load values assigned to 
 discrete points. To facilitate analysis, we adopt several simplifications. Firstly, we constrain charges to predefined values 
 according to the following predicate: 
-```
+```prolog
 charge( +++++++ ).
 charge( ++++++ ).
 charge( +++++ ).
@@ -14,11 +14,12 @@ charge( ++ ).
 charge( + ).
 charge( 0 ).
 ```
+
 Here, each charge is denoted by the number of '+' symbols, e.g., 
 '++++' signifies a charge of four units. 
 Furthermore, we discretize the two-dimensional surface, conceptualizing it as a grid of cells where each cell can hold one of 
 the predefined charge values. An illustrative example of such a surface is: 
-```prolog
+```
    +++    +++++++    0      +    ++++    0
  +++++++    +++      0      +    ++++    0
    +++       0    +++++++   +     0     ++++
@@ -30,7 +31,7 @@ the predefined charge values. An illustrative example of such a surface is:
 
 For representation purposes, we employ a list of lists. The inner lists delineate cells horizontally, while the outer list 
 groups cells by rows, with each element representing a load value. Thus, the above surface is structured as follows:
-```prolog
+```
 [ [ +++ , +++++++ , 0 , + , ++++ , 0 ],
 [ +++++++ , +++ , 0 , + , ++++ , 0 ],
 [ +++ , 0 , +++++++ , + , 0 , ++++ ],
